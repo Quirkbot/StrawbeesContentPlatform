@@ -1,0 +1,7 @@
+.DS_Store
+node_modules
+/.next
+/pages
+/static/contentful
+/components/contentful.js
+/utils/contentful.js

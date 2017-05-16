@@ -1,0 +1,25 @@
+{
+  "name": "nested-components",
+  "version": "1.0.0",
+  "scripts": {
+    "scrape": "node update.js",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "babel-eslint": "^7.2.3",
+    "contentful": "^4.2.1",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "jimp": "^0.2.27",
+    "mime-types": "^2.1.15",
+    "ncp": "^2.0.0",
+    "next": "*",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "rimraf": "^2.6.1"
+  },
+  "author": "",
+  "license": "ISC"
+}
