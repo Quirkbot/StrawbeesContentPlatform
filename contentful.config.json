@@ -1,0 +1,11 @@
+{
+	"contentTypesPages" : {
+		"lessonPlan" : {
+			"single" : true
+		},
+		"lessonPlanCollection" : {
+			"single" : true,
+			"index"  : true
+		}
+	}
+}

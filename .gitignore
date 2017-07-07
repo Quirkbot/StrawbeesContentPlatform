@@ -1,7 +1,8 @@
 .DS_Store
 node_modules
+yarn-error.log
 /.next
-/pages
+/out
 /static/contentful
-/components/contentful.js
-/utils/contentful.js
+/static/graphql
+/env.config.js

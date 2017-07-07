@@ -10,8 +10,14 @@
   },
   "parserOptions": {
     "ecmaVersion": 6,
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
+  "plugins": [
+    "react"
+  ],
   "rules": {
     "arrow-parens": 0,
     "arrow-body-style": [
@@ -50,6 +56,8 @@
       2,
       "never"
     ],
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
     "key-spacing": [
       2,
       {
@@ -62,9 +70,7 @@
   },
   "settings": {
     "import/resolver": {
-      "webpack": {
-        "config": "./webpack.config.js"
-      }
+       "babel-module": {}
     }
   }
 }

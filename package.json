@@ -1,25 +1,42 @@
 {
-  "name": "nested-components",
-  "version": "1.0.0",
+  "name": "strawbees-content-platform",
+  "version": "0.0.0",
   "scripts": {
-    "scrape": "node update.js",
-    "dev": "next",
-    "build": "next build",
-    "start": "next start"
+    "clean": "rm -rf out && rm -rf .next && rm -rf static/routes.json && rm -rf static/graphql && rm -rf node_modules/.cache/babel-loader",
+    "generate-routes": "node lib/services/routes.js",
+    "cache-server": "node lib/services/fetch-cache.js",
+    "dev": "npm run clean && npm run generate-routes && node lib/services/server.js",
+    "build": "npm run clean && npm run generate-routes && STATIC=1 NODE_ENV=production next build && next export",
+    "build-serve": "npm run build && http-server out -p 3000 -a localhost -o"
   },
   "dependencies": {
-    "babel-eslint": "^7.2.3",
+    "babel-plugin-module-resolver": "^2.7.1",
+    "babel-plugin-transform-define": "^1.2.0",
+    "cf-graphql": "^0.4.1",
     "contentful": "^4.2.1",
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb-base": "^11.2.0",
+    "express": "^4.15.3",
+    "express-graphql": "^0.6.6",
+    "isomorphic-fetch": "^2.2.1",
     "jimp": "^0.2.27",
+    "js-md5": "^0.4.2",
     "mime-types": "^2.1.15",
-    "ncp": "^2.0.0",
-    "next": "*",
+    "mkdirp": "^0.5.1",
+    "next": "3.0.0-beta14",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "rimraf": "^2.6.1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.0.1",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-import-resolver-babel-module": "^3.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^5.0.1",
+    "eslint-plugin-react": "^7.0.1",
+    "http-server": "^0.10.0"
+  }
 }

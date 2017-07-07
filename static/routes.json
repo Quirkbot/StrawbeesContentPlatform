@@ -1,0 +1,60 @@
+{
+	"/": {
+		"page": "/",
+		"query": {
+			"locale": "en"
+		}
+	},
+	"/lesson-plan/lesson-plan-1-introduction-to-strawbees": {
+		"page": "/contentful/lessonPlan-single",
+		"query": {
+			"locale": "en",
+			"contentType": "lessonPlan",
+			"id": "66UotWEzFSCCm0AQa4Sgcq"
+		}
+	},
+	"/lesson-plans": {
+		"page": "/contentful/lessonPlanCollection-list",
+		"query": {
+			"locale": "en",
+			"contentType": "lessonPlanCollection"
+		}
+	},
+	"/lesson-plans/12-lessons-plans-8-9": {
+		"page": "/contentful/lessonPlanCollection-single",
+		"query": {
+			"locale": "en",
+			"contentType": "lessonPlanCollection",
+			"id": "5UWCKAdEVGyaoOcu0a8SWc"
+		}
+	},
+	"/th": {
+		"page": "/",
+		"query": {
+			"locale": "th"
+		}
+	},
+	"/th/th-lesson-plan/66UotWEzFSCCm0AQa4Sgcq": {
+		"page": "/contentful/lessonPlan-single",
+		"query": {
+			"locale": "th",
+			"contentType": "lessonPlan",
+			"id": "66UotWEzFSCCm0AQa4Sgcq"
+		}
+	},
+	"/th/th-lesson-plans": {
+		"page": "/contentful/lessonPlanCollection-list",
+		"query": {
+			"locale": "th",
+			"contentType": "lessonPlanCollection"
+		}
+	},
+	"/th/th-lesson-plans/5UWCKAdEVGyaoOcu0a8SWc": {
+		"page": "/contentful/lessonPlanCollection-single",
+		"query": {
+			"locale": "th",
+			"contentType": "lessonPlanCollection",
+			"id": "5UWCKAdEVGyaoOcu0a8SWc"
+		}
+	}
+}

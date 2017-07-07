@@ -1,6 +1,5 @@
 import Link from 'next/link'
-import getPathRoot from '../utils/getPathRoot'
-import getEntryPermalink from '../utils/getEntryPermalink'
+import getEntryPermalink from '../../../utils/getEntryPermalink'
 
 export default ({ asPath, data }) =>
 	<div>
@@ -10,7 +9,7 @@ export default ({ asPath, data }) =>
 			}
 		`}</style>
 		<Link>
-			<a href={`${getPathRoot(asPath)}${getEntryPermalink(data)}`}>
+			<a href={getEntryPermalink(data, asPath)}>
 				<h3>{data.fields.title}</h3>
 			</a>
 		</Link>
