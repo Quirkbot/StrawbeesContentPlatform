@@ -13,19 +13,44 @@
 			"id": "66UotWEzFSCCm0AQa4Sgcq"
 		}
 	},
-	"/lesson-plans": {
-		"page": "/contentful/lessonPlanCollection-list",
-		"query": {
-			"locale": "en",
-			"contentType": "lessonPlanCollection"
-		}
-	},
-	"/lesson-plans/12-lessons-plans-8-9": {
+	"/lesson-plans/strawbees-8-to-9": {
 		"page": "/contentful/lessonPlanCollection-single",
 		"query": {
 			"locale": "en",
 			"contentType": "lessonPlanCollection",
 			"id": "5UWCKAdEVGyaoOcu0a8SWc"
+		}
+	},
+	"/age-group/5-to-7": {
+		"page": "/contentful/lessonPlanGroup-single",
+		"query": {
+			"locale": "en",
+			"contentType": "lessonPlanGroup",
+			"id": "28GT2ieOLmukmEs4oCIAiI"
+		}
+	},
+	"/age-group/14-plus": {
+		"page": "/contentful/lessonPlanGroup-single",
+		"query": {
+			"locale": "en",
+			"contentType": "lessonPlanGroup",
+			"id": "39cBQSyM36o8cuyECemc44"
+		}
+	},
+	"/age-group/8-to-9": {
+		"page": "/contentful/lessonPlanGroup-single",
+		"query": {
+			"locale": "en",
+			"contentType": "lessonPlanGroup",
+			"id": "20klu8VA2sYEaQcSw4IiY"
+		}
+	},
+	"/age-group/10-to-13": {
+		"page": "/contentful/lessonPlanGroup-single",
+		"query": {
+			"locale": "en",
+			"contentType": "lessonPlanGroup",
+			"id": "4dd6xpr6N2o2W8YKCY2ygU"
 		}
 	},
 	"/th": {
@@ -34,7 +59,7 @@
 			"locale": "th"
 		}
 	},
-	"/th/th-lesson-plan/66UotWEzFSCCm0AQa4Sgcq": {
+	"/th/th-lesson-plan/lesson-plan-1-introduction-to-strawbees": {
 		"page": "/contentful/lessonPlan-single",
 		"query": {
 			"locale": "th",
@@ -42,19 +67,44 @@
 			"id": "66UotWEzFSCCm0AQa4Sgcq"
 		}
 	},
-	"/th/th-lesson-plans": {
-		"page": "/contentful/lessonPlanCollection-list",
-		"query": {
-			"locale": "th",
-			"contentType": "lessonPlanCollection"
-		}
-	},
-	"/th/th-lesson-plans/5UWCKAdEVGyaoOcu0a8SWc": {
+	"/th/th-lesson-plans/th-strawbees-8-to-9": {
 		"page": "/contentful/lessonPlanCollection-single",
 		"query": {
 			"locale": "th",
 			"contentType": "lessonPlanCollection",
 			"id": "5UWCKAdEVGyaoOcu0a8SWc"
+		}
+	},
+	"/th/th-age-group/5-to-7": {
+		"page": "/contentful/lessonPlanGroup-single",
+		"query": {
+			"locale": "th",
+			"contentType": "lessonPlanGroup",
+			"id": "28GT2ieOLmukmEs4oCIAiI"
+		}
+	},
+	"/th/th-age-group/14-plus": {
+		"page": "/contentful/lessonPlanGroup-single",
+		"query": {
+			"locale": "th",
+			"contentType": "lessonPlanGroup",
+			"id": "39cBQSyM36o8cuyECemc44"
+		}
+	},
+	"/th/th-age-group/8-to-9": {
+		"page": "/contentful/lessonPlanGroup-single",
+		"query": {
+			"locale": "th",
+			"contentType": "lessonPlanGroup",
+			"id": "20klu8VA2sYEaQcSw4IiY"
+		}
+	},
+	"/th/th-age-group/10-to-13": {
+		"page": "/contentful/lessonPlanGroup-single",
+		"query": {
+			"locale": "th",
+			"contentType": "lessonPlanGroup",
+			"id": "4dd6xpr6N2o2W8YKCY2ygU"
 		}
 	}
 }

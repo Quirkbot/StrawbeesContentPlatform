@@ -4,8 +4,10 @@
 			"single" : true
 		},
 		"lessonPlanCollection" : {
-			"single" : true,
-			"index"  : true
+			"single" : true
+		},
+		"lessonPlanGroup" : {
+			"single" : true
 		}
 	}
 }

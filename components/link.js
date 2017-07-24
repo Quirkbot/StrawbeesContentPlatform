@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import routes from 'static/routes'
+import routes from 'src/static/routes.json'
 
 export default ({ children, ...props }) => {
 	const {
@@ -19,7 +19,6 @@ export default ({ children, ...props }) => {
 	} else {
 		href = to
 	}
-
 	return (
 		<Link href={href} as={as} {...otherProps}>
 			<a>{children}</a>

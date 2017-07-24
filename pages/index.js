@@ -1,20 +1,47 @@
-import App from 'components/app'
-import Link from 'components/link'
+import App from 'src/components/hoc/app'
+import Hero from 'src/components/hero'
+import LessonPlanGroupListItem from 'src/components/lessonPlanGroupListItem'
 
-const Page = props =>
-	<div>
-		<Link to='/'>EN</Link>
-		<Link to='/th'>TH</Link>
-		<pre>{JSON.stringify(props, null, 2)}</pre>
+const Page = ({ meta, hero, lessonPlanGroups }) =>
+	<div className='root indexPage'>
+		<Hero {...hero}/>
+		<div className='lessonPlanGroups'>
+			{lessonPlanGroups.map((data, i) =>
+				<LessonPlanGroupListItem
+					key={i}
+					{...{ meta }}
+					{...data}
+				/>
+			)}
+		</div>
 	</div>
 
 Page.getInitialProps = async ({ query }, fetchLocalData) => {
 	const {	locale, contentType, id } = query
-	return fetchLocalData(locale, `{
-		tags {
-			slug
+	const localData = await fetchLocalData(locale, `{
+		siteMetas (q: "order=-sys.createdAt&limit=1"){
+			heroIcon { url }
+			heroTitle
+			heroDescription
+			featuredLessonPlanGroups {
+				slug
+				title
+				description
+				featuredImage { url }
+				ageGroup { title }
+			}
 		}
 	}`)
+	const data = localData.siteMetas.pop()
+
+	return {
+		hero : {
+			icon        : data.heroIcon,
+			title       : data.heroTitle,
+			description : data.heroDescription
+		},
+		lessonPlanGroups : data.featuredLessonPlanGroups
+	}
 }
 
 

@@ -3,6 +3,6 @@ node_modules
 yarn-error.log
 /.next
 /out
-/static/contentful
+/static/routes.json
 /static/graphql
 /env.config.js
