@@ -5,4 +5,3 @@ yarn-error.log
 /out
 /static/routes.json
 /static/graphql
-/env.config.js
