@@ -1,46 +1,71 @@
 import App from 'src/components/hoc/app'
+import Breadcrumbs from 'src/components/breadcrumbs'
 import Hero from 'src/components/hero'
-import LessonPlanGroupListItem from 'src/components/lessonPlanGroupListItem'
+import LessonPlanCollectionListItem from 'src/components/lessonPlanCollectionListItem'
+import generateUrl from 'src/utils/generateUrl'
 
-const Page = ({ meta, hero, lessonPlanGroups }) =>
+const Page = ({ appProps, breadcrumbs, hero, list }) =>
 	<div className='root indexPage'>
-		<Hero {...hero}/>
-		<div className='lessonPlanGroups'>
-			{lessonPlanGroups.map((data, i) =>
-				<LessonPlanGroupListItem
-					key={i}
-					{...{ meta }}
-					{...data}
-				/>
-			)}
-		</div>
+		{breadcrumbs &&
+			<Breadcrumbs {...{
+				appProps,
+				breadcrumbs
+			}}/>
+		}
+		{hero &&
+			<Hero {...hero}/>
+		}
+		{list &&
+			<div className='list'>
+				{list.map((props, i) =>
+					<LessonPlanCollectionListItem
+						key={i}
+						{...props}
+					/>
+				)}
+			</div>
+		}
 	</div>
 
-Page.getInitialProps = async ({ query }, fetchLocalData) => {
-	const {	locale, contentType, id } = query
-	const localData = await fetchLocalData(locale, `{
-		siteMetas (q: "order=-sys.createdAt&limit=1"){
+Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
+	const {	locale } = query
+	const data = await fetchLocalData(locale, `{
+		content:siteMetas (q: "order=-sys.createdAt&limit=1"){
 			heroIcon { url }
 			heroTitle
 			heroDescription
-			featuredLessonPlanGroups {
+			list:featuredLessonPlanGroups {
+				sys { contentTypeId }
 				slug
 				title
 				description
 				featuredImage { url }
-				ageGroup { title }
+				ageGroup { cssColor }
 			}
 		}
 	}`)
-	const data = localData.siteMetas.pop()
-
+	data.content = data.content.pop()
 	return {
+		breadcrumbs : [
+			{
+				title : appProps.strings.home,
+				url   : generateUrl({ appProps })
+			}
+		],
 		hero : {
-			icon        : data.heroIcon,
-			title       : data.heroTitle,
-			description : data.heroDescription
+			icon        : data.content.heroIcon,
+			title       : data.content.heroTitle,
+			description : data.content.heroDescription
 		},
-		lessonPlanGroups : data.featuredLessonPlanGroups
+		list : data.content.list.map(item => ({
+			...item,
+			url : generateUrl({
+				appProps,
+				contentType : item.sys.contentTypeId,
+				slug        : item.slug
+			}),
+			color : item.ageGroup.cssColor
+		}))
 	}
 }
 
