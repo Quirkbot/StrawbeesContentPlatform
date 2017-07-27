@@ -4,13 +4,10 @@ import Hero from 'src/components/hero'
 import LessonPlanListItem from 'src/components/lessonPlanListItem'
 import generateUrl from 'src/utils/generateUrl'
 
-const Page = ({ appProps, hero, breadcrumbs, list }) =>
+const Page = ({ hero, breadcrumbs, list }) =>
 	<div className='root lessonPlanCollectionSinglePage'>
 		{breadcrumbs &&
-			<Breadcrumbs {...{
-				appProps,
-				breadcrumbs
-			}}/>
+			<Breadcrumbs {...breadcrumbs}/>
 		}
 		{hero &&
 			<Hero {...hero}/>
@@ -57,24 +54,26 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 	}`)
 	data.content.list = data.content.list || []
 	return {
-		breadcrumbs : [
-			{
-				title : appProps.strings.home,
-				url   : generateUrl({ appProps })
-			},
-			{
-				title : data.content.parent.entry[0].title,
-				url   : generateUrl({
-					appProps,
-					contentType : data.content.parent.entry[0].sys.contentTypeId,
-					slug        : data.content.parent.entry[0].slug
-				})
-			},
-			{
-				title : data.content.title,
-				url   : generateUrl({ appProps, contentType, slug : data.content.slug })
-			}
-		],
+		breadcrumbs : {
+			list : [
+				{
+					title : appProps.strings.home,
+					url   : generateUrl({ appProps })
+				},
+				{
+					title : data.content.parent.entry[0].title,
+					url   : generateUrl({
+						appProps,
+						contentType : data.content.parent.entry[0].sys.contentTypeId,
+						slug        : data.content.parent.entry[0].slug
+					})
+				},
+				{
+					title : data.content.title,
+					url   : generateUrl({ appProps, contentType, slug : data.content.slug })
+				}
+			]
+		},
 		hero : {
 			icon        : data.content.featuredIcon,
 			title       : data.content.title,

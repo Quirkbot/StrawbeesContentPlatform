@@ -3,13 +3,10 @@ import Breadcrumbs from 'src/components/breadcrumbs'
 import Hero from 'src/components/hero'
 import generateUrl from 'src/utils/generateUrl'
 
-const Page = ({ appProps, hero, breadcrumbs }) =>
+const Page = ({ hero, breadcrumbs }) =>
 	<div className='root lessonPlanSinglePage'>
 		{breadcrumbs &&
-			<Breadcrumbs {...{
-				appProps,
-				breadcrumbs
-			}}/>
+			<Breadcrumbs {...breadcrumbs}/>
 		}
 		{hero &&
 			<Hero {...hero}/>
@@ -41,32 +38,34 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 		}
 	}`)
 	return {
-		breadcrumbs : [
-			{
-				title : appProps.strings.home,
-				url   : generateUrl({ appProps })
-			},
-			{
-				title : data.content.parent.entry[0].parent.entry[0].title,
-				url   : generateUrl({
-					appProps,
-					contentType : data.content.parent.entry[0].parent.entry[0].sys.contentTypeId,
-					slug        : data.content.parent.entry[0].parent.entry[0].slug
-				})
-			},
-			{
-				title : data.content.parent.entry[0].title,
-				url   : generateUrl({
-					appProps,
-					contentType : data.content.parent.entry[0].sys.contentTypeId,
-					slug        : data.content.parent.entry[0].slug
-				})
-			},
-			{
-				title : data.content.title,
-				url   : generateUrl({ appProps, contentType, slug : data.content.slug })
-			}
-		],
+		breadcrumbs : {
+			list : [
+				{
+					title : appProps.strings.home,
+					url   : generateUrl({ appProps })
+				},
+				{
+					title : data.content.parent.entry[0].parent.entry[0].title,
+					url   : generateUrl({
+						appProps,
+						contentType : data.content.parent.entry[0].parent.entry[0].sys.contentTypeId,
+						slug        : data.content.parent.entry[0].parent.entry[0].slug
+					})
+				},
+				{
+					title : data.content.parent.entry[0].title,
+					url   : generateUrl({
+						appProps,
+						contentType : data.content.parent.entry[0].sys.contentTypeId,
+						slug        : data.content.parent.entry[0].slug
+					})
+				},
+				{
+					title : data.content.title,
+					url   : generateUrl({ appProps, contentType, slug : data.content.slug })
+				}
+			]
+		},
 		hero : {
 			title       : data.content.title,
 			description : data.content.description

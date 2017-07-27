@@ -1,10 +1,10 @@
 import Link from 'src/components/link'
 
 export default ({
-	breadcrumbs
+	list
 }) =>
 <div className='root breadcrumbs'>
-	{breadcrumbs
+	{list
 		.map(({ url, title }, i) =>
 		<Link
 			key={i}
