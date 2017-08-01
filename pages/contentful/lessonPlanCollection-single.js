@@ -1,31 +1,12 @@
 import App from 'src/components/hoc/app'
-import Breadcrumbs from 'src/components/breadcrumbs'
-import Hero from 'src/components/hero'
-import LessonPlanListItem from 'src/components/lessonPlanListItem'
 import generateUrl from 'src/utils/generateUrl'
 
-const Page = ({ hero, breadcrumbs, list }) =>
-	<div className='root lessonPlanCollectionSinglePage'>
-		{breadcrumbs &&
-			<Breadcrumbs {...breadcrumbs}/>
-		}
-		{hero &&
-			<Hero {...hero}/>
-		}
-		{list &&
-			<div className='list'>
-				{list.map((props, i) =>
-					<LessonPlanListItem
-						key={i}
-						{...props}
-					/>
-				)}
-			</div>
-		}
-	</div>
+import P from 'src/components/pages/lessonPlanCollection'
+
+const Page = props => <P {...props}/>
 
 Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
-	const {	locale, contentType, id } = query
+	const { locale, contentType, id } = query
 	const data = await fetchLocalData(locale, `{
 		content:${contentType} (id:"${id}"){
 			ageGroup { cssColor }
@@ -52,7 +33,6 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 			}
 		}
 	}`)
-	data.content.list = data.content.list || []
 	return {
 		breadcrumbs : {
 			list : [
@@ -81,7 +61,7 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 			description : data.content.description,
 			color       : data.content.ageGroup.cssColor
 		},
-		list : data.content.list.map((item, i) => ({
+		list : (data.content.list || []).map((item, i) => ({
 			...item,
 			url : generateUrl({
 				appProps,

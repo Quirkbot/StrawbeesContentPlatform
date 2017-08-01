@@ -1,33 +1,14 @@
 import App from 'src/components/hoc/app'
-import Breadcrumbs from 'src/components/breadcrumbs'
-import Hero from 'src/components/hero'
-import LessonPlanCollectionListItem from 'src/components/lessonPlanCollectionListItem'
 import generateUrl from 'src/utils/generateUrl'
 
-const Page = ({ breadcrumbs, hero, list }) =>
-	<div className='root indexPage'>
-		{breadcrumbs &&
-			<Breadcrumbs {...breadcrumbs}/>
-		}
-		{hero &&
-			<Hero {...hero}/>
-		}
-		{list &&
-			<div className='list'>
-				{list.map((props, i) =>
-					<LessonPlanCollectionListItem
-						key={i}
-						{...props}
-					/>
-				)}
-			</div>
-		}
-	</div>
+import P from 'src/components/pages/home'
+
+const Page = props => <P {...props}/>
 
 Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
-	const {	locale } = query
+	const { locale } = query
 	const data = await fetchLocalData(locale, `{
-		content:siteMetas (q: "order=-sys.createdAt&limit=1"){
+		content:settings (q: "order=-sys.createdAt&limit=1"){
 			heroIcon { url }
 			heroTitle
 			heroDescription
@@ -67,6 +48,5 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 		}))
 	}
 }
-
 
 export default App(Page)

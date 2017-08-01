@@ -8,6 +8,9 @@
 		},
 		"lessonPlanGroup" : {
 			"single" : true
+		},
+		"page" : {
+			"single" : true
 		}
 	}
 }

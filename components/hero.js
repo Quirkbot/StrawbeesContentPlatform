@@ -1,20 +1,17 @@
 import generateClassnames from 'src/utils/generateClassnames'
 
 export default ({
+	strings,
 	children,
 	icon,
 	title,
 	subtitle,
 	description,
+	author,
 	color
 }) =>
 <div
 	className={`root hero ${generateClassnames({
-		children,
-		icon,
-		title,
-		subtitle,
-		description,
 		color
 	})}`}
 	style={{
@@ -41,6 +38,12 @@ export default ({
 		<h2 className='subtitle'>
 			{subtitle}
 		</h2>
+	}
+	{author &&
+		<div className='author'>
+			<b>{strings.author}</b>
+			<span>{author}</span>
+		</div>
 	}
 	{description &&
 		<p className='description'>

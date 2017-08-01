@@ -1,30 +1,42 @@
 import App from 'src/components/hoc/app'
 import generateUrl from 'src/utils/generateUrl'
 
-import P from 'src/components/pages/lessonPlanGroup'
+import Search from 'src/components/pages/search'
 
-const Page = props => <P {...props}/>
+const resolveTemplate = template => {
+	switch (template) {
+		case 'search':
+			return Search
+		default:
+			return null
+	}
+}
+
+const Page = props => {
+	const Template = resolveTemplate(props.template)
+	if (Template) {
+		return <Template {...props}/>
+	}
+	return null
+}
 
 Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 	const { locale, contentType, id } = query
 	const data = await fetchLocalData(locale, `{
 		content:${contentType} (id:"${id}"){
+			template
 			ageGroup { cssColor }
 			featuredIcon { url }
 			title
 			slug
 			description
-			list:lessonPlanCollections {
-				sys { contentTypeId }
-				slug
-				title
-				description
-				featuredImage { url }
-				ageGroup { cssColor }
-			}
 		}
 	}`)
-	data.content.list = data.content.list || []
+	const Template = resolveTemplate(data.content.template)
+	let templateProps = null
+	if (Template && Template.getInitialProps) {
+		templateProps = await Template.getInitialProps({ query }, fetchLocalData, appProps)
+	}
 	return {
 		breadcrumbs : {
 			list : [
@@ -42,18 +54,10 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 			icon        : data.content.featuredIcon,
 			title       : data.content.title,
 			description : data.content.description,
-			color       : data.content.ageGroup.cssColor
+			color       : data.content.ageGroup && data.content.ageGroup.cssColor
 		},
-		list : data.content.list.map(item => ({
-			...item,
-			url : generateUrl({
-				appProps,
-				contentType : item.sys.contentTypeId,
-				slug        : item.slug
-			}),
-			color : item.ageGroup.cssColor
-		}))
+		...data.content,
+		...templateProps
 	}
 }
-
 export default App(Page)

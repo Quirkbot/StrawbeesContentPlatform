@@ -4,7 +4,7 @@ export default ({
 	list
 }) =>
 <div className='root breadcrumbs'>
-	{list
+	{list && list
 		.map(({ url, title }, i) =>
 		<Link
 			key={i}

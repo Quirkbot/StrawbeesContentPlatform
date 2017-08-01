@@ -9,15 +9,20 @@ export default Child => class App extends React.Component {
 		// Retrieve props that will be used app wise
 		const {	locale } = ctx.query
 		const localData = await fetchLocalData(locale, `{
-			siteMetas(q: "order=-sys.createdAt&limit=1"){
+			settings(q: "order=-sys.createdAt&limit=1"){
 				locale
 				languageName
 				basename
-				avaiableLocales
+				availableLocales
+				storeUrl
+			}
 
-				lessonPlanSlug
-				lessonPlanCollectionSlug
-				lessonPlanGroupSlug
+			contentTypeSlugs(q: "order=-sys.createdAt&limit=1"){
+				lessonPlan
+				lessonPlanCollection
+				lessonPlanGroup
+				definition
+				material
 			}
 
 			textStrings(q: "order=-sys.createdAt&limit=1"){
@@ -57,14 +62,16 @@ export default Child => class App extends React.Component {
 				copyrightNotice
 			}
 		}`)
-		const siteMeta = localData.siteMetas.shift()
+		const settings = localData.settings.shift()
 		const strings = localData.textStrings.shift()
-		const currentLocale = {
-			locale       : siteMeta.locale,
-			languageName : siteMeta.languageName,
-			basename     : siteMeta.basename ? siteMeta.basename : ''
+		const contentTypeSlugs = localData.contentTypeSlugs.shift()
+
+		settings.currentLocale = {
+			locale       : settings.locale,
+			languageName : settings.languageName,
+			basename     : settings.basename ? settings.basename : ''
 		}
-		const avaiableLocales = siteMeta.avaiableLocales.map(line => {
+		settings.availableLocales = settings.availableLocales.map(line => {
 			const array = line.split('_')
 			return {
 				locale       : array[0],
@@ -72,17 +79,12 @@ export default Child => class App extends React.Component {
 				basename     : array[2] ? array[2] : ''
 			}
 		})
-		const contentTypeSlugs = Object.keys(siteMeta)
-			.filter(key => key.endsWith('Slug'))
-			.reduce((acc, key) => {
-				const type = key.replace('Slug', '')
-				acc[type] = siteMeta[key]
-				return acc
-			}, {})
+		delete settings.locale
+		delete settings.languageName
+		delete settings.basename
 
 		const appProps = {
-			currentLocale,
-			avaiableLocales,
+			settings,
 			contentTypeSlugs,
 			strings
 		}

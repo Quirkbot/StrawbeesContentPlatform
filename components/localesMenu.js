@@ -1,11 +1,11 @@
 import Link from 'src/components/link'
 
-export default ({ currentLocale, avaiableLocales }) =>
+export default ({ settings }) =>
 	<div className='root localesMenu'>
-		<div>{currentLocale.languageName}</div>
+		<div>{settings.currentLocale.languageName}</div>
 		<div>
-			{avaiableLocales
-				.filter(locale => locale.locale !== currentLocale.locale)
+			{settings.availableLocales
+				.filter(locale => locale.locale !== settings.currentLocale.locale)
 				.map((locale, i) =>
 				<Link
 					key={i}
