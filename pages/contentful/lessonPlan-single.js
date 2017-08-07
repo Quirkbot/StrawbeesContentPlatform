@@ -29,6 +29,7 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 				classSize { title }
 				groupSize { title }
 				overview
+				gallery { url }
 				materials {
 					material {
 						title

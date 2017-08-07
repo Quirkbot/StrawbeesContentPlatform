@@ -21,7 +21,14 @@ export default ({ children, ...props }) => {
 	}
 	return (
 		<Link href={href} as={as} {...otherProps}>
-			<a>{children}</a>
+			<a className={`root link ${href ? 'to' : 'not-to'}`}>
+				<style jsx>{`
+					.root.to:hover {
+						opacity: 0.7;
+					}
+				`}</style>
+				{children}
+			</a>
 		</Link>
 	)
 }

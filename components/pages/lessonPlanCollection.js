@@ -1,6 +1,6 @@
 import Breadcrumbs from 'src/components/breadcrumbs'
 import Hero from 'src/components/hero'
-import LessonPlanListItem from 'src/components/lessonPlanListItem'
+import LessonPlanList from 'src/components/lessonPlanList'
 
 export default ({ hero, breadcrumbs, list }) =>
 	<div className='root lessonPlanCollectionSinglePage'>
@@ -11,13 +11,6 @@ export default ({ hero, breadcrumbs, list }) =>
 			<Hero {...hero}/>
 		}
 		{list &&
-			<div className='list'>
-				{list.map((props, i) =>
-					<LessonPlanListItem
-						key={i}
-						{...props}
-					/>
-				)}
-			</div>
+			<LessonPlanList items={list}/>
 		}
 	</div>

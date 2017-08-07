@@ -3,61 +3,118 @@ import generateClassnames from 'src/utils/generateClassnames'
 
 export default ({
 	number,
-	label,
+	ageGroup,
 	title,
 	description,
 	featuredImage,
-	url,
-	color
+	url
 }) =>
 	<div
 		className={`root lessonPlanListItem ${generateClassnames({
 			number,
-			label,
+			ageGroup,
 			title,
 			description,
 			featuredImage,
-			url,
-			color
+			url
 		})}`}
-		style={{
-			color,
-			backgroundColor : color
+		style={ageGroup && ageGroup.cssColor && {
+			color           : ageGroup.cssColor,
+			backgroundColor : ageGroup.cssColor
 		}}>
 		<style jsx>{`
+			.root {
+				width: 23rem;
+				position: relative;
+			}
 			.root :global(a){
 				text-decoration: none;
 				color: inherit;
 			}
-			.root.not-color {
+			.root.not-ageGroup {
 				background-color: #DDD;
 			}
-			.root.not-color .info,
-			.root.not-color .number,
-			.root.not-color .label {
+			.root.not-ageGroup .number,
+			.root.not-ageGroup .label {
 				color: #000;
 			}
-			.root.color .info,
-			.root.color .number,
-			.root.color .label{
+			.root.ageGroup .number,
+			.root.ageGroup .label{
 				color: #FFF;
+			}
+			.root :global(.info){
+				padding: 1rem;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				min-height: 8rem;
+				background-color: #f1f1f1;
+				color: #000;
+			}
+			.root :global(.featuredImage){
+				display: block;
+				width: 100%;
+				height: auto;
+			}
+			.root :global(.info .title){
+				margin: 0;
+				font-size: 1.5rem;
+				font-weight: 500;
+			}
+			.root :global(.number),
+			.root :global(.label) {
+				position: absolute;
+				background-color: inherit;
+			}
+
+			.root :global(.number) {
+				left: 1rem;
+				font-size: 2.5rem;
+				font-weight: bold;
+				padding: 0 1rem;
+				border-bottom-right-radius: 0.8rem;
+				border-bottom-left-radius: 0.8rem;
+			}
+			.root :global(.label) {
+				right: 1rem;
+				font-size: 1.5rem;
+				font-weight: bold;
+				padding: 0 1rem;
+				border-bottom-right-radius: 0.5rem;
+				border-bottom-left-radius: 0.5rem;
+				letter-spacing: 0.3rem;
+			}
+
+			@media (max-width: 600px) {
+				.root :global(.info){
+					min-height: 0;
+				}
+				.root :global(.info .title){
+					font-size: 1.3rem;
+				}
 			}
 		`}</style>
 		<Link to={url}>
 			{number &&
-				<div className='number'>
+				<div className='number'
+					style={ageGroup && ageGroup.cssColor && {
+						backgroundColor : ageGroup.cssColor
+					}}>
 					{number}
 				</div>
 			}
-			{label &&
-				<div className='label'>
-					{label}
+			{ageGroup && ageGroup.title &&
+				<div className='label'
+					style={ageGroup && ageGroup.cssColor && {
+						backgroundColor : ageGroup.cssColor
+					}}>
+					{ageGroup.title}
 				</div>
 			}
 			{featuredImage &&
 				<img className='featuredImage'
-					srcSet={`${featuredImage.url}?w=535&h=345, ${featuredImage.url}?w=1070&h=690 2x`}
-					src={`${featuredImage.url}?w=535&h=345`}
+					srcSet={`${featuredImage.url}?w=535&h=345&fit=fill, ${featuredImage.url}?w=1070&h=690&fit=fill 2x`}
+					src={`${featuredImage.url}?w=535&h=345&fit=fill`}
 				/>
 			}
 			<div className='info'>

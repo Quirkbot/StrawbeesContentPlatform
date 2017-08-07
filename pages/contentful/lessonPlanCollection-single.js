@@ -17,10 +17,13 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 			list:lessonPlans {
 				sys { contentTypeId }
 				slug
+				number
 				title
 				description
 				featuredImage { url }
-				ageGroup { cssColor }
+				ageGroup {
+					cssColor
+				}
 			}
 			parent:_backrefs {
 				entry:lessonPlanGroups__via__lessonPlanCollections {
@@ -61,15 +64,13 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 			description : data.content.description,
 			color       : data.content.ageGroup.cssColor
 		},
-		list : (data.content.list || []).map((item, i) => ({
+		list : (data.content.list || []).map(item => ({
 			...item,
 			url : generateUrl({
 				appProps,
 				contentType : item.sys.contentTypeId,
 				slug        : item.slug
-			}),
-			color  : item.ageGroup.cssColor,
-			number : i + 1
+			})
 		}))
 	}
 }

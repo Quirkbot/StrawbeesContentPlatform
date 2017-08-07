@@ -12,6 +12,10 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 			heroIcon { url }
 			heroTitle
 			heroDescription
+			searchPage {
+				slug
+				sys { contentTypeId }
+			}
 			list:featuredLessonPlanGroups {
 				sys { contentTypeId }
 				slug
@@ -24,6 +28,7 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 	}`)
 	data.content = data.content.pop()
 	return {
+		...data.content,
 		breadcrumbs : {
 			list : [
 				{
@@ -35,7 +40,12 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 		hero : {
 			icon        : data.content.heroIcon,
 			title       : data.content.heroTitle,
-			description : data.content.heroDescription
+			description : data.content.heroDescription,
+			buttonUrl   : generateUrl({
+				appProps,
+				contentType : data.content.searchPage.sys.contentTypeId,
+				slug        : data.content.searchPage.slug
+			}),
 		},
 		list : data.content.list.map(item => ({
 			...item,

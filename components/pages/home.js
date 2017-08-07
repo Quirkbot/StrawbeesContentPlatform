@@ -1,23 +1,23 @@
 import Breadcrumbs from 'src/components/breadcrumbs'
+import Button from 'src/components/button'
 import Hero from 'src/components/hero'
-import LessonPlanCollectionListItem from 'src/components/lessonPlanCollectionListItem'
+import LessonPlanCollectionList from 'src/components/lessonPlanCollectionList'
 
-export default ({ breadcrumbs, hero, list }) =>
+export default ({ appProps, breadcrumbs, hero, list }) =>
 	<div className='root homePage'>
 		{breadcrumbs &&
 			<Breadcrumbs {...breadcrumbs}/>
 		}
 		{hero &&
-			<Hero {...hero}/>
+			<Hero {...hero}>
+				<Button
+					icon='search'
+					title={appProps.strings.searchLessonPlans}
+					url={hero.buttonUrl}
+				/>
+			</Hero>
 		}
 		{list &&
-			<div className='list'>
-				{list.map((props, i) =>
-					<LessonPlanCollectionListItem
-						key={i}
-						{...props}
-					/>
-				)}
-			</div>
+			<LessonPlanCollectionList items={list} />
 		}
 	</div>

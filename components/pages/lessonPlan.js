@@ -9,6 +9,7 @@ import Hero from 'src/components/hero'
 import LessonPlanListItem from 'src/components/lessonPlanListItem'
 import LessonStep from 'src/components/lessonStep'
 import NationalStandard from 'src/components/nationalStandard'
+import Slider from 'src/components/slider'
 
 import generateClassnames from 'src/utils/generateClassnames'
 
@@ -24,6 +25,7 @@ export default ({
 	classSize,
 	groupSize,
 	overview,
+	gallery,
 	materials,
 	modifications,
 	learningObjectives,
@@ -44,7 +46,7 @@ export default ({
 		<style jsx>{`
 			.root.not-color .content,
 			.root.color .content .not-color{
-				background-color: #FFF;
+				background-color: #F3F3F3;
 				fill: #000;
 				color: #000;
 			}
@@ -66,7 +68,8 @@ export default ({
 			}
 			{featuredImage &&
 				<img className='featuredImage'
-					src={`${featuredImage.url}?w=1024&h=580`}
+					srcSet={`${featuredImage.url}?w=1024&h=580&fit=fill, ${featuredImage.url}?w=1024&h=580&fit=fill 2x`}
+					src={`${featuredImage.url}?w=1024&h=580&fit=fill`}
 				/>
 			}
 			<div className='not-color'>
@@ -87,29 +90,44 @@ export default ({
 					</div>
 				}
 			</div>
-			<div className='color'>
-				{duration &&
-					<div className='row'>
-						<h3 className='heading'>{appProps.strings.duration}</h3>
-						<p>{duration.title}</p>
-					</div>
-				}
-				{classSize &&
-					<div className='row'>
-						<h3 className='heading'>{appProps.strings.classSize}</h3>
-						<p>{classSize.title}</p>
-					</div>
-				}
-				{groupSize &&
-					<div className='row'>
-						<h3 className='heading'>{appProps.strings.groupSize}</h3>
-						<p>{groupSize.title}</p>
-					</div>
-				}
-				{overview &&
-					<div>
-						<h3 className='heading'>{appProps.strings.overview}</h3>
-						<Markdown source={overview}/>
+			<div className='color row'>
+				<div className='info'>
+					{duration &&
+						<div className='row'>
+							<h3 className='heading'>{appProps.strings.duration}</h3>
+							<p>{duration.title}</p>
+						</div>
+					}
+					{classSize &&
+						<div className='row'>
+							<h3 className='heading'>{appProps.strings.classSize}</h3>
+							<p>{classSize.title}</p>
+						</div>
+					}
+					{groupSize &&
+						<div className='row'>
+							<h3 className='heading'>{appProps.strings.groupSize}</h3>
+							<p>{groupSize.title}</p>
+						</div>
+					}
+					{overview &&
+						<div>
+							<h3 className='heading'>{appProps.strings.overview}</h3>
+							<Markdown source={overview}/>
+						</div>
+					}
+				</div>
+				{gallery &&
+					<div className='gallery'>
+						<Slider>
+							{gallery.map(({ url }, i) =>
+								<div key={i}>
+									<img srcSet={`${url}?w=500&h=500&fit=fill, ${url}?w=1000&h=1000&fit=fill 2x`}
+										src={`${url}?w=1000&h=1000&fit=fill`}
+									/>
+								</div>
+							)}
+						</Slider>
 					</div>
 				}
 			</div>
