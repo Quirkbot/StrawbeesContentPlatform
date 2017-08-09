@@ -11,9 +11,23 @@ export default ({
 		<div
 			className='root material'>
 			<style jsx>{`
-				.root :global(a){
+				.root :global(>a),
+				.root :global(>div){
+					width: 15rem;
 					text-decoration: none;
 					color: inherit;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+				}
+				.root :global(.featuredImage) {
+					display: block;
+				}
+				.root :global(.title) {
+					font-weight: 500;
+					font-style: italic;
+					font-size: 1.2rem;
 				}
 			`}</style>
 			<Wrapper to={url}>

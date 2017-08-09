@@ -33,8 +33,7 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 					url   : generateUrl({ appProps })
 				},
 				{
-					title : data.content.title,
-					url   : generateUrl({ appProps, contentType, slug : data.content.slug })
+					title : data.content.title
 				}
 			]
 		},

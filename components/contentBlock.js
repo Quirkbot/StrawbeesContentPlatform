@@ -7,10 +7,18 @@ export default ({
 	body
 }) =>
 	<div
-		className={`root lessonPlanListItem ${generateClassnames({
+		className={`root contentBlock ${generateClassnames({
 			title,
 			body
 		})}`}>
+		<style jsx>{`
+			.body :global(p:first-child) {
+				margin-top: 0;
+			}
+			.body :global(p:last-child) {
+				margin-bottom: 0;
+			}
+		`}</style>
 		{title &&
 			<div className='title'>
 				{title}

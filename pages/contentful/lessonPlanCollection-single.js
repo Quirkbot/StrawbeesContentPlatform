@@ -9,7 +9,10 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 	const { locale, contentType, id } = query
 	const data = await fetchLocalData(locale, `{
 		content:${contentType} (id:"${id}"){
-			ageGroup { cssColor }
+			ageGroup {
+				title
+				cssColor
+			}
 			featuredIcon { url }
 			title
 			slug
@@ -22,6 +25,7 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 				description
 				featuredImage { url }
 				ageGroup {
+					title
 					cssColor
 				}
 			}
@@ -52,8 +56,7 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 					})
 				},
 				{
-					title : data.content.title,
-					url   : generateUrl({ appProps, contentType, slug : data.content.slug })
+					title : data.content.title
 				}
 			]
 		},

@@ -75,13 +75,15 @@ export default ({
 		.wrapper .info .description {
 			margin-top: 0;
 		}
-		.wrapper .info .subtitle {
-			margin-top: -2rem;
-		}
 		.wrapper .info .title {
 			font-size: 3rem;
 			margin-bottom: 1rem;
 		}
+		.wrapper .info .subtitle {
+			font-size: : 2rem;
+			margin-top: -2rem;
+		}
+
 		@media (max-width: 1000px) {
 			.wrapper .icon {
 				padding-left: 0;
@@ -91,12 +93,26 @@ export default ({
 			}
 		}
 		@media (max-width: 600px) {
+			.root {
+				padding: 2rem;
+				margin-bottom: 1rem;
+				min-height: 0;
+			}
 			.wrapper {
 				flex-direction: column;
 			}
 			.wrapper .icon,
 			.wrapper .info {
 				width: 100%;
+			}
+			.wrapper .info .title {
+				font-size: 2rem;
+			}
+			.wrapper .info .subtitle {
+				margin-top: -1.5rem;
+			}
+			.wrapper .info .description {
+				font-size: 1rem;
 			}
 		}
 	`}</style>

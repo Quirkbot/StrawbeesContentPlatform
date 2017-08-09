@@ -53,10 +53,13 @@ export default ({
 				text-transform: uppercase;
 				margin: 0;
 				font-size: 2rem;
-				font-weight: 500;
+				font-weight: bold;
 				letter-spacing: 0.07rem;
 			}
-			@media (max-width: 600px) {
+			@media (max-width: 1024px) {
+				.root {
+					width: 20rem;
+				}
 				.root :global(.info){
 					min-height: 0;
 				}
@@ -64,6 +67,12 @@ export default ({
 					font-size: 1.5rem;
 				}
 			}
+			@media (max-width: 600px) {
+				.root :global(.info .title){
+					font-size: 1.2rem;
+				}
+			}
+
 		`}</style>
 		<Link to={url}>
 			{featuredImage &&

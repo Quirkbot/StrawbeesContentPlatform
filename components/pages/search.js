@@ -4,6 +4,7 @@ import Breadcrumbs from 'src/components/breadcrumbs'
 import Hero from 'src/components/hero'
 import EntryTitleSelector from 'src/components/entryTitleSelector'
 import LessonPlanList from 'src/components/lessonPlanList'
+import SvgIcon from 'src/components/svgIcon'
 import generateUrl from 'src/utils/generateUrl'
 
 export default class Page extends React.Component {
@@ -198,13 +199,16 @@ export default class Page extends React.Component {
 			this.fuse.search(searchQuery) : [...lessonPlans]
 
 		state.foundLessonPlans = state.foundLessonPlans.filter(l => {
+			if (!searchQuery && !selectedAgeGroups.length && !selectedCoMaterials.length && !selectedTags.length) {
+				return false
+			}
+
 			const foundByAgeGroup = selectedAgeGroups.length > 0 ?
 				selectedAgeGroups.filter(o => o.sys.id === l.ageGroup.sys.id).length : true
 			const foundByCoMaterial = selectedCoMaterials.length > 0 ?
 				selectedCoMaterials.filter(o => o.sys.id === l.coMaterial.sys.id).length : true
 			const foundByTag = selectedTags.length > 0 ?
 				selectedTags.filter(o => l.tags.filter(t => t.sys.id === o.sys.id).length).length : true
-
 			return foundByAgeGroup && foundByCoMaterial && foundByTag
 		})
 
@@ -258,67 +262,139 @@ export default class Page extends React.Component {
 			appProps,
 			breadcrumbs,
 			hero,
-			featuredIcon,
 			ageGroups,
 			tags,
-			lessonPlans,
 			coMaterials
 		} = this.props
-		delete hero.icon
+
+		let resultsTitle = ''
+		if (foundLessonPlans.length === 0) {
+			if (!searchQuery && !selectedAgeGroups.length && !selectedCoMaterials.length && !selectedTags.length) {
+				resultsTitle = appProps.strings.emptySearch
+			}
+			else {
+				resultsTitle = appProps.strings.noLessonsFound
+			}
+		}
 		return (
 			<div className='root searchPage'>
+				<style jsx>{`
+
+					.root :global(.hero){
+						margin-bottom: 1rem;
+					}
+					.root .search {
+						padding: 1rem;
+						width: 100%;
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						position: relative;
+						justify-content: center;
+						border-bottom: solid 1px rgba(0,0,0,0.1)
+					}
+					.root .search .bar {
+						width: 20rem;
+						max-width: 100%;
+						height: 3rem;
+						border-radius: 5rem;
+						border: solid 1px;
+						display: flex;
+						flex-direction: row;
+						align-items: center;
+						margin-bottom: 1rem;
+					}
+					.root .search .bar .input {
+						flex: 1;
+						margin-left: 1rem;
+						border: 0;
+						height: 90%;
+						text-align: center;
+						font-family: 'Brandon Text', sans-serif;
+						font-size: 1.2rem;
+					}
+					.root .search .bar :global(svg) {
+						height: 2.5rem;
+						margin-right: 0.5rem;
+						width: auto;
+					}
+					.root .search .selectors {
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						justify-content: center;
+					}
+					.root .search .selectors .title {
+						font-weight: 500;
+						font-size: 1.2rem;
+						margin-bottom: 0.5rem;
+					}
+					.root .results {
+						width: 100%;
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						justify-content: center;
+					}
+				`}</style>
 				{breadcrumbs &&
 					<Breadcrumbs {...breadcrumbs}/>
 				}
 				{hero &&
-					<Hero {...hero}>
+					<Hero {...hero}/>
+				}
+				<div className='search'>
+					<div className='bar'>
 						<input
-							type="text"
+							type='text'
+							className='input'
 							value={searchQuery}
+							placeholder={appProps.strings.searchFieldPlaceholder}
 							onChange={searchQueryChanged}
 						/>
-						{featuredIcon &&
-							<img className='icon' src={featuredIcon.url} />
+						<SvgIcon icon='search'/>
+					</div>
+					<div className='selectors'>
+						<div className='title'>{appProps.strings.searchFilters}</div>
+						{ageGroups &&
+							<EntryTitleSelector
+								title={appProps.strings.ageGroup}
+								entries={ageGroups}
+								selectedEntries={selectedAgeGroups}
+								entrySelected={ageGroupSelected}
+								entryDeselected={ageGroupDeselected}
+							/>
 						}
-						<div className='selectors'>
-							{ageGroups &&
-								<EntryTitleSelector
-									title={appProps.strings.ageGroup}
-									entries={ageGroups}
-									selectedEntries={selectedAgeGroups}
-									entrySelected={ageGroupSelected}
-									entryDeselected={ageGroupDeselected}
-								/>
-							}
-							{coMaterials &&
-								<EntryTitleSelector
-									title={appProps.strings.coMaterial}
-									entries={coMaterials}
-									selectedEntries={selectedCoMaterials}
-									entrySelected={coMaterialSelected}
-									entryDeselected={coMaterialDeselected}
-								/>
-							}
-							{tags &&
-								<EntryTitleSelector
-									title={appProps.strings.tag}
-									entries={tags}
-									selectedEntries={selectedTags}
-									entrySelected={tagSelected}
-									entryDeselected={tagDeselected}
-								/>
-							}
-						</div>
-					</Hero>
-				}
-
-				<h1 className='results title'>
-					{foundLessonPlans.length === 0 && appProps.strings.noLessonsFound}
-					{foundLessonPlans.length > 0 && appProps.strings.foundLessons}
-				</h1>
-				{foundLessonPlans.length > 0 &&
-					<LessonPlanList items={foundLessonPlans} />
-				}
+						{coMaterials &&
+							<EntryTitleSelector
+								title={appProps.strings.coMaterial}
+								entries={coMaterials}
+								selectedEntries={selectedCoMaterials}
+								entrySelected={coMaterialSelected}
+								entryDeselected={coMaterialDeselected}
+							/>
+						}
+						{tags &&
+							<EntryTitleSelector
+								title={appProps.strings.tag}
+								entries={tags}
+								selectedEntries={selectedTags}
+								entrySelected={tagSelected}
+								entryDeselected={tagDeselected}
+							/>
+						}
+					</div>
+				</div>
+				<div className='results'>
+					{resultsTitle &&
+						<h1 className='title'>
+							{resultsTitle}
+						</h1>
+					}
+					{foundLessonPlans.length > 0 &&
+						<LessonPlanList items={foundLessonPlans} />
+					}
+				</div>
 			</div>
 		)
 	}

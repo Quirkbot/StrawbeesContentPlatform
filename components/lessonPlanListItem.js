@@ -48,8 +48,7 @@ export default ({
 				flex-direction: column;
 				justify-content: center;
 				min-height: 8rem;
-				background-color: #f1f1f1;
-				color: #000;
+				color: #FFF;
 			}
 			.root :global(.featuredImage){
 				display: block;
@@ -59,7 +58,7 @@ export default ({
 			.root :global(.info .title){
 				margin: 0;
 				font-size: 1.5rem;
-				font-weight: 500;
+				font-weight: bold;
 			}
 			.root :global(.number),
 			.root :global(.label) {
@@ -93,6 +92,12 @@ export default ({
 					font-size: 1.3rem;
 				}
 			}
+			@media (max-width: 800px) {
+				.root {
+					width: 20rem;
+					position: relative;
+				}
+			}
 		`}</style>
 		<Link to={url}>
 			{number &&
@@ -113,6 +118,8 @@ export default ({
 			}
 			{featuredImage &&
 				<img className='featuredImage'
+					width='535'
+					height='345'
 					srcSet={`${featuredImage.url}?w=535&h=345&fit=fill, ${featuredImage.url}?w=1070&h=690&fit=fill 2x`}
 					src={`${featuredImage.url}?w=535&h=345&fit=fill`}
 				/>

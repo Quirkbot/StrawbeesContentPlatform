@@ -11,6 +11,7 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 		{
 			content:${contentType} (id:"${id}"){
 				sys { contentTypeId }
+				number
 				ageGroup {
 					title
 					cssColor
@@ -73,6 +74,11 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 				}
 				nextLessonPlan {
 					...lessonPlanThumb
+					number
+				}
+				previousLessonPlan {
+					...lessonPlanThumb
+					number
 				}
 				parent:_backrefs {
 					entry:lessonPlanCollections__via__lessonPlans {
@@ -129,13 +135,12 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 					})
 				},
 				{
-					title : data.content.title,
-					url   : generateUrl({ appProps, contentType, slug : data.content.slug })
+					title : `${data.content.number} - ${data.content.title}`
 				}
 			]
 		},
 		hero : {
-			title  : data.content.title,
+			title  : `${data.content.number} - ${data.content.title}`,
 			author : `${data.content.author.name} @ ${data.content.author.organization}`,
 			color  : data.content.ageGroup.cssColor
 		},
@@ -145,9 +150,7 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 				appProps,
 				contentType : item.sys.contentTypeId,
 				slug        : item.slug
-			}),
-			label : item.ageGroup.title,
-			color : item.ageGroup.cssColor
+			})
 		})),
 		nextLessonPlan : data.content.nextLessonPlan ? {
 			...data.content.nextLessonPlan,
@@ -155,9 +158,15 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 				appProps,
 				contentType : data.content.nextLessonPlan.sys.contentTypeId,
 				slug        : data.content.nextLessonPlan.slug
-			}),
-			label : data.content.nextLessonPlan.ageGroup.title,
-			color : data.content.nextLessonPlan.ageGroup.cssColor
+			})
+		} : null,
+		previousLessonPlan : data.content.previousLessonPlan ? {
+			...data.content.previousLessonPlan,
+			url : generateUrl({
+				appProps,
+				contentType : data.content.previousLessonPlan.sys.contentTypeId,
+				slug        : data.content.previousLessonPlan.slug
+			})
 		} : null
 	}
 }

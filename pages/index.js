@@ -32,8 +32,7 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 		breadcrumbs : {
 			list : [
 				{
-					title : appProps.strings.home,
-					url   : generateUrl({ appProps })
+					title : appProps.strings.home
 				}
 			]
 		},

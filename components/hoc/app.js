@@ -17,6 +17,8 @@ export default Child => class App extends React.Component {
 				availableLocales
 				storeUrl
 				logo { url }
+				socialMediaLinks
+				mainMenuLinks
 			}
 
 			contentTypeSlugs(q: "order=-sys.createdAt&limit=1"){
@@ -29,40 +31,44 @@ export default Child => class App extends React.Component {
 			}
 
 			textStrings(q: "order=-sys.createdAt&limit=1"){
-				content
-				home
-				searchLessonPlans
-				more
-				author
-				duration
-				classSize
-				groupSize
-				overview
-				materials
-				shop
-				modifications
-				learningObjectives
-				nationalStandards
-				teachingAssessment
-				preparation
-				lessonSteps
-				vocabulary
-				attachments
-				saveAsPrintableFile
-				download
-				relatedLessons
-				nextLesson
-				all
-				previousLesson
-				foundLessons
-				noLessonsFound
 				ageGroup
+				all
+				attachments
+				author
+				classSize
 				coMaterial
-				tag
+				companyAddress
+				content
+				copyrightNotice
+				download
+				duration
+				emptySearch
+				foundLessons
+				groupSize
+				home
+				learningObjectives
 				lessonPlan
 				lessonPlanCollection
-				companyAddress
-				copyrightNotice
+				lessonSteps
+				materials
+				minutes
+				modifications
+				more
+				nationalStandards
+				nextLesson
+				noLessonsFound
+				overview
+				preparation
+				previousLesson
+				relatedLessons
+				saveAsPrintableFile
+				searchFieldPlaceholder
+				searchFilters
+				searchLessonPlans
+				shop
+				tag
+				teachingAssessment
+				vocabulary
 			}
 		}`)
 		const settings = localData.settings.shift()
@@ -85,6 +91,22 @@ export default Child => class App extends React.Component {
 		delete settings.locale
 		delete settings.languageName
 		delete settings.basename
+
+		settings.socialMediaLinks = settings.socialMediaLinks.map(line => {
+			const array = line.split('_')
+			return {
+				title : array[0],
+				url   : array[1]
+			}
+		})
+
+		settings.mainMenuLinks = settings.mainMenuLinks.map(line => {
+			const array = line.split('_')
+			return {
+				title : array[0],
+				url   : array[1]
+			}
+		})
 
 		const appProps = {
 			settings,
@@ -119,6 +141,16 @@ export default Child => class App extends React.Component {
 				`}</style>
 				<Head>
 					<link rel="stylesheet" href="/static/lib/carousel.min.css"/>
+					<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+					<link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png"/>
+					<link rel="icon" type="image/png" sizes="32x32" href="/static/favicon/favicon-32x32.png"/>
+					<link rel="icon" type="image/png" sizes="16x16" href="/static/favicon/favicon-16x16.png"/>
+					<link rel="manifest" href="/static/favicon/manifest.json"/>
+					<link rel="mask-icon" href="/static/favicon/safari-pinned-tab.svg" color="#5bbad5"/>
+					<link rel="shortcut icon" href="/static/favicon/favicon.ico"/>
+					<meta name="msapplication-config" content="/static/favicon/browserconfig.xml"/>
+					<meta name="theme-color" content="#ffffff"/>
 				</Head>
 				<Header {...this.props}/>
 				<Child {...this.props} />

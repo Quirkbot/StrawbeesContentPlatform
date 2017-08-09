@@ -23,6 +23,9 @@ export default ({ children, ...props }) => {
 		<Link href={href} as={as} {...otherProps}>
 			<a className={`root link ${href ? 'to' : 'not-to'}`}>
 				<style jsx>{`
+					.root {
+						display: block;
+					}
 					.root.to:hover {
 						opacity: 0.7;
 					}
