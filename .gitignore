@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
 yarn-error.log
+/.private-keys.txt
 /.next
 /out
 /static/routes.json
