@@ -13,6 +13,7 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 				title
 				cssColor
 			}
+			featuredImage { url }
 			featuredIcon { url }
 			title
 			slug
@@ -40,7 +41,15 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 			}
 		}
 	}`)
+	const meta = {
+		ogTitle       : `${data.content.title} - ${appProps.settings.ogTitle}`,
+		ogDescription : data.content.description
+	}
+	if (data.content.featuredImage) {
+		meta.ogImage = `https:${data.content.featuredImage.url}`
+	}
 	return {
+		...meta,
 		breadcrumbs : {
 			list : [
 				{

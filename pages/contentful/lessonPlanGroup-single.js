@@ -10,6 +10,7 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 	const data = await fetchLocalData(locale, `{
 		content:${contentType} (id:"${id}"){
 			ageGroup { cssColor }
+			featuredImage { url }
 			featuredIcon { url }
 			title
 			slug
@@ -24,8 +25,15 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 			}
 		}
 	}`)
-	data.content.list = data.content.list || []
+	const meta = {
+		ogTitle       : `${data.content.title} - ${appProps.settings.ogTitle}`,
+		ogDescription : data.content.description
+	}
+	if (data.content.featuredImage) {
+		meta.ogImage = `https:${data.content.featuredImage.url}`
+	}
 	return {
+		...meta,
 		breadcrumbs : {
 			list : [
 				{
@@ -43,7 +51,7 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 			description : data.content.description,
 			color       : data.content.ageGroup.cssColor
 		},
-		list : data.content.list.map(item => ({
+		list : (data.content.list || []).map(item => ({
 			...item,
 			url : generateUrl({
 				appProps,

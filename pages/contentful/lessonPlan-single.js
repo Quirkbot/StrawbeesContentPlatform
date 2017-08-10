@@ -108,8 +108,17 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 			}
 		}
 	`)
+	const meta = {
+		ogTitle       : `${data.content.title} - ${appProps.settings.ogTitle}`,
+		ogDescription : data.content.description
+	}
+	if (data.content.featuredImage) {
+		meta.ogImage = `https:${data.content.featuredImage.url}`
+	}
+
 	return {
 		...data.content,
+		...meta,
 		color       : data.content.ageGroup.cssColor,
 		pdfUrl      : `/static/pdfs/${data.content.ageGroup.title}_${data.content.coMaterial.title}_${data.content.title}.pdf`,
 		breadcrumbs : {

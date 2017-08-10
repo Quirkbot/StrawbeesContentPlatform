@@ -8,6 +8,7 @@ export default ({ items }) =>
 				flex-direction: row;
 				justify-content: center;
 				flex-wrap: wrap;
+				margin-bottom: 2rem;
 			}
 			.root :global(.lessonPlanListItem) {
 				margin: 1rem;

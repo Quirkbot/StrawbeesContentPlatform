@@ -26,6 +26,7 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 		content:${contentType} (id:"${id}"){
 			template
 			ageGroup { cssColor }
+			featuredImage { url }
 			featuredIcon { url }
 			title
 			slug
@@ -37,7 +38,15 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 	if (Template && Template.getInitialProps) {
 		templateProps = await Template.getInitialProps({ query }, fetchLocalData, appProps)
 	}
+	const meta = {
+		ogTitle       : `${data.content.title} - ${appProps.settings.ogTitle}`,
+		ogDescription : data.content.description
+	}
+	if (data.content.featuredImage) {
+		meta.ogImage = `https:${data.content.featuredImage.url}`
+	}
 	return {
+		...meta,
 		breadcrumbs : {
 			list : [
 				{
