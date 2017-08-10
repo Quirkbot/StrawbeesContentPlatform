@@ -271,8 +271,7 @@ export default class Page extends React.Component {
 		if (foundLessonPlans.length === 0) {
 			if (!searchQuery && !selectedAgeGroups.length && !selectedCoMaterials.length && !selectedTags.length) {
 				resultsTitle = appProps.strings.emptySearch
-			}
-			else {
+			} else {
 				resultsTitle = appProps.strings.noLessonsFound
 			}
 		}
