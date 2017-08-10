@@ -19,6 +19,9 @@ export default Child => class App extends React.Component {
 				logo { url }
 				socialMediaLinks
 				mainMenuLinks
+				ogImage { url }
+				ogTitle
+				ogDescription
 			}
 
 			contentTypeSlugs(q: "order=-sys.createdAt&limit=1"){
@@ -113,15 +116,27 @@ export default Child => class App extends React.Component {
 			contentTypeSlugs,
 			strings
 		}
+
+		const meta = {
+			ogTitle       : settings.ogTitle,
+			ogDescription : settings.ogDescription,
+			ogImage       : settings.ogImage && `https:${settings.ogImage.url}`
+		}
 		// Retrive props of the current page
 		const pageProps = await Child.getInitialProps(ctx, fetchLocalData, appProps)
 		return {
 			appProps,
+			...meta,
 			...pageProps
 		}
 	}
 
 	render() {
+		const meta = {
+			'og:title'       : this.props.ogTitle,
+			'og:description' : this.props.ogDescription,
+			'og:image'       : this.props.ogImage
+		}
 		return (
 			<div className='root app'>
 				<style jsx>{`
@@ -140,6 +155,10 @@ export default Child => class App extends React.Component {
 					}
 				`}</style>
 				<Head>
+					<title>{meta['og:title']}</title>
+					{Object.keys(meta).map((m, i) =>
+						<meta key={i} property={m} content={meta[m]} />
+					)}
 					<link rel="stylesheet" href="/static/lib/carousel.min.css"/>
 					<meta name="viewport" content="width=device-width, initial-scale=1"/>
 
@@ -151,6 +170,8 @@ export default Child => class App extends React.Component {
 					<link rel="shortcut icon" href="/static/favicon/favicon.ico"/>
 					<meta name="msapplication-config" content="/static/favicon/browserconfig.xml"/>
 					<meta name="theme-color" content="#ffffff"/>
+
+
 				</Head>
 				<Header {...this.props}/>
 				<Child {...this.props} />
