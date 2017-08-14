@@ -6,10 +6,10 @@
     "dev": "node lib/scripts/dev.js",
     "build": "node lib/scripts/build.js",
     "deploy": "node lib/scripts/deploy.js",
-    "start": "node lib/scripts/deploy.js",
+    "start": "node lib/services/ci-server.js",
     "now": "npm run clean && now --public -e SPACE_ID -e CDA_TOKEN -e CMA_TOKEN",
-    "now-build" : "echo 'nothing to build'",
-    "now-start" : "node lib/scripts/deploy.js",
+    "now-build": "sh now-setup.sh",
+    "now-start": "cd tmp && npm start",
     "build-serve": "npm run build && http-server out -p 3000 -a localhost -o"
   },
   "dependencies": {
@@ -25,6 +25,7 @@
     "react-remarkable": "^1.1.1",
     "react-responsive-carousel": "^3.1.24",
     "rimraf": "^2.6.1",
+    "s3": "^4.4.0",
     "strawbees-content-graphql-server": "git+https://github.com/Quirkbot/StrawbeesContentGraphQLServer.git"
   },
   "author": "",
