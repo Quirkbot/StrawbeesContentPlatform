@@ -1,0 +1,16 @@
+{
+	"presets": [
+		"next/babel"
+	],
+	"plugins": [
+		[
+			"module-resolver",
+			{
+				"alias": {
+					"src": "./"
+				}
+			}
+		],
+		["transform-define", "./env.config.js"],
+ 	]
+}

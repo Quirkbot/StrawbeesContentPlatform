@@ -1,0 +1,47 @@
+{
+  "name": "strawbees-content-platform",
+  "version": "0.0.0",
+  "scripts": {
+    "clean": "rm -rf out && rm -rf .next && rm -rf static/routes.json && rm -rf static/graphql && rm -rf node_modules/.cache/babel-loader",
+    "dev": "node lib/scripts/dev.js",
+    "build": "node lib/scripts/build.js",
+    "deploy": "node lib/scripts/deploy.js",
+    "start": "node lib/services/ci-server.js",
+    "deploy:ci:stage": "git checkout develop && eb deploy strawbees-content-platform-stage",
+    "deploy:ci:production": "git checkout master && eb deploy strawbees-content-platform-production",
+    "now": "npm run clean && now --public -e SPACE_ID -e CDA_TOKEN -e CMA_TOKEN",
+    "now-build": "sh now-setup.sh",
+    "now-start": "cd tmp && npm start",
+    "build-serve": "npm run build && http-server out -p 3000 -a localhost -o"
+  },
+  "dependencies": {
+    "babel-plugin-module-resolver": "^2.7.1",
+    "babel-plugin-transform-define": "^1.2.0",
+    "fuse.js": "^3.0.5",
+    "isomorphic-fetch": "^2.2.1",
+    "js-md5": "^0.4.2",
+    "mkdirp": "^0.5.1",
+    "next": "^3.0.1-beta.20",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-remarkable": "^1.1.1",
+    "react-responsive-carousel": "^3.1.24",
+    "rimraf": "^2.6.1",
+    "s3": "^4.4.0",
+    "strawbees-content-graphql-server": "git+https://github.com/Quirkbot/StrawbeesContentGraphQLServer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.0.1",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-import-resolver-babel-module": "^3.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^5.0.1",
+    "eslint-plugin-react": "^7.0.1",
+    "http-server": "^0.10.0",
+    "now": "^7.3.0"
+  }
+}
