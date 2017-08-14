@@ -6,3 +6,6 @@ yarn-error.log
 /out
 /static/routes.json
 /static/graphql
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

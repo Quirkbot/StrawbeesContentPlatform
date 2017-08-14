@@ -7,6 +7,8 @@
     "build": "node lib/scripts/build.js",
     "deploy": "node lib/scripts/deploy.js",
     "start": "node lib/services/ci-server.js",
+    "deploy:ci:stage": "git checkout develop && eb deploy strawbees-content-platform-stage",
+    "deploy:ci:production": "git checkout master && eb deploy strawbees-content-platform-production",
     "now": "npm run clean && now --public -e SPACE_ID -e CDA_TOKEN -e CMA_TOKEN",
     "now-build": "sh now-setup.sh",
     "now-start": "cd tmp && npm start",
