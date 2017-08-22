@@ -1,6 +1,6 @@
 {
   "name": "strawbees-content-platform",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "clean": "rm -rf out && rm -rf .next && rm -rf static/routes.json && rm -rf static/graphql && rm -rf node_modules/.cache/babel-loader",
     "dev": "node lib/scripts/dev.js",
@@ -30,8 +30,7 @@
     "s3": "^4.4.0",
     "strawbees-content-graphql-server": "git+https://github.com/Quirkbot/StrawbeesContentGraphQLServer.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Paulo Barcelos <paulo@strawbees.com>",
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "eslint": "^3.19.0",
