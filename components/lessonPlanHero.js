@@ -58,7 +58,7 @@ export default ({
 			margin-right: 1rem;
 		}
 
-		@media (max-width: 600px) {
+		@media screen and (max-width: 600px) {
 			.root {
 				padding: 2rem 2rem;
 				align-items: flex-start;

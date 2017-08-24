@@ -27,6 +27,11 @@ export default ({ settings }) =>
 				display: block;
 				margin: 0.2rem 0;
 			}
+			@media print {
+				.root {
+					display: none;
+				}
+			}
 		`}</style>
 		<Button
 			border={false}

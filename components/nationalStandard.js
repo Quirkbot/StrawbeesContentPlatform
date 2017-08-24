@@ -8,8 +8,8 @@ export default ({
 		<style jsx>{`
 			.root {
 				display: flex;
-				flex-direction: row;
-				align-items: center;
+				flex-direction: column;
+				align-items: flex-start;
 				margin-bottom: 2rem;
 			}
 			.root:last-of-type {
@@ -30,9 +30,9 @@ export default ({
 				margin-right: 1rem;
 				font-weight: bold;
 				font-style: italic;
-				font-size: 1.5rem;
+				font-size: 1rem;
 			}
-			@media (max-width:600px) {
+			@media screen and (max-width:600px) {
 				.root {
 					flex-direction: column;
 				}

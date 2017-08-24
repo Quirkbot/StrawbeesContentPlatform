@@ -23,7 +23,7 @@ export default ({ appProps }) =>
 				max-width: 67.5rem;
 				flex-grow: 1;
 			}
-			@media (max-width: 600px) {
+			@media screen and (max-width: 600px) {
 				.root {
 					padding: 2rem 2rem 1rem 2rem;
 				}

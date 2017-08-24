@@ -39,7 +39,7 @@ export default ({
 			margin: 0 0.5rem;
 			opacity: 0.2;
 		}
-		@media (max-width: 600px) {
+		@media screen and (max-width: 600px) {
 			.wrapper {
 				flex-direction: column;
 				align-items: flex-start;
@@ -51,6 +51,11 @@ export default ({
 			.item :global(svg) {
 				transform: rotate(90deg);
 				margin: 0;
+			}
+		}
+		@media print {
+			.root {
+				display: none;
 			}
 		}
 	`}</style>

@@ -25,6 +25,20 @@ export default ({
 			.root .description {
 				text-align: center;
 			}
+			@media print {
+				.root {
+					width: 8rem;
+				}
+				.root .title {
+					font-weight: bold;
+					font-style: normal;
+					font-size: 0.6rem;
+				}
+				.root .description {
+					text-align: left;
+					font-size: 0.6rem;
+				}
+			}
 		`}</style>
 		{featuredImage &&
 			<img className='featuredImage'

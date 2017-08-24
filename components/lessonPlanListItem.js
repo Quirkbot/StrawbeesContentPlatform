@@ -84,7 +84,7 @@ export default ({
 				letter-spacing: 0.3rem;
 			}
 
-			@media (max-width: 600px) {
+			@media screen and (max-width: 600px) {
 				.root :global(.info){
 					min-height: 0;
 				}
@@ -92,7 +92,7 @@ export default ({
 					font-size: 1.3rem;
 				}
 			}
-			@media (max-width: 800px) {
+			@media screen and (max-width: 800px) {
 				.root {
 					width: 20rem;
 					position: relative;

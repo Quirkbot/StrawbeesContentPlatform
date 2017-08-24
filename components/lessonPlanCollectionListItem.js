@@ -56,7 +56,7 @@ export default ({
 				font-weight: bold;
 				letter-spacing: 0.07rem;
 			}
-			@media (max-width: 1024px) {
+			@media screen and (max-width: 1024px) {
 				.root {
 					width: 20rem;
 				}
@@ -67,7 +67,7 @@ export default ({
 					font-size: 1.5rem;
 				}
 			}
-			@media (max-width: 600px) {
+			@media screen and (max-width: 600px) {
 				.root :global(.info .title){
 					font-size: 1.2rem;
 				}

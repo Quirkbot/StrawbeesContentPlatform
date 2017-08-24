@@ -149,9 +149,15 @@ export default Child => class App extends React.Component {
 						margin: 0;
 						font-family: 'Brandon Text', sans-serif;
 						font-size: 16px;
+						line-height: 1.5;
 					}
 					:global(*){
 						box-sizing: border-box;
+					}
+					@media print {
+						:global(body) {
+							font-size: 11pt;
+						}
 					}
 				`}</style>
 				<Head>

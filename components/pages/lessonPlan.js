@@ -119,7 +119,8 @@ export default ({
 				max-width: 67.5rem;
 			}
 			.root .initialInfo .info,
-			.root .initialInfo .gallery {
+			.root .initialInfo .gallery,
+			.root .initialInfo .gallery-print {
 				width: 50%;
 			}
 			.root .initialInfo .info {
@@ -139,6 +140,18 @@ export default ({
 			}
 			.root .initialInfo .info .overview {
 				margin-top: 2rem;
+			}
+			.root .initialInfo .gallery-print {
+				display: none;
+				flex-direction: row;
+				flex-wrap: wrap;
+			}
+			.root .initialInfo .gallery-print > * {
+				width: 50%;
+			}
+			.root .initialInfo .gallery-print img {
+				display: block;
+				width: 100%;
 			}
 			.root .materials .wrapper {
 				max-width: 80rem;
@@ -192,7 +205,7 @@ export default ({
 				flex-direction: column;
 				align-items: center;
 			}
-			@media (max-width: 600px) {
+			@media screen and (max-width: 600px) {
 				.root .section {
 					padding: 1rem;
 				}
@@ -205,8 +218,11 @@ export default ({
 					max-width: 40rem;
 					text-align: center;
 				}
+				.root .initialInfo .info {
+					padding: 0;
+				}
 			}
-			@media (max-width: 900px) {
+			@media screen and (max-width: 900px) {
 				.root .initialInfo .wrapper {
 					flex-direction: column;
 				}
@@ -214,13 +230,45 @@ export default ({
 				.root .initialInfo .gallery {
 					width: 100% ;
 				}
-				.root .initialInfo .info {
-					padding: 0;
-				}
 			}
-			@media (min-width:1080px){
+			@media screen and (min-width:1080px){
 				.root .initialInfo  {
 					padding: 2rem 1rem;
+				}
+			}
+			@media print {
+				.root.not-color .content,
+				.root.color .content .not-color{
+					background-color: #FFF;
+					fill: #000;
+					color: #000;
+				}
+				.root.color .content {
+					background-color: #FFF !important;
+					fill: #000;
+					color: #000;
+				}
+				.root .section,
+				.root img,
+				.root ul {
+					page-break-inside: avoid;
+				}
+				.root .initialInfo .wrapper {
+					align-items: flex-start;
+				}
+				.root .initialInfo .gallery {
+					display: none;
+				}
+				.root .initialInfo .gallery-print {
+					display: flex;
+				}
+				.root .attachments,
+				.root .pdf,
+				.root .relatedLessonPlans,
+				.root .nextLessonPlan,
+				.root .previousLessonPlan,
+				.root .materials :global(.button) {
+					display: none;
 				}
 			}
 		`}</style>
@@ -307,6 +355,17 @@ export default ({
 										</div>
 									)}
 								</Slider>
+							</div>
+						}
+						{gallery &&
+							<div className='gallery-print'>
+								{gallery.map(({ url }, i) =>
+									<div key={i}>
+										<img srcSet={`${url}?w=500&h=500&fit=fill, ${url}?w=1000&h=1000&fit=fill 2x`}
+											src={`${url}?w=1000&h=1000&fit=fill`}
+										/>
+									</div>
+								)}
 							</div>
 						}
 					</div>
@@ -447,16 +506,16 @@ export default ({
 				</div>
 			}
 			{nextLessonPlan &&
-				<div className='section wrapper not-color'>
-					<div className='nextLessonPlan'>
+				<div className='section nextLessonPlan not-color'>
+					<div className='wrapper'>
 						<h3 className='heading'>{appProps.strings.nextLesson}</h3>
 						<LessonPlanList items={[nextLessonPlan]}/>
 					</div>
 				</div>
 			}
 			{previousLessonPlan &&
-				<div className='section wrapper not-color'>
-					<div className='previousLessonPlan'>
+				<div className='section previousLessonPlan not-color'>
+					<div className='wrapper'>
 						<h3 className='heading'>{appProps.strings.previousLesson}</h3>
 						<LessonPlanList items={[previousLessonPlan]}/>
 					</div>

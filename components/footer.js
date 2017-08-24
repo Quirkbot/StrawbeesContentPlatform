@@ -55,6 +55,11 @@ export default ({ appProps }) =>
 				letter-spacing: 0.05rem;
 				font-size: 0.7rem;
 			}
+			@media print {
+				.root {
+					display: none;
+				}
+			}
 		`}</style>
 		<div className='social'>
 			{appProps.settings.socialMediaLinks &&

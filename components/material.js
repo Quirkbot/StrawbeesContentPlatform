@@ -29,6 +29,17 @@ export default ({
 					font-style: italic;
 					font-size: 1.2rem;
 				}
+				@media print {
+					.root :global(>a),
+					.root :global(>div){
+						width: 8rem;
+					}
+					.root :global(.title) {
+						font-weight: normal;
+						font-style: normal;
+						font-size: 0.8rem;
+					}
+				}
 			`}</style>
 			<Wrapper to={url}>
 				{featuredImage &&

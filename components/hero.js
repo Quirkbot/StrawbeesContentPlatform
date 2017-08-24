@@ -84,7 +84,7 @@ export default ({
 			margin-top: -2rem;
 		}
 
-		@media (max-width: 1000px) {
+		@media screen and (max-width: 1000px) {
 			.wrapper .icon {
 				padding-left: 0;
 			}
@@ -92,7 +92,7 @@ export default ({
 				padding-right: 0;
 			}
 		}
-		@media (max-width: 600px) {
+		@media screen and (max-width: 600px) {
 			.root {
 				padding: 2rem;
 				margin-bottom: 1rem;
