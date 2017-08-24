@@ -1,5 +1,4 @@
 /* global STATIC, CACHE_SERVER, GRAPHQL_SERVER */
-
 import 'isomorphic-fetch'
 import md5 from 'js-md5'
 
@@ -22,7 +21,7 @@ export default async (locale = '', query = '') => {
 
 	// Define which url to load, depending on the context
 	let url
-	if (STATIC) {
+	if (typeof STATIC !== 'undefined' && STATIC === 'static') {
 		// Static...
 		if (process.browser) {
 			// Static client
