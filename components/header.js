@@ -7,35 +7,50 @@ export default ({ appProps }) =>
 	<div className='root header'>
 		<style jsx>{`
 			.root {
-				padding: 4rem 2rem 2rem 2rem;
+				padding: 1rem;
 				display: flex;
 				flex-direction: row;
 				align-items: center;
 				justify-content: center;
 			}
 			.root :global(.logo){
-				height: 5.5rem;
+				height: 7.5rem;
 			}
 			.wrapper {
 				display: flex;
 				flex-direction: row;
 				justify-content: space-between;
-				max-width: 67.5rem;
+				align-items: center;
+				max-width: 50rem;
 				flex-grow: 1;
 			}
 			@media screen and (max-width: 600px) {
 				.root {
-					padding: 2rem 2rem 1rem 2rem;
+					padding: 1rem 1rem 0 1rem;
 				}
 				.root :global(.logo){
 					height: 4rem;
-				}
-				.root :global(.logo){
 					margin-bottom: 1rem;
 				}
-				.wrapper {
-					flex-direction: column;
-					align-items: flex-start;
+			}
+			@media screen and (max-width: 290px) {
+				.root :global(.logo){
+					display: none;
+				}
+			}
+			@media print {
+				.root {
+					background-color: #eee !important;
+					position: relative;
+					position: fixed;
+					top: 0;
+					left: 0;
+					width: 100%;
+					z-index: 2;
+					height: 1.5cm;
+				}
+				.root :global(.logo){
+					height: 2.5rem;
 				}
 			}
 		`}</style>

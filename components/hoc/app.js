@@ -154,9 +154,17 @@ export default Child => class App extends React.Component {
 					:global(*){
 						box-sizing: border-box;
 					}
+					:global(a) {
+						color: inherit;
+					}
 					@media print {
 						:global(body) {
 							font-size: 11pt;
+							print-color-adjust: exact;
+							-webkit-print-color-adjust: exact;
+						}
+						@page {
+							margin: 0;
 						}
 					}
 				`}</style>

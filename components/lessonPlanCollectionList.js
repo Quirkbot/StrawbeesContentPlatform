@@ -5,20 +5,28 @@ export default ({ items }) =>
 		<style jsx>{`
 			.root {
 				display: flex;
+				flex-direction: column;
+				align-items: center;
+				margin-bottom: 2rem;
+			}
+			.root .wrapper {
+				display: flex;
 				flex-direction: row;
 				justify-content: center;
 				flex-wrap: wrap;
-				margin-bottom: 2rem;
+				max-width: calc(50rem + 2rem);
 			}
 			.root :global(.lessonPlanCollectionListItem) {
 				margin: 1rem;
 			}
 
 		`}</style>
-		{items.map((props, i) =>
-			<LessonPlanCollectionListItem
-				key={i}
-				{...props}
-			/>
-		)}
+		<div className='wrapper'>
+			{items.map((props, i) =>
+				<LessonPlanCollectionListItem
+					key={i}
+					{...props}
+				/>
+			)}
+		</div>
 	</div>

@@ -7,7 +7,7 @@ export default ({
 <div className='root breadcrumbs'>
 	<style jsx>{`
 		.root {
-			padding: 0 2rem 1rem 2rem;
+			padding: 0 1rem 1rem 1rem;
 			display: flex;
 			flex-direction: row;
 			align-items: center;
@@ -16,7 +16,8 @@ export default ({
 		.wrapper {
 			display: flex;
 			flex-direction: row;
-			max-width: 67.5rem;
+			flex-wrap: wrap;
+			max-width: 50rem;
 			flex-grow: 1;
 		}
 		.item {
@@ -25,12 +26,12 @@ export default ({
 			align-items: center;
 		}
 
-		.item :global(a) {
+		.item :global(.link) {
 			text-decoration: none;
 			color: inherit;
 			font-weight: 500;
 		}
-		.item :global(a:last-child) {
+		.item :global(.link:last-child) {
 			margin-right: none;
 		}
 		.item :global(svg) {
@@ -40,17 +41,16 @@ export default ({
 			opacity: 0.2;
 		}
 		@media screen and (max-width: 600px) {
-			.wrapper {
-				flex-direction: column;
-				align-items: flex-start;
-			}
-			.item {
-				flex-direction: column;
-				align-items: flex-start;
+			.root {
+				padding: 0 1rem 1rem 1rem;
 			}
 			.item :global(svg) {
-				transform: rotate(90deg);
-				margin: 0;
+				width: 0.8rem;
+				height: 0.8rem;
+				margin: 0 0.2rem;
+			}
+			.item :global(.link) {
+				font-size: 0.8rem;
 			}
 		}
 		@media print {

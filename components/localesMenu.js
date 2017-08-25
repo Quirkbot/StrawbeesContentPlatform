@@ -20,7 +20,7 @@ export default ({ settings }) =>
 				position: absolute;
 				width: 100%;
 			}
-			.list :global(a){
+			.list :global(.link){
 				cursor: pointer;
 				text-decoration: none;
 				color: inherit;

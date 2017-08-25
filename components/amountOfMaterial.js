@@ -15,7 +15,7 @@ export default ({
 			}
 			.root .amount {
 				font-weight: 500;
-				font-size: 2rem;
+				font-size: 1.2rem;
 			}
 			@media print {
 				.root .amount {

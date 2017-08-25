@@ -27,24 +27,57 @@ export default ({
 				margin-bottom: 1rem;
 			}
 			.root .title {
+				text-align: center;
 				font-weight: bold;
 				font-style: italic;
-				font-size: 1.5rem;
+				font-size: 1rem;
 			}
 			.root .duration {
 				display: flex;
 				flex-direction: row;
 				align-items: center;
 				justify-content: center;
-				margin: 0.5rem 0 1rem 0;
 			}
 			.root .duration .key{
 				font-weight: bold;
 				margin-right: 0.5rem;
 			}
+			.root .body :global(>div >span) {
+				display: block;
+			}
+			.root .body :global(>div >span ul) {
+				padding-left: 2rem;
+			}
+			.root .body :global(>div >span >ul) {
+				padding-left: 1rem;
+			}
+			@media print {
+				.root {
+					flex-direction: row;
+					align-items: flex-start;
+					margin-bottom: 0;
+				}
+				.root .text {
+					margin-right: 1cm;
+				}
+				.root .featuredImage {
+					width: 5cm;
+					order: 2;
+				}
+				.root .title {
+					text-align: left;
+				}
+				.root .duration {
+					justify-content: flex-start;
+				}
+				/*.root {
+					align-items: flex-start;
+				}
+				.root .featuredImage {
+					width: auto;
+					max-height: 8cm;
+				}*/
 
-			.root .body {
-				max-width: 40rem;
 			}
 
 		`}</style>
@@ -54,20 +87,22 @@ export default ({
 				src={`${featuredImage.url}?w=1200&fit=fill`}
 			/>
 		}
-		{title &&
-			<div className='title'>
-				{`${number}. ${title}`}
-			</div>
-		}
-		{duration &&
-			<div className='duration'>
-				<div className='key'>{appProps.strings.duration}:</div>
-				<div className='value'>{appProps.strings.minutes.split('{{minutes}}').join(duration)}</div>
-			</div>
-		}
-		{body &&
-			<div className='body'>
-				<Markdown source={body} />
-			</div>
-		}
+		<div className='text'>
+			{title &&
+				<div className='title'>
+					{`${number}. ${title}`}
+				</div>
+			}
+			{duration &&
+				<div className='duration'>
+					<div className='key'>{appProps.strings.duration}:</div>
+					<div className='value'>{appProps.strings.minutes.split('{{minutes}}').join(duration)}</div>
+				</div>
+			}
+			{body &&
+				<div className='body'>
+					<Markdown source={body} />
+				</div>
+			}
+		</div>
 	</div>

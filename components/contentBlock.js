@@ -18,6 +18,9 @@ export default ({
 			.body :global(p:last-child) {
 				margin-bottom: 0;
 			}
+			.body :global(>div >span) {
+				display: block;
+			}
 		`}</style>
 		{title &&
 			<div className='title'>

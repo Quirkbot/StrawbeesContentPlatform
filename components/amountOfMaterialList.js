@@ -13,6 +13,11 @@ export default ({
 				justify-content: center;
 				flex-wrap: wrap;
 			}
+			@media print {
+				.root {
+					justify-content: flex-start;
+				}
+			}
 		`}</style>
 		{items.map((props, i) =>
 			<AmountOfMaterial

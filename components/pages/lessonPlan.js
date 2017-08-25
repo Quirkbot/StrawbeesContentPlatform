@@ -16,6 +16,7 @@ import generateClassnames from 'src/utils/generateClassnames'
 export default ({
 	appProps,
 	breadcrumbs,
+	ageGroup,
 	color,
 	hero,
 	featuredImage,
@@ -45,6 +46,36 @@ export default ({
 			color
 		})}`}>
 		<style jsx>{`
+			.root .print-bar {
+				display: none;
+				position: fixed;
+				left: 0;
+				top: 0;
+				height: 100%;
+				width: 0.3cm;
+			}
+			.root .print-age {
+				display: none;
+				position: fixed;
+				padding: 0.1rem 0.4rem;
+				color: #FFF;
+				right: 2rem;
+				top: 0;
+				height: 3rem;
+				width: 5rem;
+				z-index: 3;
+				text-align: right;
+				flex-direction: column;
+				align-content: flex-end;
+			}
+			.root .print-age .label {
+				font-size: 0.8rem;
+			}
+			.root .print-age .age {
+				font-size: 1.2rem;
+				font-weight: 500;
+				line-height: 1.2rem;
+			}
 			.root.not-color .content,
 			.root.color .content .not-color{
 				background-color: #F3F3F3;
@@ -85,12 +116,12 @@ export default ({
 			.root .section :global(.contentBlock:last-of-type){
 				margin-bottom: 0;
 			}
-			.root .featuredImage .wrapper{
-				max-width: 67.5rem;
-			}
 			.root .featuredImage img{
 				display: block;
 				width: 100%;
+			}
+			.root .description-tags {
+				padding: 1rem;
 			}
 			.root .description-tags .wrapper {
 				display: flex;
@@ -100,8 +131,7 @@ export default ({
 			}
 			.root .description-tags .description {
 				margin: 0;
-				font-size: 1.5rem;
-				max-width: 40rem;
+				font-size: 1.2rem;
 				text-align: center;
 			}
 			.root .description-tags .tags {
@@ -115,9 +145,6 @@ export default ({
 			.root .initialInfo  {
 				padding: 0;
 			}
-			.root .initialInfo .wrapper {
-				max-width: 67.5rem;
-			}
 			.root .initialInfo .info,
 			.root .initialInfo .gallery,
 			.root .initialInfo .gallery-print {
@@ -130,7 +157,7 @@ export default ({
 				align-items: baseline;
 			}
 			.root .initialInfo .info .key {
-				font-size: 1.5rem;
+				font-size: 1.2rem;
 				margin-right: 1rem;
 			}
 			.root .initialInfo .info .key,
@@ -141,20 +168,26 @@ export default ({
 			.root .initialInfo .info .overview {
 				margin-top: 2rem;
 			}
+			.root .initialInfo .info .overview :global(p:first-child) {
+				margin-top: 0;
+			}
+			.root .initialInfo .info .overview :global(p:last-child) {
+				margin-bottom: 0;
+			}
 			.root .initialInfo .gallery-print {
 				display: none;
 				flex-direction: row;
 				flex-wrap: wrap;
 			}
 			.root .initialInfo .gallery-print > * {
-				width: 50%;
+				width: calc(50% - 2rem);
+				margin: 1rem;
 			}
 			.root .initialInfo .gallery-print img {
 				display: block;
 				width: 100%;
 			}
 			.root .materials .wrapper {
-				max-width: 80rem;
 				display: flex;
 				flex-direction: column;
 				align-items: center;
@@ -175,7 +208,25 @@ export default ({
 			.root .modifications :global(.contentBlock .title){
 				margin: 0;
 				font-weight: 500;
-				font-size: 1.5rem;
+				font-size: 1.2rem;
+				font-style: italic;
+			}
+			.root .modifications :global(.contentBlock),
+			.root .learningObjectives :global(.contentBlock){
+				padding-left: 1.5rem;
+				position: relative;
+			}
+			.root .modifications :global(.contentBlock:before),
+			.root .learningObjectives :global(.contentBlock:before){
+				display: block;
+				position: absolute;
+				content: '';
+				left: 0;
+				top: 0.2rem;
+				width: 1rem;
+				height: 1rem;
+				border-radius: 1rem;
+				border: solid 1px;
 			}
 			.root .preparation .step {
 				display: flex;
@@ -196,8 +247,14 @@ export default ({
 				border: solid 1px;
 				flex: 0 0 auto;
 			}
-			.root .vocabulary .wrapper {
-				max-width: 80rem;
+			.root .lessonSteps :global(.lessonStep) {
+				page-break-inside: avoid;
+			}
+			.root .attachments :global(.button) {
+				margin-bottom: 1rem;
+			}
+			.root .attachments :global(.button:last-child) {
+				margin-bottom: 0;
 			}
 			.root .attachments .wrapper,
 			.root .pdf .wrapper {
@@ -205,6 +262,10 @@ export default ({
 				flex-direction: column;
 				align-items: center;
 			}
+			.root .relatedLessonPlans .wrapper{
+				max-width: 100%;
+			}
+
 			@media screen and (max-width: 600px) {
 				.root .section {
 					padding: 1rem;
@@ -215,7 +276,6 @@ export default ({
 				.root .description-tags .description {
 					margin: 0;
 					font-size: 1.2rem;
-					max-width: 40rem;
 					text-align: center;
 				}
 				.root .initialInfo .info {
@@ -237,6 +297,16 @@ export default ({
 				}
 			}
 			@media print {
+				.root .print-bar {
+					display: block;
+				}
+				.root .print-age {
+					display: flex;
+				}
+				.root .content {
+					margin-left: 2cm;
+					margin-right: 1cm;
+				}
 				.root.not-color .content,
 				.root.color .content .not-color{
 					background-color: #FFF;
@@ -253,14 +323,58 @@ export default ({
 				.root ul {
 					page-break-inside: avoid;
 				}
+				.root :global(.lessonPlanHero),
+				.root .section:not(.featuredImage):not(.description-tags),
+				.root .lessonSteps :global(.lessonStep){
+					padding-top: 2cm;
+					padding-bottom: 0;
+				}
+				.root .section .heading{
+					text-align: left;
+					font-size: 1.2rem;
+					margin: 0;
+					position: relative;
+				}
+				.root .description-tags .description {
+					font-size: 1rem;
+				}
+				.root .initialInfo .info .key {
+					position: relative;
+				}
+				.root .section .heading:before,
+				.root .initialInfo .info .key:before{
+					position: absolute;
+					content: '';
+					width: 0.5rem;
+					height: 0.5rem;
+					left: -1rem;
+					top: 0.6rem;
+					background-color: #000 !important;
+				}
+				.root .featuredImage {
+					padding: 1rem;
+					padding-bottom: 0;
+				}
+				.root .featuredImage .wrapper{
+					max-width: 15cm;
+				}
 				.root .initialInfo .wrapper {
 					align-items: flex-start;
+				}
+				.root .initialInfo .info {
+					padding: 0;
+				}
+				.root .initialInfo .info .overview {
+					margin-top: 0;
 				}
 				.root .initialInfo .gallery {
 					display: none;
 				}
 				.root .initialInfo .gallery-print {
 					display: flex;
+				}
+				.root .modifications :global(.contentBlock .title){
+					font-size: 1rem;
 				}
 				.root .attachments,
 				.root .pdf,
@@ -274,6 +388,24 @@ export default ({
 		`}</style>
 		{breadcrumbs &&
 			<Breadcrumbs {...breadcrumbs}/>
+		}
+		<div className='print-bar'
+			style={{
+				backgroundColor : color
+			}}
+		/>
+		{ageGroup && ageGroup.title &&
+			<div className='print-age'
+				style={{
+					backgroundColor : color
+				}}>
+				<div className='label'>
+					{appProps.strings.ageGroup}
+				</div>
+				<div className='age'>
+					{ageGroup.title}
+				</div>
+			</div>
 		}
 		<div
 			className='content'
@@ -479,6 +611,7 @@ export default ({
 							<Button
 								key={i}
 								icon='download'
+								external={true}
 								{...props}
 							/>
 						)}
