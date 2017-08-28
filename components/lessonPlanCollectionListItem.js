@@ -22,9 +22,9 @@ export default ({
 		}}>
 		<style jsx>{`
 			.root {
-				width: 31rem;
+				width: 24rem;
 			}
-			.root :global(a){
+			.root :global(.link){
 				text-decoration: none;
 				color: inherit;
 			}
@@ -56,18 +56,13 @@ export default ({
 				font-weight: bold;
 				letter-spacing: 0.07rem;
 			}
-			@media (max-width: 1024px) {
+			@media screen and (max-width: 52rem) {
 				.root {
-					width: 20rem;
+					width: auto;
 				}
 				.root :global(.info){
 					min-height: 0;
 				}
-				.root :global(.info .title){
-					font-size: 1.5rem;
-				}
-			}
-			@media (max-width: 600px) {
 				.root :global(.info .title){
 					font-size: 1.2rem;
 				}

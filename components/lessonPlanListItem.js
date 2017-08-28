@@ -24,10 +24,10 @@ export default ({
 		}}>
 		<style jsx>{`
 			.root {
-				width: 23rem;
+				width: 24rem;
 				position: relative;
 			}
-			.root :global(a){
+			.root :global(.link){
 				text-decoration: none;
 				color: inherit;
 			}
@@ -68,7 +68,7 @@ export default ({
 
 			.root :global(.number) {
 				left: 1rem;
-				font-size: 2.5rem;
+				font-size: 2rem;
 				font-weight: bold;
 				padding: 0 1rem;
 				border-bottom-right-radius: 0.8rem;
@@ -76,7 +76,7 @@ export default ({
 			}
 			.root :global(.label) {
 				right: 1rem;
-				font-size: 1.5rem;
+				font-size: 1.2rem;
 				font-weight: bold;
 				padding: 0 1rem;
 				border-bottom-right-radius: 0.5rem;
@@ -84,18 +84,15 @@ export default ({
 				letter-spacing: 0.3rem;
 			}
 
-			@media (max-width: 600px) {
+			@media screen and (max-width: 52rem) {
+				.root {
+					width: auto;
+				}
 				.root :global(.info){
 					min-height: 0;
 				}
 				.root :global(.info .title){
-					font-size: 1.3rem;
-				}
-			}
-			@media (max-width: 800px) {
-				.root {
-					width: 20rem;
-					position: relative;
+					font-size: 1.2rem;
 				}
 			}
 		`}</style>

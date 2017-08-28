@@ -11,6 +11,7 @@ export default ({ appProps }) =>
 				padding: 4rem 2rem 16rem;
 				background-color: rgb(127,127,127);
 				color: #FFF;
+				text-align: center;
 			}
 			.root .social,
 			.root .menu {
@@ -41,7 +42,7 @@ export default ({ appProps }) =>
 				letter-spacing: 0.07rem;
 				margin: 0.5rem;
 			}
-			.root .menu .item :global(a){
+			.root .menu .item :global(.link){
 				color: inherit;
 				text-decoration: none;
 			}
@@ -54,6 +55,24 @@ export default ({ appProps }) =>
 			.root .copyright {
 				letter-spacing: 0.05rem;
 				font-size: 0.7rem;
+			}
+			@media print {
+				.root {
+					position: fixed;
+					bottom: 0;
+					left: 0;
+					width: 100%;
+					padding: 0.2rem;
+					background-color: rgba(127,127,127, 0.5);
+				}
+				.root .social,
+				.root .menu,
+				.root .address {
+					display: none;
+				}
+				.root .copyright {
+					font-size: 5pt;
+				}
 			}
 		`}</style>
 		<div className='social'>

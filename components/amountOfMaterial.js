@@ -13,9 +13,15 @@ export default ({
 				align-items: center;
 				justify-content: center;
 			}
-			.amount {
+			.root .amount {
 				font-weight: 500;
-				font-size: 2rem;
+				font-size: 1.2rem;
+			}
+			@media print {
+				.root .amount {
+					font-weight: normal;
+					font-size: 1rem;
+				}
 			}
 		`}</style>
 		{material &&

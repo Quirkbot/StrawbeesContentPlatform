@@ -8,7 +8,7 @@ import fetchLocalData from 'src/utils/fetchLocalData'
 export default Child => class App extends React.Component {
 	static async getInitialProps(ctx) {
 		// Retrieve props that will be used app wise
-		const {	locale } = ctx.query
+		const { locale } = ctx.query
 		const localData = await fetchLocalData(locale, `{
 			settings(q: "order=-sys.createdAt&limit=1"){
 				locale
@@ -63,6 +63,8 @@ export default Child => class App extends React.Component {
 				overview
 				preparation
 				previousLesson
+				print
+				printFriendly
 				relatedLessons
 				saveAsPrintableFile
 				searchFieldPlaceholder
@@ -149,9 +151,23 @@ export default Child => class App extends React.Component {
 						margin: 0;
 						font-family: 'Brandon Text', sans-serif;
 						font-size: 16px;
+						line-height: 1.5;
 					}
 					:global(*){
 						box-sizing: border-box;
+					}
+					:global(a) {
+						color: inherit;
+					}
+					@media print {
+						:global(body) {
+							font-size: 11pt;
+							print-color-adjust: exact;
+							-webkit-print-color-adjust: exact;
+						}
+						@page {
+							margin: 0;
+						}
 					}
 				`}</style>
 				<Head>

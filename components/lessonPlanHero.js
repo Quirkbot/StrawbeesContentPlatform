@@ -25,7 +25,7 @@ export default ({
 			justify-content: center;
 			position: relative;
 			width: 100%;
-			padding: 2rem 3rem;
+			padding: 2rem 1rem;
 			min-height: 15rem;
 		}
 		.root.not-color {
@@ -40,12 +40,12 @@ export default ({
 			margin-top: 0;
 		}
 		.root .title {
-			font-size: 3rem;
+			font-size: 2.5rem;
 			margin-bottom: 0;
 			font-weight: 500;
 		}
 		.root .author {
-			font-size: 1.5rem;
+			font-size: 1.2rem;
 			font-weight: normal;
 			display: flex;
 			flex-direction: row;
@@ -58,15 +58,15 @@ export default ({
 			margin-right: 1rem;
 		}
 
-		@media (max-width: 600px) {
+		@media screen and (max-width: 600px) {
 			.root {
-				padding: 2rem 2rem;
+				padding: 1rem;
 				align-items: flex-start;
 				justify-content:  flex-start;
 				min-height: 0;
 			}
 			.root .title {
-				font-size: 1.5rem;
+				font-size: 1.2rem;
 			}
 			.root .author {
 				font-size: 1rem;
@@ -78,6 +78,14 @@ export default ({
 			}
 			.root .author .key {
 				margin-right: 0.5rem;
+			}
+		}
+		@media print {
+			.root {
+				padding: 1rem;
+				min-height: 0;
+				background-color: #FFF !important;
+				color: #000 !important;
 			}
 		}
 	`}</style>

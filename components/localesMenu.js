@@ -20,12 +20,17 @@ export default ({ settings }) =>
 				position: absolute;
 				width: 100%;
 			}
-			.list :global(a){
+			.list :global(.link){
 				cursor: pointer;
 				text-decoration: none;
 				color: inherit;
 				display: block;
 				margin: 0.2rem 0;
+			}
+			@media print {
+				.root {
+					display: none;
+				}
 			}
 		`}</style>
 		<Button
