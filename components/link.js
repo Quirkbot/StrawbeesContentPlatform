@@ -21,7 +21,9 @@ export default ({ children, ...props }) => {
 		href = to
 	}
 	const toContainer = (
-		<a className='root link to'>
+		<a className='root link to'
+			href={external && href}
+			target={external && '_blank'}>
 			<style jsx>{`
 				.root {
 					display: block;
@@ -48,11 +50,7 @@ export default ({ children, ...props }) => {
 	)
 	if (href) {
 		if (external) {
-			return (
-				<a href={href} target='_blank' {...otherProps}>
-					{toContainer}
-				</a>
-			)
+			return toContainer
 		}
 		return (
 			<Link href={href} as={as} {...otherProps}>

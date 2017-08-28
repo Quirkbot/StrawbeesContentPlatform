@@ -13,6 +13,9 @@ import Slider from 'src/components/slider'
 
 import generateClassnames from 'src/utils/generateClassnames'
 
+const printPage = () => {
+	window.print()
+}
 export default ({
 	appProps,
 	breadcrumbs,
@@ -36,7 +39,6 @@ export default ({
 	lessonSteps,
 	vocabulary,
 	attachments,
-	pdfUrl,
 	relatedLessonPlans,
 	nextLessonPlan,
 	previousLessonPlan
@@ -618,18 +620,16 @@ export default ({
 					</div>
 				</div>
 			}
-			{pdfUrl &&
-				<div className='section pdf color'>
-					<div className='wrapper'>
-						<h3 className='heading'>{appProps.strings.saveAsPrintableFile}</h3>
-						<Button
-							icon='download'
-							title={appProps.strings.download}
-							url={pdfUrl}
-						/>
-					</div>
+			<div className='section pdf color'>
+				<div className='wrapper'>
+					<h3 className='heading'>{appProps.strings.printFriendly}</h3>
+					<Button
+						icon='download'
+						title={appProps.strings.print}
+						onClick={printPage}
+					/>
 				</div>
-			}
+			</div>
 			{relatedLessonPlans && (relatedLessonPlans.length > 0) &&
 				<div className='section relatedLessonPlans not-color'>
 					<div className='wrapper'>

@@ -6,6 +6,7 @@ export default ({
 	title,
 	icon,
 	url,
+	external,
 	border = true,
 	small = false,
 	onClick = () => {}
@@ -86,7 +87,7 @@ export default ({
 				}
 			}
 		`}</style>
-		<Link to={url}>
+		<Link external={external} to={url}>
 			{icon &&
 				<SvgIcon icon={icon}/>
 			}
