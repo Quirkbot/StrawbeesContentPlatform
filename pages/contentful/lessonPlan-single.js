@@ -116,39 +116,41 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 		meta.ogImage = `https:${data.content.featuredImage.url}`
 	}
 
+	const breadcrumbs = { list : [] }
+	breadcrumbs.list.push({
+		title : appProps.strings.home,
+		url   : generateUrl({ appProps })
+	})
+	if (data.content.parent && data.content.parent.entry && data.content.parent.entry[0] && data.content.parent.entry[0].sys) {
+		if (data.content.parent.entry[0].parent && data.content.parent.entry[0].parent.entry && data.content.parent.entry[0].parent.entry[0] && data.content.parent.entry[0].parent.entry[0].sys) {
+			breadcrumbs.list.push({
+				title : data.content.parent.entry[0].parent.entry[0].title,
+				url   : generateUrl({
+					appProps,
+					contentType : data.content.parent.entry[0].parent.entry[0].sys.contentTypeId,
+					slug        : data.content.parent.entry[0].parent.entry[0].slug
+				})
+			})
+		}
+		breadcrumbs.list.push({
+			title : data.content.parent.entry[0].title,
+			url   : generateUrl({
+				appProps,
+				contentType : data.content.parent.entry[0].sys.contentTypeId,
+				slug        : data.content.parent.entry[0].slug
+			})
+		})
+	}
+	breadcrumbs.list.push({
+		title : `${data.content.number} - ${data.content.title}`
+	})
 	return {
 		...data.content,
 		...meta,
-		color       : data.content.ageGroup.cssColor,
-		pdfUrl      : `/static/pdfs/${data.content.ageGroup.title}_${data.content.coMaterial.title}_${data.content.title}.pdf`,
-		breadcrumbs : {
-			list : [
-				{
-					title : appProps.strings.home,
-					url   : generateUrl({ appProps })
-				},
-				{
-					title : data.content.parent.entry[0].parent.entry[0].title,
-					url   : generateUrl({
-						appProps,
-						contentType : data.content.parent.entry[0].parent.entry[0].sys.contentTypeId,
-						slug        : data.content.parent.entry[0].parent.entry[0].slug
-					})
-				},
-				{
-					title : data.content.parent.entry[0].title,
-					url   : generateUrl({
-						appProps,
-						contentType : data.content.parent.entry[0].sys.contentTypeId,
-						slug        : data.content.parent.entry[0].slug
-					})
-				},
-				{
-					title : `${data.content.number} - ${data.content.title}`
-				}
-			]
-		},
-		hero : {
+		breadcrumbs,
+		color  : data.content.ageGroup.cssColor,
+		pdfUrl : `/static/pdfs/${data.content.ageGroup.title}_${data.content.coMaterial.title}_${data.content.title}.pdf`,
+		hero   : {
 			title  : `${data.content.number} - ${data.content.title}`,
 			author : `${data.content.author.name} @ ${data.content.author.organization}`,
 			color  : data.content.ageGroup.cssColor
