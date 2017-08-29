@@ -60,7 +60,7 @@ export default ({
 				line-height: 2.2rem;
 			}
 			.root :global(svg){
-				width: auto;
+				width: 2.2rem;
 				height: 2.2rem;
 			}
 			.root.title :global(svg) {

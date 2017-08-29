@@ -144,9 +144,6 @@ export default ({
 			.root .description-tags .tags :global(> *) {
 				margin: 0.5rem;
 			}
-			.root .initialInfo  {
-				padding: 0;
-			}
 			.root .initialInfo .info,
 			.root .initialInfo .gallery,
 			.root .initialInfo .gallery-print {
@@ -306,7 +303,7 @@ export default ({
 					display: flex;
 				}
 				.root .content {
-					margin-left: 2cm;
+					margin-left: 1cm;
 					margin-right: 1cm;
 				}
 				.root.not-color .content,
@@ -359,9 +356,6 @@ export default ({
 				}
 				.root .featuredImage .wrapper{
 					max-width: 15cm;
-				}
-				.root .initialInfo .wrapper {
-					align-items: flex-start;
 				}
 				.root .initialInfo .info {
 					padding: 0;
