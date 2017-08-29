@@ -29,7 +29,7 @@
     "react-responsive-carousel": "^3.1.24",
     "rimraf": "^2.6.1",
     "s3": "^4.4.0",
-    "strawbees-content-graphql-server": "git+https://github.com/Quirkbot/StrawbeesContentGraphQLServer.git"
+    "strawbees-content-graphql-server": "git+https://github.com/Quirkbot/StrawbeesContentGraphQLServer.git#0.0.9"
   },
   "author": "Paulo Barcelos <paulo@strawbees.com>",
   "devDependencies": {
