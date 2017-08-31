@@ -81,7 +81,8 @@ export default ({ appProps }) =>
 				<div key={i}
 					className='item'>
 					<Link
-						to={url}>
+						to={url}
+						external={true}>
 						<SvgIcon icon={title}/>
 					</Link>
 				</div>
@@ -93,7 +94,8 @@ export default ({ appProps }) =>
 				<div key={i}
 					className='item'>
 					<Link
-						to={url}>
+						to={url}
+						external={true}>
 						{title}
 					</Link>
 				</div>

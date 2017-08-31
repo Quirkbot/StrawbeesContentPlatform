@@ -24,6 +24,7 @@ export default ({
 			.root {
 				box-sizing: border-box;
 				border-radius: 3rem;
+				cursor: pointer;
 			}
 			.root.not-border {
 				background-color: rgba(0,0,0,0.05);
@@ -45,7 +46,6 @@ export default ({
 				border: solid 1px;
 			}
 			.root :global(.link){
-				cursor: pointer;
 				text-decoration: none;
 				color: inherit;
 				display: block;
@@ -74,6 +74,7 @@ export default ({
 			}
 			.root.small :global(svg){
 				height: 1.2rem;
+				width: 1.2rem;
 			}
 
 			@media print {

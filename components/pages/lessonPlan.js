@@ -13,10 +13,13 @@ import Slider from 'src/components/slider'
 
 import generateClassnames from 'src/utils/generateClassnames'
 
-const printPage = () => {
+const printPage = ga => {
+	const page = document.location.pathname
+	ga.trackPageview(`${page}${page.endsWith('/') ? '' : '/'}print`)
 	window.print()
 }
 export default ({
+	ga,
 	appProps,
 	breadcrumbs,
 	ageGroup,
@@ -508,6 +511,7 @@ export default ({
 							icon='shopping'
 							title={appProps.strings.shop}
 							url={appProps.settings.storeUrl}
+							external={true}
 						/>
 					</div>
 				</div>
@@ -620,7 +624,7 @@ export default ({
 					<Button
 						icon='download'
 						title={appProps.strings.print}
-						onClick={printPage}
+						onClick={() => printPage(ga)}
 					/>
 				</div>
 			</div>

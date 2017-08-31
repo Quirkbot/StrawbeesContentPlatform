@@ -1,5 +1,8 @@
+/* global GAID */
 import React from 'react'
+import ReactGA from 'react-ga'
 import Head from 'next/head'
+import Router from 'next/router'
 import Header from 'src/components/header'
 import Footer from 'src/components/footer'
 
@@ -133,7 +136,39 @@ export default Child => class App extends React.Component {
 		}
 	}
 
+	constructor(props) {
+		super(props)
+		this.trackPageview = this.trackPageview.bind(this)
+	}
+
+	componentDidMount() {
+		this.initGa()
+		this.trackPageview()
+		Router.router.events.on('routeChangeComplete', this.trackPageview)
+	}
+
+	componentWillUnmount() {
+		Router.router.events.off('routeChangeComplete', this.trackPageview)
+	}
+
+	trackPageview(path = document.location.pathname) {
+		if (path !== this.lastTrackedPath) {
+			ReactGA.pageview(path)
+			this.lastTrackedPath = path
+		}
+	}
+
+	initGa() {
+		if (!window.GA_INITIALIZED) {
+			ReactGA.initialize(GAID)
+			window.GA_INITIALIZED = true
+		}
+	}
+
 	render() {
+		const ga = {
+			trackPageview : this.trackPageview
+		}
 		const meta = {
 			'og:title'       : this.props.ogTitle,
 			'og:description' : this.props.ogDescription,
@@ -165,6 +200,9 @@ export default Child => class App extends React.Component {
 							print-color-adjust: exact;
 							-webkit-print-color-adjust: exact;
 						}
+						:global(a[href]:after) {
+							content: " (" attr(href) ")";
+						}
 						@page {
 							margin: 1cm;
 						}
@@ -189,9 +227,9 @@ export default Child => class App extends React.Component {
 
 
 				</Head>
-				<Header {...this.props}/>
-				<Child {...this.props} />
-				<Footer {...this.props}/>
+				<Header {...this.props} ga={ga}/>
+				<Child {...this.props} ga={ga}/>
+				<Footer {...this.props} ga={ga}/>
 			</div>
 		)
 	}
