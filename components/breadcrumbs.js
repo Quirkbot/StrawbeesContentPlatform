@@ -17,7 +17,7 @@ export default ({
 			display: flex;
 			flex-direction: row;
 			flex-wrap: wrap;
-			max-width: 50rem;
+			max-width: 60rem;
 			flex-grow: 1;
 		}
 		.item {

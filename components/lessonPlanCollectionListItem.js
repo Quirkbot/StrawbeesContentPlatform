@@ -22,7 +22,7 @@ export default ({
 		}}>
 		<style jsx>{`
 			.root {
-				width: 24rem;
+				width: calc(60rem * 0.5 - 1rem);
 				cursor: pointer;
 			}
 			.root :global(.link){
@@ -57,7 +57,7 @@ export default ({
 				font-weight: bold;
 				letter-spacing: 0.07rem;
 			}
-			@media screen and (max-width: 52rem) {
+			@media screen and (max-width: 62rem) {
 				.root {
 					width: auto;
 				}

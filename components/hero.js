@@ -47,7 +47,7 @@ export default ({
 			display: flex;
 			flex-direction: row;
 			align-items: center;
-			max-width: 50rem
+			max-width: 60rem
 		}
 		.wrapper .icon,
 		.wrapper .info {

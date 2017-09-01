@@ -24,7 +24,7 @@ export default ({
 		}}>
 		<style jsx>{`
 			.root {
-				width: 24rem;
+				width: calc(60rem * 0.5 - 1rem);
 				position: relative;
 				cursor: pointer;
 			}

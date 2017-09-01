@@ -107,7 +107,7 @@ export default ({
 			.root .section .wrapper{
 				position: relative;
 				width: 100%;
-				max-width: 50rem;
+				max-width: 60rem;
 			}
 			.root .section .heading{
 				width: 100%;

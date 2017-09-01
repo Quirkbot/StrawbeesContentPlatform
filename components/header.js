@@ -21,7 +21,7 @@ export default ({ appProps }) =>
 				flex-direction: row;
 				justify-content: space-between;
 				align-items: center;
-				max-width: 50rem;
+				max-width: 60rem;
 				flex-grow: 1;
 			}
 			@media screen and (max-width: 600px) {
