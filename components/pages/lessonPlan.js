@@ -623,7 +623,7 @@ export default ({
 				<div className='wrapper'>
 					<h3 className='heading'>{appProps.strings.printFriendly}</h3>
 					<Button
-						icon='download'
+						icon='print'
 						title={appProps.strings.print}
 						onClick={() => printPage(ga)}
 					/>
