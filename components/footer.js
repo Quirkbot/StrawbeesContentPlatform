@@ -1,5 +1,6 @@
 import Link from 'src/components/link'
 import SvgIcon from 'src/components/svgIcon'
+import Package from 'src/package.json'
 
 export default ({ appProps }) =>
 	<div className='root footer'>
@@ -12,6 +13,7 @@ export default ({ appProps }) =>
 				background-color: rgb(127,127,127);
 				color: #FFF;
 				text-align: center;
+				position: relative;
 			}
 			.root .social,
 			.root .menu {
@@ -56,18 +58,29 @@ export default ({ appProps }) =>
 				letter-spacing: 0.05rem;
 				font-size: 0.7rem;
 			}
+			.root .version {
+				position: absolute;
+				bottom: 0.2rem;
+				right: 0.2rem;
+				letter-spacing: 0.05rem;
+				font-size: 0.5rem;
+				opacity: 0.5;
+			}
 			@media print {
 				.root {
 					position: fixed;
 					bottom: 0;
 					left: 0;
 					width: 100%;
-					padding: 0.2rem;
-					background-color: rgba(127,127,127, 0.5);
+					padding: 0.2rem 1rem;
+					background-color: #eee !important;
+					color: #000;
+					align-items: left;
 				}
 				.root .social,
 				.root .menu,
-				.root .address {
+				.root .address,
+				.root .version {
 					display: none;
 				}
 				.root .copyright {
@@ -106,5 +119,8 @@ export default ({ appProps }) =>
 		</div>
 		<div className='copyright'>
 			{appProps.strings.copyrightNotice.split('{{year}}').join((new Date()).getFullYear())}
+		</div>
+		<div className='version'>
+			v{Package.version}
 		</div>
 	</div>
