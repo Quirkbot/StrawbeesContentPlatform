@@ -26,6 +26,7 @@ export default ({
 			.root {
 				width: 24rem;
 				position: relative;
+				cursor: pointer;
 			}
 			.root :global(.link){
 				text-decoration: none;

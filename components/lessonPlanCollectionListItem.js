@@ -23,6 +23,7 @@ export default ({
 		<style jsx>{`
 			.root {
 				width: 24rem;
+				cursor: pointer;
 			}
 			.root :global(.link){
 				text-decoration: none;

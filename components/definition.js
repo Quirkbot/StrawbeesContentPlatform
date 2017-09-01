@@ -26,6 +26,11 @@ export default ({
 				text-align: center;
 				font-size: 0.8rem;
 			}
+			@media print {
+				.root {
+					page-break-inside: avoid;
+				}
+			}
 		`}</style>
 		{featuredImage &&
 			<img className='featuredImage'

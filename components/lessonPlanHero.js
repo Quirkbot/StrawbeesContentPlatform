@@ -87,6 +87,19 @@ export default ({
 				background-color: #FFF !important;
 				color: #000 !important;
 			}
+			.root .title {
+				font-size: 2rem;
+				margin-bottom: 0;
+				font-weight: 500;
+			}
+			.root .author {
+				font-size: 1rem;
+				font-weight: normal;
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: center;
+			}
 		}
 	`}</style>
 		{title &&

@@ -27,6 +27,7 @@ export default ({ children, ...props }) => {
 			<style jsx>{`
 				.root {
 					display: block;
+					cursor: pointer;
 				}
 				.root.to:hover {
 					opacity: 0.7;

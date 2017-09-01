@@ -180,10 +180,11 @@ export default ({
 				display: none;
 				flex-direction: row;
 				flex-wrap: wrap;
+				padding-left: 2rem;
 			}
 			.root .initialInfo .gallery-print > * {
-				width: calc(50% - 2rem);
-				margin: 1rem;
+				width: calc(50% - 1rem);
+				margin: 0.5rem;
 			}
 			.root .initialInfo .gallery-print img {
 				display: block;
@@ -321,7 +322,7 @@ export default ({
 					color: #000;
 				}
 				.root .section,
-				.root img,
+				.root :global(img),
 				.root ul {
 					page-break-inside: avoid;
 				}
