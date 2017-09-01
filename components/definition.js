@@ -7,7 +7,7 @@ export default ({
 		className='root definition'>
 		<style jsx>{`
 			.root {
-				width: 15rem;
+				width: 11rem;
 				display: flex;
 				flex-direction: column;
 				align-items: center;
@@ -20,10 +20,16 @@ export default ({
 			.root .title {
 				font-weight: 500;
 				font-style: italic;
-				font-size: 1.2rem;
+				font-size: 1rem;
 			}
 			.root .description {
 				text-align: center;
+				font-size: 0.8rem;
+			}
+			@media print {
+				.root {
+					page-break-inside: avoid;
+				}
 			}
 		`}</style>
 		{featuredImage &&

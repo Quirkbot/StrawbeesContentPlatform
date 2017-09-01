@@ -36,17 +36,17 @@ export default class Page extends React.Component {
 				}
 			}
 
-			ageGroups {
+			ageGroups(q:"order=fields.sort") {
 				sys { id }
 				title
 			}
 
-			coMaterials {
+			coMaterials(q:"order=fields.sort") {
 				sys { id }
 				title
 			}
 
-			tags {
+			tags(q:"order=fields.sort") {
 				sys { id }
 				title
 			}
@@ -59,8 +59,7 @@ export default class Page extends React.Component {
 					appProps,
 					contentType : item.sys.contentTypeId,
 					slug        : item.slug
-				}),
-				number : null
+				})
 			}))
 		}
 	}
@@ -79,7 +78,8 @@ export default class Page extends React.Component {
 	constructor(props) {
 		super(props)
 		this.fuse = new Fuse(props.lessonPlans, {
-			keys : [
+			threshold : 0.5,
+			keys      : [
 				'title',
 				'description',
 				'ageGroup.title',
@@ -180,7 +180,6 @@ export default class Page extends React.Component {
 	}
 
 	filterFoundLessonPlans = (state) => {
-		const { lessonPlans } = this.props
 		const {
 			selectedAgeGroups,
 			selectedCoMaterials,
@@ -193,6 +192,28 @@ export default class Page extends React.Component {
 			selectedCoMaterials,
 			selectedTags,
 			searchQuery
+		})
+
+		const {
+			ageGroups,
+			coMaterials,
+			tags
+		} = this.props
+
+		let { lessonPlans } = this.props
+		lessonPlans = lessonPlans.slice(0).sort((a, b) => {
+			if (a.ageGroup.sys.id !== b.ageGroup.sys.id) {
+				const aO = ageGroups.filter(o => o.sys.id === a.ageGroup.sys.id).pop()
+				const bO = ageGroups.filter(o => o.sys.id === b.ageGroup.sys.id).pop()
+				return ageGroups.indexOf(aO) > ageGroups.indexOf(bO) ? 1 : -1
+			}
+			if (a.coMaterial.sys.id !== b.coMaterial.sys.id) {
+				const aO = coMaterials.filter(o => o.sys.id === a.coMaterial.sys.id).pop()
+				const bO = coMaterials.filter(o => o.sys.id === b.coMaterial.sys.id).pop()
+				return coMaterials.indexOf(aO) > coMaterials.indexOf(bO) ? 1 : -1
+			}
+			return a.number > b.number ? 1 : -1
+			return 0
 		})
 
 		state.foundLessonPlans = searchQuery ?

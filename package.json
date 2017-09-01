@@ -1,6 +1,6 @@
 {
   "name": "strawbees-content-platform",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "scripts": {
     "clean": "rm -rf out && rm -rf .next && rm -rf static/routes.json && rm -rf static/graphql && rm -rf node_modules/.cache/babel-loader",
     "dev": "node lib/scripts/dev.js",
@@ -9,6 +9,8 @@
     "start": "node lib/services/ci-server.js",
     "deploy:ci:stage": "git checkout develop && eb deploy strawbees-content-platform-stage",
     "deploy:ci:production": "git checkout master && eb deploy strawbees-content-platform-production",
+    "logs:ci:stage": "eb logs strawbees-content-platform-stage",
+    "logs:ci:production": "eb logs strawbees-content-platform-production",
     "now": "npm run clean && now --public -e SPACE_ID -e CDA_TOKEN -e CMA_TOKEN",
     "now-build": "sh now-setup.sh",
     "now-start": "cd tmp && npm start",
@@ -17,21 +19,22 @@
   "dependencies": {
     "babel-plugin-module-resolver": "^2.7.1",
     "babel-plugin-transform-define": "^1.2.0",
+    "dotenv": "^4.0.0",
     "fuse.js": "^3.0.5",
     "isomorphic-fetch": "^2.2.1",
     "js-md5": "^0.4.2",
     "mkdirp": "^0.5.1",
-    "next": "^3.0.1-beta.20",
+    "next": "^3.0.6",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-ga": "^2.2.0",
     "react-remarkable": "^1.1.1",
     "react-responsive-carousel": "^3.1.24",
     "rimraf": "^2.6.1",
     "s3": "^4.4.0",
-    "strawbees-content-graphql-server": "git+https://github.com/Quirkbot/StrawbeesContentGraphQLServer.git"
+    "strawbees-content-graphql-server": "git+https://github.com/Quirkbot/StrawbeesContentGraphQLServer.git#0.0.9"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Paulo Barcelos <paulo@strawbees.com>",
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "eslint": "^3.19.0",

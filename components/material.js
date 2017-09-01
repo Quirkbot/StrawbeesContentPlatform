@@ -13,13 +13,15 @@ export default ({
 			<style jsx>{`
 				.root :global(>a),
 				.root :global(>div){
-					width: 15rem;
-					text-decoration: none;
-					color: inherit;
+					width: 11rem;
 					display: flex;
 					flex-direction: column;
 					align-items: center;
 					justify-content: center;
+					margin: 0 0.5rem;
+					text-decoration: none;
+					color: inherit;
+
 				}
 				.root :global(.featuredImage) {
 					display: block;
@@ -27,7 +29,19 @@ export default ({
 				.root :global(.title) {
 					font-weight: 500;
 					font-style: italic;
-					font-size: 1.2rem;
+					font-size: 1rem;
+					text-align: center;
+				}
+				@media print {
+					.root :global(>a),
+					.root :global(>div){
+						width: 8rem;
+					}
+					.root :global(.title) {
+						font-weight: normal;
+						font-style: normal;
+						font-size: 0.8rem;
+					}
 				}
 			`}</style>
 			<Wrapper to={url}>

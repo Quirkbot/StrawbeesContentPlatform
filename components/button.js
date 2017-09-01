@@ -6,6 +6,7 @@ export default ({
 	title,
 	icon,
 	url,
+	external,
 	border = true,
 	small = false,
 	onClick = () => {}
@@ -23,6 +24,7 @@ export default ({
 			.root {
 				box-sizing: border-box;
 				border-radius: 3rem;
+				cursor: pointer;
 			}
 			.root.not-border {
 				background-color: rgba(0,0,0,0.05);
@@ -43,8 +45,7 @@ export default ({
 			.root.border {
 				border: solid 1px;
 			}
-			.root :global(a){
-				cursor: pointer;
+			.root :global(.link){
 				text-decoration: none;
 				color: inherit;
 				display: block;
@@ -59,7 +60,7 @@ export default ({
 				line-height: 2.2rem;
 			}
 			.root :global(svg){
-				width: auto;
+				width: 2.2rem;
 				height: 2.2rem;
 			}
 			.root.title :global(svg) {
@@ -73,9 +74,21 @@ export default ({
 			}
 			.root.small :global(svg){
 				height: 1.2rem;
+				width: 1.2rem;
+			}
+
+			@media print {
+				.root.title:not(.icon) {
+					padding: 0.4rem 0.8rem;
+				}
+				.root.not-small .title {
+					font-size: 0.8rem;
+					height: 0.8rem;
+					line-height: 0.8rem;
+				}
 			}
 		`}</style>
-		<Link to={url}>
+		<Link external={external} to={url}>
 			{icon &&
 				<SvgIcon icon={icon}/>
 			}
