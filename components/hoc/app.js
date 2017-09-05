@@ -1,4 +1,4 @@
-/* global GAID */
+/* global GAID, CANONICAL_URL */
 import React from 'react'
 import ReactGA from 'react-ga'
 import Head from 'next/head'
@@ -12,6 +12,10 @@ export default Child => class App extends React.Component {
 	static async getInitialProps(ctx) {
 		// Retrieve props that will be used app wise
 		const { locale } = ctx.query
+		const context = {
+			query  : ctx.query,
+			asPath : ctx.asPath
+		}
 		const localData = await fetchLocalData(locale, `{
 			settings(q: "order=-sys.createdAt&limit=1"){
 				locale
@@ -117,6 +121,7 @@ export default Child => class App extends React.Component {
 		})
 
 		const appProps = {
+			context,
 			settings,
 			contentTypeSlugs,
 			strings
@@ -169,11 +174,15 @@ export default Child => class App extends React.Component {
 		const ga = {
 			trackPageview : this.trackPageview
 		}
+		const baseUrl = typeof CANONICAL_URL !== 'undefined' ? CANONICAL_URL : ''
+
 		const meta = {
+			'og:url'         : baseUrl ? `${baseUrl}${this.props.appProps.context.asPath}` : '',
 			'og:title'       : this.props.ogTitle,
 			'og:description' : this.props.ogDescription,
 			'og:image'       : this.props.ogImage
 		}
+
 		return (
 			<div className='root app'>
 				<style jsx>{`
@@ -209,12 +218,23 @@ export default Child => class App extends React.Component {
 					}
 				`}</style>
 				<Head>
-					<title>{meta['og:title']}</title>
-					{Object.keys(meta).map((m, i) =>
-						<meta key={i} property={m} content={meta[m]} />
+					{meta['og:title'] &&
+						<title>{meta['og:title']}</title>
+					}
+					{meta['og:url'] &&
+						<link rel="canonical" href={meta['og:url']} />
+					}
+					{Object.keys(meta).map((m, i) => {
+						if (meta[m]) {
+							return (
+								<meta key={i} property={m} content={meta[m]} />
+							)
+						}
+						return null
+					}
 					)}
-					<link rel="stylesheet" href="/static/lib/carousel.min.css"/>
 					<meta name="viewport" content="width=device-width, initial-scale=1"/>
+					<link rel="stylesheet" href="/static/lib/carousel.min.css"/>
 
 					<link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png"/>
 					<link rel="icon" type="image/png" sizes="32x32" href="/static/favicon/favicon-32x32.png"/>
@@ -224,8 +244,6 @@ export default Child => class App extends React.Component {
 					<link rel="shortcut icon" href="/static/favicon/favicon.ico"/>
 					<meta name="msapplication-config" content="/static/favicon/browserconfig.xml"/>
 					<meta name="theme-color" content="#ffffff"/>
-
-
 				</Head>
 				<Header {...this.props} ga={ga}/>
 				<Child {...this.props} ga={ga}/>
