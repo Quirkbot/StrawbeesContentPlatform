@@ -180,7 +180,8 @@ export default Child => class App extends React.Component {
 			'og:url'         : baseUrl ? `${baseUrl}${this.props.appProps.context.asPath}` : '',
 			'og:title'       : this.props.ogTitle,
 			'og:description' : this.props.ogDescription,
-			'og:image'       : this.props.ogImage
+			'og:image'       : this.props.ogImage,
+			'og:type'        : 'website'
 		}
 
 		return (
