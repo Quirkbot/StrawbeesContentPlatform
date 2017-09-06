@@ -192,6 +192,7 @@ export default Child => class App extends React.Component {
 					@font-face { font-family: 'Brandon Text'; src: url('/static/fonts/BrandonText-Regular.eot'); src: url('/static/fonts/BrandonText-Regular.eot?#iefix') format('embedded-opentype'),url('/static/fonts/BrandonText-Regular.woff2') format('woff2'),url('/static/fonts/BrandonText-Regular.woff') format('woff'),url('/static/fonts/BrandonText-Regular.ttf') format('truetype'); font-weight: normal; font-style: normal; }
 					@font-face { font-family: 'Brandon Text'; src: url('/static/fonts/BrandonText-Bold.eot'); src: url('/static/fonts/BrandonText-Bold.eot?#iefix') format('embedded-opentype'),url('/static/fonts/BrandonText-Bold.woff2') format('woff2'),url('/static/fonts/BrandonText-Bold.woff') format('woff'),url('/static/fonts/BrandonText-Bold.ttf') format('truetype'); font-weight: bold; font-style: normal; }
 
+					:global(html),
 					:global(body) {
 						margin: 0;
 						font-family: 'Brandon Text', sans-serif;
