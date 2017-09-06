@@ -1,6 +1,6 @@
 {
   "name": "strawbees-content-platform",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "scripts": {
     "clean": "rm -rf out && rm -rf .next && rm -rf static/routes.json && rm -rf static/graphql && rm -rf node_modules/.cache/babel-loader",
     "dev": "node lib/scripts/dev.js",
