@@ -2,7 +2,7 @@ import Button from 'src/components/button'
 import Link from 'src/components/link'
 
 export default ({ settings }) => {
-	const otherLocales = settings.availableLocales
+	const otherLocales = settings.locales
 	.filter(locale => locale.locale !== settings.currentLocale.locale)
 
 	if (!otherLocales.length) {

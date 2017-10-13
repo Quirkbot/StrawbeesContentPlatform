@@ -1,4 +1,4 @@
-/* global GAID, CANONICAL_URL */
+/* global GAID, CANONICAL_URL, STAGE */
 import React from 'react'
 import ReactGA from 'react-ga'
 import Head from 'next/head'
@@ -21,7 +21,7 @@ export default Child => class App extends React.Component {
 				locale
 				languageName
 				basename
-				availableLocales
+				locales
 				storeUrl
 				logo { url }
 				socialMediaLinks
@@ -92,17 +92,18 @@ export default Child => class App extends React.Component {
 			languageName : settings.languageName,
 			basename     : settings.basename ? settings.basename : ''
 		}
-		settings.availableLocales = settings.availableLocales.map(line => {
-			const array = line.split('_')
-			return {
-				locale       : array[0],
-				languageName : array[1],
-				basename     : array[2] ? array[2] : ''
-			}
-		})
 		delete settings.locale
 		delete settings.languageName
 		delete settings.basename
+
+
+		settings.locales = JSON.parse(settings.locales)
+		.filter(localeObject => {
+			if (typeof STAGE !== 'undefined') {
+				return true
+			}
+			return !localeObject.stage
+		})
 
 		settings.socialMediaLinks = settings.socialMediaLinks.map(line => {
 			const array = line.split('_')
