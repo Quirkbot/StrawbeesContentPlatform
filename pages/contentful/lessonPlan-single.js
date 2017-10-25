@@ -59,6 +59,7 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 					duration
 					body
 					featuredImage { url }
+					imageGallery { url }
 				}
 				vocabulary {
 					title
