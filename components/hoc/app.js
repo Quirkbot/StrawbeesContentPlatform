@@ -1,4 +1,4 @@
-/* global GAID, CANONICAL_URL, STAGE */
+/* global GAID, GTMID, CANONICAL_URL, STAGE */
 import React from 'react'
 import ReactGA from 'react-ga'
 import Head from 'next/head'
@@ -221,6 +221,18 @@ export default Child => class App extends React.Component {
 					}
 				`}</style>
 				<Head>
+					{/* <!-- Google Tag Manager --> */}
+					<script dangerouslySetInnerHTML={{
+						__html : `
+							(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+							new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+							j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+							'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+							})(window,document,'script','dataLayer','${GTMID}');
+						`
+					}}/>
+					{/* <!-- End Google Tag Manager --> */}
+
 					{meta['og:title'] &&
 						<title>{meta['og:title']}</title>
 					}
@@ -234,8 +246,7 @@ export default Child => class App extends React.Component {
 							)
 						}
 						return null
-					}
-					)}
+					})}
 					<meta name="viewport" content="width=device-width, initial-scale=1"/>
 					<link rel="stylesheet" href="/static/lib/carousel.min.css"/>
 
@@ -248,6 +259,20 @@ export default Child => class App extends React.Component {
 					<meta name="msapplication-config" content="/static/favicon/browserconfig.xml"/>
 					<meta name="theme-color" content="#ffffff"/>
 				</Head>
+
+				{/* <!-- Google Tag Manager (noscript) --> */}
+				<noscript>
+					<iframe
+						src={`https://www.googletagmanager.com/ns.html?id=${GTMID}`}
+						height="0"
+						width="0"
+						style={{
+							display    : 'none',
+							visibility : 'hidden'
+						}}/>
+				</noscript>
+				{/* <!-- End Google Tag Manager (noscript) --> */}
+
 				<Header {...this.props} ga={ga}/>
 				<Child {...this.props} ga={ga}/>
 				<Footer {...this.props} ga={ga}/>
