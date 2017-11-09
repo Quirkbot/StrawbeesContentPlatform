@@ -35,9 +35,6 @@ export default class extends React.Component {
 						justify-content: flex-start;
 						flex-wrap: wrap;
 					}
-					.root .label {
-
-					}
 				`}</style>
 				{label &&
 					<div className='label' onClick={() => { /* this.setState({ active : !active }) */ }}>

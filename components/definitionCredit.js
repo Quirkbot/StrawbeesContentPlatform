@@ -16,10 +16,10 @@ export default ({
 				margin-right: 0.5rem;
 			}
 			.root .index::before {
-				content: '('
+				content: '(';
 			}
 			.root .index::after {
-				content: ')'
+				content: ')';
 			}
 			.root .credit {
 				text-align: left;

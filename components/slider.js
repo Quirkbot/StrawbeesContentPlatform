@@ -14,9 +14,6 @@ export default ({
 	children
 }) =>
 	<div className='root slider'>
-		<style jsx>{`
-
-		`}</style>
 		<Carousel {...{ ...defaults, ...options }}>
 			{children}
 		</Carousel>

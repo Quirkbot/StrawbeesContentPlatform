@@ -32,10 +32,10 @@ export default ({
 				font-size: 0.7rem;
 			}
 			.root .description .creditIndex::before {
-				content: '('
+				content: '(';
 			}
 			.root .description .creditIndex::after {
-				content: ')'
+				content: ')';
 			}
 			@media print {
 				.root {
