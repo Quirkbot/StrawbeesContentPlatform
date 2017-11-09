@@ -59,11 +59,13 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 					duration
 					body
 					featuredImage { url }
+					imageGallery { url }
 				}
 				vocabulary {
 					title
 					description
 					featuredImage { url }
+					credit
 				}
 				attachments {
 					title
@@ -108,6 +110,8 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 			}
 		}
 	`)
+
+	// Metadata
 	const meta = {
 		ogTitle       : `${data.content.title} - ${appProps.settings.ogTitle}`,
 		ogDescription : data.content.description
@@ -116,6 +120,7 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 		meta.ogImage = `https:${data.content.featuredImage.url}`
 	}
 
+	// Breadcrumbs
 	const breadcrumbs = { list : [] }
 	breadcrumbs.list.push({
 		title : appProps.strings.home,
@@ -144,6 +149,18 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 	breadcrumbs.list.push({
 		title : `${data.content.number} - ${data.content.title}`
 	})
+
+	// Prepare vocabulary credit
+	let vocabularyCreditIndex = 0
+	data.content.vocabulary.forEach(definition => {
+		definition.creditIndex = definition.credit ? ++vocabularyCreditIndex : null
+	})
+	data.content.vocabularyCredits = data.content.vocabulary
+		.filter(d => d.credit)
+		.map(({ credit }, i) => ({
+			index : i + 1,
+			credit
+		}))
 	return {
 		...data.content,
 		...meta,

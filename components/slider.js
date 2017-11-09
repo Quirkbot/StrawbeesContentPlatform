@@ -13,11 +13,8 @@ export default ({
 	options = {},
 	children
 }) =>
-<div className='root slider'>
-	<style jsx>{`
-
-	`}</style>
-	<Carousel {...{ ...defaults, ...options }}>
-		{children}
-	</Carousel>
-</div>
+	<div className='root slider'>
+		<Carousel {...{ ...defaults, ...options }}>
+			{children}
+		</Carousel>
+	</div>

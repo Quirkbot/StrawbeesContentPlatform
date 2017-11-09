@@ -1,11 +1,14 @@
 import Markdown from 'react-remarkable'
 
+import Slider from 'src/components/slider'
+
 export default ({
 	appProps,
 	title,
 	number,
 	duration,
 	featuredImage,
+	imageGallery,
 	body
 }) =>
 	<div
@@ -21,10 +24,17 @@ export default ({
 			.root:last-of-type {
 				margin-bottom: 0;
 			}
-			.root .featuredImage {
+			.root .images {
 				width: 30rem;
 				max-width: 100%;
+			}
+			.root .images .featuredImage,
+			.root .images .gallery {
+				width: 100%;
 				margin-bottom: 1rem;
+			}
+			.root .images .gallery-print {
+				display: none;
 			}
 			.root .title {
 				text-align: center;
@@ -60,9 +70,29 @@ export default ({
 				.root .text {
 					margin-right: 1cm;
 				}
-				.root .featuredImage {
-					width: 5cm;
+				.root .images  {
+
 					order: 2;
+				}
+				.root .images .featuredImage,
+				.root .images .gallery-print {
+					width: 5cm;
+				}
+				.root .images .gallery {
+					display: none;
+				}
+				.root .images .gallery-print {
+					display: flex;
+					flex-direction: column;
+					position: relative;
+				}
+				.root .images .gallery-print > * {
+					width: 100%;
+					margin-bottom: 0.5rem;
+				}
+				.root .images .gallery-print img {
+					display: block;
+					width: 100%;
 				}
 				.root .title {
 					text-align: left;
@@ -81,11 +111,43 @@ export default ({
 			}
 
 		`}</style>
-		{featuredImage &&
-			<img className='featuredImage'
-				srcSet={`${featuredImage.url}?w=600&fit=fill, ${featuredImage.url}?w=1200&fit=fill 2x`}
-				src={`${featuredImage.url}?w=1200&fit=fill`}
-			/>
+		{(featuredImage || imageGallery) &&
+			<div className='images'>
+				{featuredImage &&
+					<img className='featuredImage'
+						srcSet={`${featuredImage.url}?w=600&fit=fill, ${featuredImage.url}?w=1200&fit=fill 2x`}
+						src={`${featuredImage.url}?w=1200&fit=fill`}
+					/>
+				}
+				{imageGallery &&
+					<div className='gallery'>
+						<Slider options={{
+							infiniteLoop   : false,
+							autoPlay       : false,
+							showIndicators : imageGallery.length > 1
+						}}>
+							{imageGallery.map(({ url }, i) =>
+								<div key={i}>
+									<img srcSet={`${url}?w=500&h=500&fit=fill, ${url}?w=1000&h=1000&fit=fill 2x`}
+										src={`${url}?w=1000&h=1000&fit=fill`}
+									/>
+								</div>
+							)}
+						</Slider>
+					</div>
+				}
+				{imageGallery &&
+					<div className='gallery-print'>
+						{imageGallery.map(({ url }, i) =>
+							<div key={i}>
+								<img srcSet={`${url}?w=500&h=500&fit=fill, ${url}?w=1000&h=1000&fit=fill 2x`}
+									src={`${url}?w=1000&h=1000&fit=fill`}
+								/>
+							</div>
+						)}
+					</div>
+				}
+			</div>
 		}
 		<div className='text'>
 			{title &&

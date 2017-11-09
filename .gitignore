@@ -5,6 +5,7 @@ yarn-error.log
 /.env
 /.next
 /out
+/static/content-types.json
 /static/routes.json
 /static/graphql
 .elasticbeanstalk/*
