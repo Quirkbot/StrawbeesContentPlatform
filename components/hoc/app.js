@@ -50,6 +50,7 @@ export default Child => class App extends React.Component {
 				companyAddress
 				content
 				copyrightNotice
+				credits
 				download
 				duration
 				emptySearch

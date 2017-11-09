@@ -24,6 +24,7 @@
       2,
       "as-needed"
     ],
+    "function-paren-newline": 0,
     "comma-dangle": 0,
     "import/imports-first": 1,
     "import/named": 1,

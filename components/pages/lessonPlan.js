@@ -5,6 +5,7 @@ import Button from 'src/components/button'
 import Breadcrumbs from 'src/components/breadcrumbs'
 import ContentBlock from 'src/components/contentBlock'
 import DefinitionList from 'src/components/definitionList'
+import DefinitionCreditList from 'src/components/definitionCreditList'
 import LessonPlanHero from 'src/components/lessonPlanHero'
 import LessonPlanList from 'src/components/lessonPlanList'
 import LessonStep from 'src/components/lessonStep'
@@ -41,6 +42,7 @@ export default ({
 	preparation,
 	lessonSteps,
 	vocabulary,
+	vocabularyCredits,
 	attachments,
 	relatedLessonPlans,
 	nextLessonPlan,
@@ -252,6 +254,9 @@ export default ({
 			}
 			.root .lessonSteps :global(.lessonStep) {
 				page-break-inside: avoid;
+			}
+			.root .vocabulary :global(.definitionCreditList) {
+				margin-top: 3rem;
 			}
 			.root .attachments :global(.button) {
 				margin-bottom: 1rem;
@@ -601,6 +606,9 @@ export default ({
 					<div className='wrapper'>
 						<h3 className='heading'>{appProps.strings.vocabulary}</h3>
 						<DefinitionList items={vocabulary}/>
+						{vocabularyCredits && (vocabularyCredits.length > 0) &&
+							<DefinitionCreditList items={vocabularyCredits}/>
+						}
 					</div>
 				</div>
 			}

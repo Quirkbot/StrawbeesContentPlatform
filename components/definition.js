@@ -1,7 +1,8 @@
 export default ({
 	title,
 	description,
-	featuredImage
+	featuredImage,
+	creditIndex
 }) =>
 	<div
 		className='root definition'>
@@ -26,6 +27,16 @@ export default ({
 				text-align: center;
 				font-size: 0.8rem;
 			}
+			.root .description .creditIndex {
+				display: inline;
+				font-size: 0.7rem;
+			}
+			.root .description .creditIndex::before {
+				content: '('
+			}
+			.root .description .creditIndex::after {
+				content: ')'
+			}
 			@media print {
 				.root {
 					page-break-inside: avoid;
@@ -46,6 +57,11 @@ export default ({
 		{description &&
 			<div className='description'>
 				{description}
+				{creditIndex &&
+					<div className='creditIndex'>
+						{creditIndex}
+					</div>
+				}
 			</div>
 		}
 	</div>
