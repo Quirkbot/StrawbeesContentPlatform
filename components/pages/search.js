@@ -55,7 +55,8 @@ export default class Page extends React.Component {
 			...data,
 			lessonPlans : (data.lessonPlans || []).map(item => ({
 				...item,
-				url : generateUrl({
+				tags : item.tags || [],
+				url  : generateUrl({
 					appProps,
 					contentType : item.sys.contentTypeId,
 					slug        : item.slug
@@ -154,8 +155,8 @@ export default class Page extends React.Component {
 				return []
 			}
 			return params.get(key).split(',')
-			.map(l => stack.filter(s => s.title.toLowerCase() === l).pop())
-			.filter(l => l)
+				.map(l => stack.filter(s => s.title.toLowerCase() === l).pop())
+				.filter(l => l)
 		}
 		state.searchQuery = params.get('q') || ''
 		state.selectedAgeGroups = parseArrayParams('age', ageGroups)
@@ -213,7 +214,6 @@ export default class Page extends React.Component {
 				return coMaterials.indexOf(aO) > coMaterials.indexOf(bO) ? 1 : -1
 			}
 			return a.number > b.number ? 1 : -1
-			return 0
 		})
 
 		state.foundLessonPlans = searchQuery ?
