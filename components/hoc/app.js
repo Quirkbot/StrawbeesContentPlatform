@@ -1,6 +1,7 @@
 /* global GAID, GTMID, CANONICAL_URL, STAGE */
 import React from 'react'
 import ReactGA from 'react-ga'
+import NProgress from 'nprogress'
 import Head from 'next/head'
 import Router from 'next/router'
 import Header from 'src/components/header'
@@ -151,10 +152,16 @@ export default Child => class App extends React.Component {
 		this.initGa()
 		this.trackPageview()
 		Router.router.events.on('routeChangeComplete', this.trackPageview)
+		Router.router.events.on('routeChangeStart', NProgress.start)
+		Router.router.events.on('routeChangeComplete', NProgress.done)
+		Router.router.events.on('routeChangeError', NProgress.done)
 	}
 
 	componentWillUnmount() {
 		Router.router.events.off('routeChangeComplete', this.trackPageview)
+		Router.router.events.off('routeChangeStart', NProgress.start)
+		Router.router.events.off('routeChangeComplete', NProgress.done)
+		Router.router.events.off('routeChangeError', NProgress.done)
 	}
 
 	trackPageview(path = document.location.pathname) {
@@ -220,6 +227,7 @@ export default Child => class App extends React.Component {
 						}
 					}
 				`}</style>
+				{/* <!-- Start Google Tag Manager --> */}
 				<Head>
 					<script dangerouslySetInnerHTML={{
 						__html : `
@@ -260,6 +268,7 @@ export default Child => class App extends React.Component {
 					})}
 					<meta name="viewport" content="width=device-width, initial-scale=1"/>
 					<link rel="stylesheet" href="/static/lib/carousel.min.css"/>
+					<link rel="stylesheet" href="/static/lib/nprogress.css"/>
 
 					<link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png"/>
 					<link rel="icon" type="image/png" sizes="32x32" href="/static/favicon/favicon-32x32.png"/>

@@ -40,8 +40,10 @@ export default async (locale = '', query = '') => {
 	// Fecth the data
 	const res = await fetch(url)
 	const json = (await res.json())
-	const results = json.data
-	const errors = json.errors
+	const {
+		data : results,
+		errors
+	} = json
 
 	if (errors) {
 		console.log('Local data errors')

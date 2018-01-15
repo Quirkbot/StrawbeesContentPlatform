@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import routes from 'src/static/routes.json'
+import generateClassnames from 'src/utils/generateClassnames'
 
 export default ({ children, ...props }) => {
 	const {
@@ -21,11 +22,49 @@ export default ({ children, ...props }) => {
 		href = to
 	}
 
+	if (to) {
+		return (
+			<Link href={href} as={as} {...otherProps}>
+				<a
+					className={`root link ${generateClassnames({
+						to,
+						external
+					})}`}
+					target={external && '_blank'}>
+					<style jsx>{`
+						.root {
+							display: block;
+							cursor: pointer;
+						}
+					`}</style>
+					{children}
+				</a>
+			</Link>
+		)
+	}
+
+	return (
+		<span className={`root link ${generateClassnames({
+			to,
+			external
+		})}`}>
+			<style jsx>{`
+				.root {
+					display: block;
+				}
+			`}</style>
+			{children}
+		</span>
+	)
+
 	const toContainer = (
 		<a className='root link to'
-			href={to}
+			href={external && to}
 			target={external && '_blank'}
-			onClick={e => external && e.preventDefault()}>
+			onClick={e => {
+				console.log('aaa')
+				external || e.preventDefault()
+			}}>
 			<style jsx>{`
 				.root {
 					display: block;

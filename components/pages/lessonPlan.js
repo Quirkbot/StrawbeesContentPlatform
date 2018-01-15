@@ -11,6 +11,7 @@ import LessonPlanList from 'src/components/lessonPlanList'
 import LessonStep from 'src/components/lessonStep'
 import NationalStandard from 'src/components/nationalStandard'
 import Slider from 'src/components/slider'
+import VideoPlayer from 'src/components/videoPlayer'
 
 import generateClassnames from 'src/utils/generateClassnames'
 
@@ -28,6 +29,7 @@ export default ({
 	hero,
 	featuredImage,
 	description,
+	video,
 	tags,
 	duration,
 	classSize,
@@ -122,6 +124,9 @@ export default ({
 			}
 			.root .section :global(.contentBlock:last-of-type){
 				margin-bottom: 0;
+			}
+			.root .video {
+				width: 100%;
 			}
 			.root .featuredImage img{
 				display: block;
@@ -420,7 +425,14 @@ export default ({
 			{hero &&
 				<LessonPlanHero {...appProps}{...hero}/>
 			}
-			{featuredImage &&
+			{video &&
+				<div className='section video not-color'>
+					<div className='wrapper'>
+						<VideoPlayer url={video}/>
+					</div>
+				</div>
+			}
+			{(!video && featuredImage) &&
 				<div className='section featuredImage not-color'>
 					<div className='wrapper'>
 						<img

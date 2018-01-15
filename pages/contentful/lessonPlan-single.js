@@ -23,6 +23,7 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 					name
 					organization
 				}
+				video
 				featuredImage { url }
 				description
 				tags { title }
