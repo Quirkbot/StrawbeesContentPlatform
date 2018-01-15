@@ -1,23 +1,35 @@
 import Breadcrumbs from 'src/components/breadcrumbs'
-import Button from 'src/components/button'
 import Hero from 'src/components/hero'
-import LessonPlanCollectionList from 'src/components/lessonPlanCollectionList'
+import SearchModule from 'src/components/searchModule'
 
-export default ({ appProps, breadcrumbs, hero, list }) =>
-	<div className='root homePage'>
-		{breadcrumbs &&
-			<Breadcrumbs {...breadcrumbs}/>
-		}
-		{hero &&
-			<Hero {...hero}>
-				<Button
-					icon='search'
-					title={appProps.strings.searchLessonPlans}
-					url={hero.buttonUrl}
-				/>
-			</Hero>
-		}
-		{list &&
-			<LessonPlanCollectionList items={list} />
-		}
-	</div>
+export default ({
+	appProps,
+	breadcrumbs,
+	hero,
+	lessonPlans,
+	ageGroups,
+	coMaterials,
+	tags
+}) => {
+	const searchModule = {
+		appProps,
+		lessonPlans,
+		ageGroups,
+		coMaterials,
+		tags
+	}
+
+	return (
+		<div className='root homePage'>
+			{breadcrumbs &&
+				<Breadcrumbs {...breadcrumbs}/>
+			}
+			{hero &&
+				<Hero {...hero}/>
+			}
+			{searchModule &&
+				<SearchModule {...searchModule} />
+			}
+		</div>
+	)
+}

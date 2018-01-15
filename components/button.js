@@ -4,6 +4,8 @@ import generateClassnames from 'src/utils/generateClassnames'
 
 export default ({
 	title,
+	cssColor = 'rgba(0,0,0,0.05)',
+	cssTextColor = 'black',
 	icon,
 	url,
 	external,
@@ -25,10 +27,13 @@ export default ({
 				box-sizing: border-box;
 				border-radius: 3rem;
 				cursor: pointer;
-			}
-			.root.not-border {
-				background-color: rgba(0,0,0,0.05);
+				color: ${cssTextColor};
+				background-color: ${cssColor};
 				border: solid 1px rgba(0,0,0,0);
+				transition: transform 0.1s;
+			}
+			.root:hover {
+				transform: scale(1.1);
 			}
 			.root.icon.title {
 				padding: 0.15rem 0.8rem 0.15rem 0.15rem;
@@ -38,9 +43,6 @@ export default ({
 			}
 			.root.title:not(.icon) {
 				padding: 0.4rem 0.8rem;
-			}
-			.root:hover {
-				opacity: 0.7;
 			}
 			.root.border {
 				border: solid 1px;

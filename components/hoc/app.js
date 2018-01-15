@@ -98,8 +98,7 @@ export default Child => class App extends React.Component {
 		delete settings.basename
 
 
-		settings.locales = JSON.parse(settings.locales)
-		.filter(localeObject => {
+		settings.locales = JSON.parse(settings.locales).filter(localeObject => {
 			if (typeof STAGE !== 'undefined') {
 				return true
 			}
@@ -222,7 +221,6 @@ export default Child => class App extends React.Component {
 					}
 				`}</style>
 				<Head>
-					{/* <!-- Google Tag Manager --> */}
 					<script dangerouslySetInnerHTML={{
 						__html : `
 							(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -232,8 +230,20 @@ export default Child => class App extends React.Component {
 							})(window,document,'script','dataLayer','${GTMID}');
 						`
 					}}/>
-					{/* <!-- End Google Tag Manager --> */}
+				</Head>
+				<noscript>
+					<iframe
+						src={`https://www.googletagmanager.com/ns.html?id=${GTMID}`}
+						height="0"
+						width="0"
+						style={{
+							display    : 'none',
+							visibility : 'hidden'
+						}}/>
+				</noscript>
+				{/* <!-- End Google Tag Manager --> */}
 
+				<Head>
 					{meta['og:title'] &&
 						<title>{meta['og:title']}</title>
 					}
@@ -260,19 +270,6 @@ export default Child => class App extends React.Component {
 					<meta name="msapplication-config" content="/static/favicon/browserconfig.xml"/>
 					<meta name="theme-color" content="#ffffff"/>
 				</Head>
-
-				{/* <!-- Google Tag Manager (noscript) --> */}
-				<noscript>
-					<iframe
-						src={`https://www.googletagmanager.com/ns.html?id=${GTMID}`}
-						height="0"
-						width="0"
-						style={{
-							display    : 'none',
-							visibility : 'hidden'
-						}}/>
-				</noscript>
-				{/* <!-- End Google Tag Manager (noscript) --> */}
 
 				<Header {...this.props} ga={ga}/>
 				<Child {...this.props} ga={ga}/>

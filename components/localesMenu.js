@@ -3,7 +3,7 @@ import Link from 'src/components/link'
 
 export default ({ settings }) => {
 	const otherLocales = settings.locales
-	.filter(locale => locale.locale !== settings.currentLocale.locale)
+		.filter(locale => locale.locale !== settings.currentLocale.locale)
 
 	if (!otherLocales.length) {
 		return null
@@ -14,6 +14,7 @@ export default ({ settings }) => {
 			<style jsx>{`
 				.root {
 					position: relative;
+					z-index: 1;
 				}
 				.root:hover .list,
 				.root:hover .spacer {
@@ -56,8 +57,7 @@ export default ({ settings }) => {
 			/>
 			<div className='spacer'/>
 			<div className='list'>
-				{otherLocales
-					.map((locale, i) =>
+				{otherLocales.map((locale, i) =>
 					<Link
 						key={i}
 						to={`/${locale.basename}`}>

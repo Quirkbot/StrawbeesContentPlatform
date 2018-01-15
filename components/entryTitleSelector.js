@@ -55,6 +55,8 @@ export default ({
 							}
 						}}
 						title={entry.title}
+						cssTextColor={entry.cssColor && 'white'}
+						cssColor={entry.cssColor || 'white'}
 						icon={selectedEntries.indexOf(entry) !== -1 ? 'close' : null}
 						border={selectedEntries.indexOf(entry) !== -1}
 						small={true}

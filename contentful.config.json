@@ -3,12 +3,6 @@
 		"lessonPlan" : {
 			"single" : true
 		},
-		"lessonPlanCollection" : {
-			"single" : true
-		},
-		"lessonPlanGroup" : {
-			"single" : true
-		},
 		"page" : {
 			"single" : true
 		}
