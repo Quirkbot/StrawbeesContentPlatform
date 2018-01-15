@@ -4,6 +4,7 @@ import generateClassnames from 'src/utils/generateClassnames'
 export default ({
 	number,
 	ageGroup,
+	tags,
 	title,
 	description,
 	featuredImage,
@@ -24,9 +25,13 @@ export default ({
 		}}>
 		<style jsx>{`
 			.root {
-				width: calc(60rem * 0.5 - 1rem);
 				position: relative;
 				cursor: pointer;
+				border-radius: 0.5rem;
+				transition: transform 0.1s;
+			}
+			.root:hover {
+				transform: scale(1.025);
 			}
 			.root :global(.link){
 				text-decoration: none;
@@ -43,31 +48,16 @@ export default ({
 			.root.ageGroup .label{
 				color: #FFF;
 			}
-			.root :global(.info){
-				padding: 1rem;
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				min-height: 8rem;
-				color: #FFF;
+			.root .details {
+				position: relative;
 			}
-			.root :global(.featuredImage){
-				display: block;
-				width: 100%;
-				height: auto;
-			}
-			.root :global(.info .title){
-				margin: 0;
-				font-size: 1.5rem;
-				font-weight: bold;
-			}
-			.root :global(.number),
-			.root :global(.label) {
+			.root .details .number,
+			.root .details .label {
 				position: absolute;
 				background-color: inherit;
 			}
 
-			.root :global(.number) {
+			.root .details .number {
 				left: 1rem;
 				font-size: 2rem;
 				font-weight: bold;
@@ -75,7 +65,7 @@ export default ({
 				border-bottom-right-radius: 0.8rem;
 				border-bottom-left-radius: 0.8rem;
 			}
-			.root :global(.label) {
+			.root .details .label {
 				right: 1rem;
 				font-size: 1.2rem;
 				font-weight: bold;
@@ -84,44 +74,84 @@ export default ({
 				border-bottom-left-radius: 0.5rem;
 				letter-spacing: 0.3rem;
 			}
-
-			@media screen and (max-width: 52rem) {
-				.root {
-					width: auto;
-				}
-				.root :global(.info){
-					min-height: 0;
-				}
-				.root :global(.info .title){
-					font-size: 1.2rem;
-				}
+			.root .details .tags {
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+				padding: 0.5rem;
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				justify-content: flex-end;
 			}
+			.root .details .tags .tag {
+				background-color: rgba(255,255,255,0.9);
+				color: black;
+				text-transform: uppercase;
+				font-size: 0.8rem;
+				border-radius: 1rem;
+				padding: 0 0.5rem;
+				margin: 0.1rem;
+			}
+			.root .details .featuredImage {
+				display: block;
+				width: 100%;
+				height: auto;
+				border-top-left-radius: 0.5rem;
+				border-top-right-radius: 0.5rem;
+			}
+
+			.root .info {
+				padding: 1rem;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				min-height: 8rem;
+				color: #FFF;
+			}
+			.root .info .title{
+				margin: 0;
+				font-size: 1.25rem;
+				font-weight: bold;
+			}
+
 		`}</style>
 		<Link to={url}>
-			{number &&
-				<div className='number'
-					style={ageGroup && ageGroup.cssColor && {
-						backgroundColor : ageGroup.cssColor
-					}}>
-					{number}
-				</div>
-			}
-			{ageGroup && ageGroup.title &&
-				<div className='label'
-					style={ageGroup && ageGroup.cssColor && {
-						backgroundColor : ageGroup.cssColor
-					}}>
-					{ageGroup.title}
-				</div>
-			}
-			{featuredImage &&
-				<img className='featuredImage'
-					width='535'
-					height='345'
-					srcSet={`${featuredImage.url}?w=535&h=345&fit=fill, ${featuredImage.url}?w=1070&h=690&fit=fill 2x`}
-					src={`${featuredImage.url}?w=535&h=345&fit=fill`}
-				/>
-			}
+			<div className='details'>
+				{number &&
+					<div className='number'
+						style={ageGroup && ageGroup.cssColor && {
+							backgroundColor : ageGroup.cssColor
+						}}>
+						{number}
+					</div>
+				}
+				{ageGroup && ageGroup.title &&
+					<div className='label'
+						style={ageGroup && ageGroup.cssColor && {
+							backgroundColor : ageGroup.cssColor
+						}}>
+						{ageGroup.title}
+					</div>
+				}
+				{tags &&
+					<div className='tags'>
+						{tags.map((tag, i) =>
+							<div key={i} className='tag'>
+								{tag.title}
+							</div>
+						)}
+					</div>
+				}
+				{featuredImage &&
+					<img className='featuredImage'
+						width='535'
+						height='345'
+						srcSet={`${featuredImage.url}?w=535&h=345&fit=fill, ${featuredImage.url}?w=1070&h=690&fit=fill 2x`}
+						src={`${featuredImage.url}?w=535&h=345&fit=fill`}
+					/>
+				}
+			</div>
 			<div className='info'>
 				{title &&
 					<h4 className='title'>

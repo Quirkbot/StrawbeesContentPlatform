@@ -20,18 +20,20 @@ export default ({ children, ...props }) => {
 	} else {
 		href = to
 	}
+
 	const toContainer = (
 		<a className='root link to'
-			href={external && href}
-			target={external && '_blank'}>
+			href={to}
+			target={external && '_blank'}
+			onClick={e => external && e.preventDefault()}>
 			<style jsx>{`
 				.root {
 					display: block;
 					cursor: pointer;
 				}
-				.root.to:hover {
+				/*.root.to:hover {
 					opacity: 0.7;
-				}
+				}*/
 			`}</style>
 			{children}
 		</a>

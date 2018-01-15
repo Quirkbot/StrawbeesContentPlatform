@@ -645,21 +645,21 @@ export default ({
 					</div>
 				</div>
 			}
-			{nextLessonPlan &&
+			{/* nextLessonPlan &&
 				<div className='section nextLessonPlan not-color'>
 					<div className='wrapper'>
 						<h3 className='heading'>{appProps.strings.nextLesson}</h3>
 						<LessonPlanList items={[nextLessonPlan]}/>
 					</div>
 				</div>
-			}
-			{previousLessonPlan &&
+			*/}
+			{/* previousLessonPlan &&
 				<div className='section previousLessonPlan not-color'>
 					<div className='wrapper'>
 						<h3 className='heading'>{appProps.strings.previousLesson}</h3>
 						<LessonPlanList items={[previousLessonPlan]}/>
 					</div>
 				</div>
-			}
+			*/}
 		</div>
 	</div>

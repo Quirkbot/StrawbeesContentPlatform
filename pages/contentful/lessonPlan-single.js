@@ -121,6 +121,7 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 	}
 
 	// Breadcrumbs
+	/*
 	const breadcrumbs = { list : [] }
 	breadcrumbs.list.push({
 		title : appProps.strings.home,
@@ -149,6 +150,7 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 	breadcrumbs.list.push({
 		title : `${data.content.number} - ${data.content.title}`
 	})
+	*/
 
 	// Prepare vocabulary credit
 	let vocabularyCreditIndex = 0
@@ -164,11 +166,11 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 	return {
 		...data.content,
 		...meta,
-		breadcrumbs,
+		// breadcrumbs,
 		color  : data.content.ageGroup.cssColor,
 		pdfUrl : `/static/pdfs/${data.content.ageGroup.title}_${data.content.coMaterial.title}_${data.content.title}.pdf`,
 		hero   : {
-			title  : `${data.content.number} - ${data.content.title}`,
+			title  : `${data.content.title}`,
 			author : `${data.content.author.name} @ ${data.content.author.organization}`,
 			color  : data.content.ageGroup.cssColor
 		},

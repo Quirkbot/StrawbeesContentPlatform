@@ -16,44 +16,77 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 				slug
 				sys { contentTypeId }
 			}
-			list:featuredLessonPlanGroups {
-				sys { contentTypeId }
-				slug
+		}
+
+		lessonPlans (q: "order=-sys.createdAt") {
+			sys {
+				id
+				contentTypeId
+			}
+			title
+			slug
+			description
+			featuredImage { url }
+			ageGroup {
+				sys { id }
 				title
-				description
-				featuredImage { url }
-				ageGroup { cssColor }
+				cssColor
+			}
+			coMaterial {
+				sys { id }
+				title
+			}
+			tags {
+				sys { id }
+				title
 			}
 		}
+
+		ageGroups(q:"order=fields.sort") {
+			sys { id }
+			title
+			cssColor
+		}
+
+		coMaterials(q:"order=fields.sort") {
+			sys { id }
+			title
+		}
+
+		tags(q:"order=fields.sort") {
+			sys { id }
+			title
+		}
+
 	}`)
 	data.content = data.content.pop()
 	return {
-		...data.content,
-		breadcrumbs : {
-			list : [
-				{
-					title : appProps.strings.home
-				}
-			]
-		},
-		hero : {
-			icon        : data.content.heroIcon,
-			title       : data.content.heroTitle,
-			description : data.content.heroDescription,
-			buttonUrl   : generateUrl({
-				appProps,
-				contentType : data.content.searchPage.sys.contentTypeId,
-				slug        : data.content.searchPage.slug
-			}),
-		},
-		list : data.content.list.map(item => ({
+		...data,
+		// breadcrumbs : {
+		// 	list : [
+		// 		{
+		// 			title : appProps.strings.home
+		// 		}
+		// 	]
+		// },
+		// hero : {
+		// 	icon        : data.content.heroIcon,
+		// 	title       : data.content.heroTitle,
+		// 	description : data.content.heroDescription,
+		// 	buttonUrl   : generateUrl({
+		// 		appProps,
+		// 		contentType : data.content.searchPage.sys.contentTypeId,
+		// 		slug        : data.content.searchPage.slug
+		// 	}),
+		// },
+		lessonPlans : (data.lessonPlans || []).map(item => ({
 			...item,
-			url : generateUrl({
+			tags : item.tags || [],
+			url  : generateUrl({
 				appProps,
 				contentType : item.sys.contentTypeId,
 				slug        : item.slug
-			}),
-			color : item.ageGroup.cssColor
+			})
 		}))
 	}
 }
