@@ -58,9 +58,6 @@ export default ({ appProps }) =>
 			<Link to={generateUrl({ appProps })}>
 				<img className='logo' src={appProps.settings.logo.url}/>
 			</Link>
-			<Link to="/page/search">
-				lesson
-			</Link>
 			<LocalesMenu {...appProps}/>
 		</div>
 	</div>
