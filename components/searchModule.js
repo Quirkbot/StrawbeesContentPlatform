@@ -1,5 +1,6 @@
 import React from 'react'
 import Fuse from 'fuse.js'
+// import Router from 'next/router'
 import EntryTitleSelector from 'src/components/entryTitleSelector'
 import LessonPlanList from 'src/components/lessonPlanList'
 import SvgIcon from 'src/components/svgIcon'
@@ -30,15 +31,17 @@ export default class extends React.Component {
 			selectedCoMaterials : [],
 			selectedTags        : [],
 			searchQuery         : '',
-			foundLessonPlans    : []
+			foundLessonPlans    : [...props.lessonPlans]
 		}
 	}
 
-	componentDidMount = () => {
-		this.filterFoundLessonPlans(
-			this.locationToState()
-		)
-	}
+	// componentDidMount = () => {
+	// 	Router.router.events.on('routeChangeComplete', this.onRouteChangeComplete)
+	// 	this.filterFoundLessonPlans(
+	// 		this.locationToState()
+	// 	)
+	// }
+
 
 	stateToLocation = state => {
 		if (typeof window === 'undefined') {
@@ -69,14 +72,14 @@ export default class extends React.Component {
 		arrayToQuery('material', selectedCoMaterials)
 		arrayToQuery('tags', selectedTags)
 
-		search = `?${search}`
-
-		window.history.replaceState({}, '', search)
-		// Remove the dangling '?'
-		const { href } = window.location
-		if (href.charAt(href.length - 1) === '?') {
-			window.history.replaceState({}, '', href.slice(0, -1))
-		}
+		// Router.push(
+		// 	{
+		// 		pathname : Router.router.pathname,
+		// 		query    : Router.router.query
+		// 	},
+		// 	`${Router.router.route}${search ? `?${search}` : ''}`,
+		// 	{ shallow : true }
+		// )
 	}
 	locationToState = () => {
 		const {
@@ -134,33 +137,14 @@ export default class extends React.Component {
 			searchQuery
 		} = state
 
-		this.stateToLocation({
-			selectedAgeGroups,
-			selectedCoMaterials,
-			selectedTags,
-			searchQuery
-		})
+		// this.stateToLocation({
+		// 	selectedAgeGroups,
+		// 	selectedCoMaterials,
+		// 	selectedTags,
+		// 	searchQuery
+		// })
 
-		const {
-			ageGroups,
-			coMaterials
-		} = this.props
-
-		let { lessonPlans } = this.props
-		lessonPlans = [...lessonPlans]
-		/*lessonPlans = lessonPlans.slice(0).sort((a, b) => {
-			if (a.ageGroup.sys.id !== b.ageGroup.sys.id) {
-				const aO = ageGroups.filter(o => o.sys.id === a.ageGroup.sys.id).pop()
-				const bO = ageGroups.filter(o => o.sys.id === b.ageGroup.sys.id).pop()
-				return ageGroups.indexOf(aO) > ageGroups.indexOf(bO) ? 1 : -1
-			}
-			if (a.coMaterial.sys.id !== b.coMaterial.sys.id) {
-				const aO = coMaterials.filter(o => o.sys.id === a.coMaterial.sys.id).pop()
-				const bO = coMaterials.filter(o => o.sys.id === b.coMaterial.sys.id).pop()
-				return coMaterials.indexOf(aO) > coMaterials.indexOf(bO) ? 1 : -1
-			}
-			return a.number > b.number ? 1 : -1
-		})*/
+		const { lessonPlans } = this.props
 
 		state.foundLessonPlans = searchQuery ?
 			this.fuse.search(searchQuery) : [...lessonPlans]
@@ -211,8 +195,6 @@ export default class extends React.Component {
 		const {
 			ageGroupSelected,
 			ageGroupDeselected,
-			coMaterialSelected,
-			coMaterialDeselected,
 			searchQueryChanged,
 			tagSelected,
 			tagDeselected
@@ -230,7 +212,6 @@ export default class extends React.Component {
 			appProps,
 			ageGroups,
 			tags,
-			coMaterials
 		} = this.props
 
 		let resultsTitle = ''
@@ -313,7 +294,7 @@ export default class extends React.Component {
 						<SvgIcon icon='search'/>
 					</div>
 					<div className='selectors'>
-						{/*<div className='title'>{appProps.strings.searchFilters}</div>*/}
+						{/* <div className='title'>{appProps.strings.searchFilters}</div> */}
 						{ageGroups &&
 							<EntryTitleSelector
 								title={appProps.strings.ageGroup}
@@ -323,15 +304,6 @@ export default class extends React.Component {
 								entryDeselected={ageGroupDeselected}
 							/>
 						}
-						{/*coMaterials &&
-							<EntryTitleSelector
-								title={appProps.strings.coMaterial}
-								entries={coMaterials}
-								selectedEntries={selectedCoMaterials}
-								entrySelected={coMaterialSelected}
-								entryDeselected={coMaterialDeselected}
-							/>
-						*/}
 						{tags &&
 							<EntryTitleSelector
 								entries={tags}
