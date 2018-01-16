@@ -11,6 +11,7 @@ import LessonPlanList from 'src/components/lessonPlanList'
 import LessonStep from 'src/components/lessonStep'
 import NationalStandard from 'src/components/nationalStandard'
 import Slider from 'src/components/slider'
+import VideoPlayer from 'src/components/videoPlayer'
 
 import generateClassnames from 'src/utils/generateClassnames'
 
@@ -28,6 +29,7 @@ export default ({
 	hero,
 	featuredImage,
 	description,
+	video,
 	tags,
 	duration,
 	classSize,
@@ -44,9 +46,7 @@ export default ({
 	vocabulary,
 	vocabularyCredits,
 	attachments,
-	relatedLessonPlans,
-	nextLessonPlan,
-	previousLessonPlan
+	relatedLessonPlans
 }) =>
 	<div
 		className={`root lessonPlanSinglePage ${generateClassnames({
@@ -122,6 +122,9 @@ export default ({
 			}
 			.root .section :global(.contentBlock:last-of-type){
 				margin-bottom: 0;
+			}
+			.root .video {
+				width: 100%;
 			}
 			.root .featuredImage img{
 				display: block;
@@ -384,8 +387,6 @@ export default ({
 				.root .attachments,
 				.root .pdf,
 				.root .relatedLessonPlans,
-				.root .nextLessonPlan,
-				.root .previousLessonPlan,
 				.root .materials :global(.button) {
 					display: none;
 				}
@@ -420,7 +421,14 @@ export default ({
 			{hero &&
 				<LessonPlanHero {...appProps}{...hero}/>
 			}
-			{featuredImage &&
+			{video &&
+				<div className='section video not-color'>
+					<div className='wrapper'>
+						<VideoPlayer url={video}/>
+					</div>
+				</div>
+			}
+			{(!video && featuredImage) &&
 				<div className='section featuredImage not-color'>
 					<div className='wrapper'>
 						<img
@@ -645,21 +653,5 @@ export default ({
 					</div>
 				</div>
 			}
-			{/* nextLessonPlan &&
-				<div className='section nextLessonPlan not-color'>
-					<div className='wrapper'>
-						<h3 className='heading'>{appProps.strings.nextLesson}</h3>
-						<LessonPlanList items={[nextLessonPlan]}/>
-					</div>
-				</div>
-			*/}
-			{/* previousLessonPlan &&
-				<div className='section previousLessonPlan not-color'>
-					<div className='wrapper'>
-						<h3 className='heading'>{appProps.strings.previousLesson}</h3>
-						<LessonPlanList items={[previousLessonPlan]}/>
-					</div>
-				</div>
-			*/}
 		</div>
 	</div>

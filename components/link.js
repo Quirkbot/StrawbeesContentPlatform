@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import routes from 'src/static/routes.json'
+import generateClassnames from 'src/utils/generateClassnames'
 
 export default ({ children, ...props }) => {
 	const {
@@ -21,46 +22,38 @@ export default ({ children, ...props }) => {
 		href = to
 	}
 
-	const toContainer = (
-		<a className='root link to'
-			href={to}
-			target={external && '_blank'}
-			onClick={e => external && e.preventDefault()}>
+	if (to) {
+		return (
+			<Link href={href} as={as} {...otherProps}>
+				<a
+					className={`root link ${generateClassnames({
+						to,
+						external
+					})}`}
+					target={external && '_blank'}>
+					<style jsx>{`
+						.root {
+							display: block;
+							cursor: pointer;
+						}
+					`}</style>
+					{children}
+				</a>
+			</Link>
+		)
+	}
+
+	return (
+		<span className={`root link ${generateClassnames({
+			to,
+			external
+		})}`}>
 			<style jsx>{`
 				.root {
 					display: block;
-					cursor: pointer;
-				}
-				/*.root.to:hover {
-					opacity: 0.7;
-				}*/
-			`}</style>
-			{children}
-		</a>
-	)
-	const notToContainer = (
-		<span className='root link not-to'>
-			<style jsx>{`
-				.root {
-					display: block;
-				}
-				.root.to:hover {
-					opacity: 0.7;
 				}
 			`}</style>
 			{children}
 		</span>
 	)
-	if (href) {
-		if (external) {
-			return toContainer
-		}
-		return (
-			<Link href={href} as={as} {...otherProps}>
-				{toContainer}
-			</Link>
-		)
-	}
-
-	return notToContainer
 }

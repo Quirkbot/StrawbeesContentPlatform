@@ -1,6 +1,6 @@
 {
   "name": "strawbees-content-platform",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "scripts": {
     "clean": "rm -rf out && rm -rf .next && rm -rf static/routes.json && rm -rf static/graphql && rm -rf node_modules/.cache/babel-loader",
     "dev": "node lib/scripts/dev.js",
@@ -21,7 +21,8 @@
     "isomorphic-fetch": "^2.2.1",
     "js-md5": "^0.7.3",
     "mkdirp": "^0.5.1",
-    "next": "^4.2.2",
+    "next": "^4.2.3",
+    "nprogress": "^0.2.0",
     "pluralize": "^7.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

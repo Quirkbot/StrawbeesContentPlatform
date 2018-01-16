@@ -10,7 +10,6 @@ const handle = app.getRequestHandler()
 const init = async () => {
 	await app.prepare()
 
-
 	createServer((req, res) => {
 		const parsedUrl = parse(req.url, true)
 		const { pathname } = parsedUrl
@@ -25,8 +24,7 @@ const init = async () => {
 		} else {
 			handle(req, res, parsedUrl)
 		}
-	})
-	.listen(3000, (err) => {
+	}).listen(3000, (err) => {
 		if (err) throw err
 		// eslint-disable-next-line no-console
 		console.log('> Ready on http://localhost:3000')
