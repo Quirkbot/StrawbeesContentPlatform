@@ -1,15 +1,9 @@
-import YouTube from '@u-wave/react-youtube'
-
 const getYouTubeId = url => {
-	let id = ''
 	url = url.replace(/(>|<)/gi, '').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/)
 	if (url[2] !== undefined) {
-		id = url[2].split(/[^0-9a-z_-]/i)
-		id = id[0]
-	} else {
-		id = url
+		return url[2].split(/[^0-9a-z_-]/i)[0]
 	}
-	return id
+	return url
 }
 
 export default ({
@@ -36,9 +30,10 @@ export default ({
 		{url &&
 			<iframe
 				src={`https://www.youtube.com/embed/${getYouTubeId(url)}`}
-				frameborder="0"
+				frameBorder="0"
 				allow="autoplay; encrypted-media"
-				allowfullscreen>
+				allowFullScreen
+				{...otherProps}>
 			</iframe>
 		}
 	</div>

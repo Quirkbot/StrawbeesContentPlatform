@@ -103,13 +103,6 @@
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
 
-"@u-wave/react-youtube@^0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@u-wave/react-youtube/-/react-youtube-0.4.1.tgz#aafd2f439aae4975ebbd8397fb36562ecd1af148"
-  dependencies:
-    load-script2 "^1.0.0"
-    prop-types "^15.6.0"
-
 JSONStream@^1.0.4:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/JSONStream/-/JSONStream-1.3.2.tgz#c102371b6ec3a7cf3b847ca00c20bb0fce4c6dea"
@@ -3450,10 +3443,6 @@ load-json-file@^2.0.0:
     parse-json "^2.2.0"
     pify "^2.0.0"
     strip-bom "^3.0.0"
-
-load-script2@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/load-script2/-/load-script2-1.0.0.tgz#ef95c7dae7f4cc7efde2821a9bd2382110a7f24a"
 
 loader-runner@^2.3.0:
   version "2.3.0"
