@@ -52,7 +52,6 @@ Component.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 			}
 			title
 			slug
-			number
 			description
 			featuredImage { url }
 			ageGroup {

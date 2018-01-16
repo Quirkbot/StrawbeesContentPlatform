@@ -7,7 +7,7 @@ import ContentBlock from 'src/components/contentBlock'
 import DefinitionList from 'src/components/definitionList'
 import DefinitionCreditList from 'src/components/definitionCreditList'
 import LessonPlanHero from 'src/components/lessonPlanHero'
-import LessonPlanList from 'src/components/lessonPlanList'
+import LessonPlanThumbnailList from 'src/components/lessonPlanThumbnailList'
 import LessonStep from 'src/components/lessonStep'
 import NationalStandard from 'src/components/nationalStandard'
 import Slider from 'src/components/slider'
@@ -649,7 +649,7 @@ export default ({
 				<div className='section relatedLessonPlans not-color'>
 					<div className='wrapper'>
 						<h3 className='heading'>{appProps.strings.relatedLessons}</h3>
-						<LessonPlanList items={relatedLessonPlans}/>
+						<LessonPlanThumbnailList items={relatedLessonPlans}/>
 					</div>
 				</div>
 			}

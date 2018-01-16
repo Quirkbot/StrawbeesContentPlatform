@@ -2,7 +2,7 @@ import React from 'react'
 import Fuse from 'fuse.js'
 // import Router from 'next/router'
 import EntryTitleSelector from 'src/components/entryTitleSelector'
-import LessonPlanList from 'src/components/lessonPlanList'
+import LessonPlanThumbnailList from 'src/components/lessonPlanThumbnailList'
 import SvgIcon from 'src/components/svgIcon'
 
 export default class extends React.Component {
@@ -10,8 +10,7 @@ export default class extends React.Component {
 		appProps    : {},
 		ageGroups   : [],
 		tags        : [],
-		lessonPlans : [],
-		coMaterials : [],
+		lessonPlans : []
 	}
 
 	constructor(props) {
@@ -22,16 +21,14 @@ export default class extends React.Component {
 				'title',
 				'description',
 				'ageGroup.title',
-				'coMaterial.title',
 				'tags.title'
 			],
 		})
 		this.state = {
-			selectedAgeGroups   : [],
-			selectedCoMaterials : [],
-			selectedTags        : [],
-			searchQuery         : '',
-			foundLessonPlans    : [...props.lessonPlans]
+			selectedAgeGroups : [],
+			selectedTags      : [],
+			searchQuery       : '',
+			foundLessonPlans  : [...props.lessonPlans]
 		}
 	}
 
@@ -52,7 +49,6 @@ export default class extends React.Component {
 		}
 		const {
 			selectedAgeGroups,
-			selectedCoMaterials,
 			selectedTags,
 			searchQuery
 		} = state
@@ -69,7 +65,6 @@ export default class extends React.Component {
 			search += `q=${encodeURIComponent(searchQuery)}`
 		}
 		arrayToQuery('age', selectedAgeGroups)
-		arrayToQuery('material', selectedCoMaterials)
 		arrayToQuery('tags', selectedTags)
 
 		// Router.push(
@@ -84,16 +79,14 @@ export default class extends React.Component {
 	locationToState = () => {
 		const {
 			ageGroups,
-			tags,
-			coMaterials
+			tags
 		} = this.props
 
 		const state = {
-			selectedAgeGroups   : [],
-			selectedCoMaterials : [],
-			selectedTags        : [],
-			searchQuery         : '',
-			foundLessonPlans    : []
+			selectedAgeGroups : [],
+			selectedTags      : [],
+			searchQuery       : '',
+			foundLessonPlans  : []
 		}
 		if (typeof window === 'undefined' || typeof window.location === 'undefined') {
 			return state
@@ -109,7 +102,6 @@ export default class extends React.Component {
 		}
 		state.searchQuery = params.get('q') || ''
 		state.selectedAgeGroups = parseArrayParams('age', ageGroups)
-		state.selectedCoMaterials = parseArrayParams('material', coMaterials)
 		state.selectedTags = parseArrayParams('tag', tags)
 		return state
 	}
@@ -132,36 +124,38 @@ export default class extends React.Component {
 	filterFoundLessonPlans = state => {
 		const {
 			selectedAgeGroups,
-			selectedCoMaterials,
 			selectedTags,
 			searchQuery
 		} = state
 
-		// this.stateToLocation({
-		// 	selectedAgeGroups,
-		// 	selectedCoMaterials,
-		// 	selectedTags,
-		// 	searchQuery
-		// })
-
 		const { lessonPlans } = this.props
 
+		const foundBy = (key, lessonPlan, selection) => {
+			if (selection.length > 0) {
+				if (!selection.filter(
+					o => lessonPlan[key].filter(
+						t => t.sys.id === o.sys.id
+					).length
+				).length) {
+					return false
+				}
+			}
+			return true
+		}
+
+		// Find by text search query (or all results if query is empty)
 		state.foundLessonPlans = searchQuery ?
 			this.fuse.search(searchQuery) : [...lessonPlans]
 
-
+		// Filter by taxonomies
 		state.foundLessonPlans = state.foundLessonPlans.filter(l => {
-			if (!searchQuery && !selectedAgeGroups.length && !selectedCoMaterials.length && !selectedTags.length) {
-				return true
+			if (!foundBy('ageGroups', l, selectedAgeGroups)) {
+				return false
 			}
-
-			const foundByAgeGroup = selectedAgeGroups.length > 0 ?
-				selectedAgeGroups.filter(o => o.sys.id === l.ageGroup.sys.id).length : true
-			const foundByCoMaterial = selectedCoMaterials.length > 0 ?
-				selectedCoMaterials.filter(o => o.sys.id === l.coMaterial.sys.id).length : true
-			const foundByTag = selectedTags.length > 0 ?
-				selectedTags.filter(o => l.tags.filter(t => t.sys.id === o.sys.id).length).length : true
-			return foundByAgeGroup && foundByCoMaterial && foundByTag
+			if (!foundBy('tags', l, selectedTags)) {
+				return false
+			}
+			return true
 		})
 
 		this.setState(state)
@@ -172,12 +166,6 @@ export default class extends React.Component {
 
 	ageGroupDeselected = entry =>
 		this.removeFromStateProperty(entry, 'selectedAgeGroups')
-
-	coMaterialSelected = entry =>
-		this.addToStateProperty(entry, 'selectedCoMaterials')
-
-	coMaterialDeselected = entry =>
-		this.removeFromStateProperty(entry, 'selectedCoMaterials')
 
 	tagSelected = entry =>
 		this.addToStateProperty(entry, 'selectedTags')
@@ -202,7 +190,6 @@ export default class extends React.Component {
 
 		const {
 			selectedAgeGroups,
-			selectedCoMaterials,
 			selectedTags,
 			searchQuery,
 			foundLessonPlans
@@ -216,7 +203,7 @@ export default class extends React.Component {
 
 		let resultsTitle = ''
 		if (foundLessonPlans.length === 0) {
-			if (!searchQuery && !selectedAgeGroups.length && !selectedCoMaterials.length && !selectedTags.length) {
+			if (!searchQuery && !selectedAgeGroups.length && !selectedTags.length) {
 				resultsTitle = appProps.strings.emptySearch
 			} else {
 				resultsTitle = appProps.strings.noLessonsFound
@@ -321,7 +308,7 @@ export default class extends React.Component {
 						</h1>
 					}
 					{foundLessonPlans.length > 0 &&
-						<LessonPlanList items={foundLessonPlans} />
+						<LessonPlanThumbnailList items={foundLessonPlans} />
 					}
 				</div>
 			</div>

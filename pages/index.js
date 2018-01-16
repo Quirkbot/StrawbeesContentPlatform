@@ -27,14 +27,10 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 			slug
 			description
 			featuredImage { url }
-			ageGroup {
+			ageGroups {
 				sys { id }
 				title
 				cssColor
-			}
-			coMaterial {
-				sys { id }
-				title
 			}
 			tags {
 				sys { id }
@@ -46,11 +42,6 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 			sys { id }
 			title
 			cssColor
-		}
-
-		coMaterials(q:"order=fields.sort") {
-			sys { id }
-			title
 		}
 
 		tags(q:"order=fields.sort") {
@@ -81,8 +72,9 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 		// },
 		lessonPlans : (data.lessonPlans || []).map(item => ({
 			...item,
-			tags : item.tags || [],
-			url  : generateUrl({
+			ageGroups : item.ageGroups || [],
+			tags      : item.tags || [],
+			url       : generateUrl({
 				appProps,
 				contentType : item.sys.contentTypeId,
 				slug        : item.slug
