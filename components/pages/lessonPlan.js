@@ -46,9 +46,7 @@ export default ({
 	vocabulary,
 	vocabularyCredits,
 	attachments,
-	relatedLessonPlans,
-	nextLessonPlan,
-	previousLessonPlan
+	relatedLessonPlans
 }) =>
 	<div
 		className={`root lessonPlanSinglePage ${generateClassnames({
@@ -389,8 +387,6 @@ export default ({
 				.root .attachments,
 				.root .pdf,
 				.root .relatedLessonPlans,
-				.root .nextLessonPlan,
-				.root .previousLessonPlan,
 				.root .materials :global(.button) {
 					display: none;
 				}
@@ -657,21 +653,5 @@ export default ({
 					</div>
 				</div>
 			}
-			{/* nextLessonPlan &&
-				<div className='section nextLessonPlan not-color'>
-					<div className='wrapper'>
-						<h3 className='heading'>{appProps.strings.nextLesson}</h3>
-						<LessonPlanList items={[nextLessonPlan]}/>
-					</div>
-				</div>
-			*/}
-			{/* previousLessonPlan &&
-				<div className='section previousLessonPlan not-color'>
-					<div className='wrapper'>
-						<h3 className='heading'>{appProps.strings.previousLesson}</h3>
-						<LessonPlanList items={[previousLessonPlan]}/>
-					</div>
-				</div>
-			*/}
 		</div>
 	</div>
