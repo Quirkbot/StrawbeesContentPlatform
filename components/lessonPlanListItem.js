@@ -1,8 +1,9 @@
 import Link from 'src/components/link'
 import generateClassnames from 'src/utils/generateClassnames'
 
+const THUMB_WIDTH = 535
+const THUMB_HEIGHT = 345
 export default ({
-	number,
 	ageGroup,
 	tags,
 	title,
@@ -12,7 +13,6 @@ export default ({
 }) =>
 	<div
 		className={`root lessonPlanListItem ${generateClassnames({
-			number,
 			ageGroup,
 			title,
 			description,
@@ -40,31 +40,27 @@ export default ({
 			.root.not-ageGroup {
 				background-color: #DDD;
 			}
-			.root.not-ageGroup .number,
 			.root.not-ageGroup .label {
 				color: #000;
 			}
-			.root.ageGroup .number,
 			.root.ageGroup .label{
 				color: #FFF;
 			}
 			.root .details {
 				position: relative;
+				width: 100%;
+				padding-bottom: ${(THUMB_HEIGHT / THUMB_WIDTH) * 100}%
 			}
-			.root .details .number,
+			.root .details .wrapper {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+			}
 			.root .details .label {
 				position: absolute;
 				background-color: inherit;
 			}
 
-			.root .details .number {
-				left: 1rem;
-				font-size: 2rem;
-				font-weight: bold;
-				padding: 0 1rem;
-				border-bottom-right-radius: 0.8rem;
-				border-bottom-left-radius: 0.8rem;
-			}
 			.root .details .label {
 				right: 1rem;
 				font-size: 1.2rem;
@@ -118,39 +114,33 @@ export default ({
 		`}</style>
 		<Link to={url}>
 			<div className='details'>
-				{number &&
-					<div className='number'
-						style={ageGroup && ageGroup.cssColor && {
-							backgroundColor : ageGroup.cssColor
-						}}>
-						{number}
-					</div>
-				}
-				{ageGroup && ageGroup.title &&
-					<div className='label'
-						style={ageGroup && ageGroup.cssColor && {
-							backgroundColor : ageGroup.cssColor
-						}}>
-						{ageGroup.title}
-					</div>
-				}
-				{tags &&
-					<div className='tags'>
-						{tags.map((tag, i) =>
-							<div key={i} className='tag'>
-								{tag.title}
-							</div>
-						)}
-					</div>
-				}
-				{featuredImage &&
-					<img className='featuredImage'
-						width='535'
-						height='345'
-						srcSet={`${featuredImage.url}?w=535&h=345&fit=fill, ${featuredImage.url}?w=1070&h=690&fit=fill 2x`}
-						src={`${featuredImage.url}?w=535&h=345&fit=fill`}
-					/>
-				}
+				<div className='wrapper'>
+					{ageGroup && ageGroup.title &&
+						<div className='label'
+							style={ageGroup && ageGroup.cssColor && {
+								backgroundColor : ageGroup.cssColor
+							}}>
+							{ageGroup.title}
+						</div>
+					}
+					{tags &&
+						<div className='tags'>
+							{tags.map((tag, i) =>
+								<div key={i} className='tag'>
+									{tag.title}
+								</div>
+							)}
+						</div>
+					}
+					{featuredImage &&
+						<img className='featuredImage'
+							width={THUMB_WIDTH}
+							height={THUMB_HEIGHT}
+							srcSet={`${featuredImage.url}?w=${THUMB_WIDTH}&h=${THUMB_HEIGHT}&fit=fill, ${featuredImage.url}?w=${THUMB_WIDTH * 2}&h=${THUMB_HEIGHT * 2}&fit=fill 2x`}
+							src={`${featuredImage.url}?w=${THUMB_WIDTH}&h=${THUMB_HEIGHT}&fit=fill`}
+						/>
+					}
+				</div>
 			</div>
 			<div className='info'>
 				{title &&
