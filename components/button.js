@@ -5,7 +5,7 @@ import generateClassnames from 'src/utils/generateClassnames'
 export default ({
 	title,
 	cssColor = 'rgba(0,0,0,0.05)',
-	cssTextColor = 'black',
+	cssTextColor = 'inherit',
 	icon,
 	url,
 	external,
