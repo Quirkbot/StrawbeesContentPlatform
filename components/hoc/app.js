@@ -18,7 +18,7 @@ export default Child => class App extends React.Component {
 			asPath : ctx.asPath
 		}
 		const localData = await fetchLocalData(locale, `{
-			settings(q: "order=-sys.createdAt&limit=1"){
+			settings (q : "order=-sys.createdAt", limit : 1) {
 				locale
 				languageName
 				basename
@@ -32,7 +32,7 @@ export default Child => class App extends React.Component {
 				ogDescription
 			}
 
-			contentTypeSlugs(q: "order=-sys.createdAt&limit=1"){
+			contentTypeSlugs (q : "order=-sys.createdAt", limit : 1){
 				lessonPlan
 				lessonPlanCollection
 				lessonPlanGroup
@@ -41,7 +41,7 @@ export default Child => class App extends React.Component {
 				page
 			}
 
-			textStrings(q: "order=-sys.createdAt&limit=1"){
+			textStrings(q: "order=-sys.createdAt", limit : 1){
 				ageGroup
 				all
 				attachments
