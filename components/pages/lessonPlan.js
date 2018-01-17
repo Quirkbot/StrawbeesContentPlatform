@@ -24,7 +24,7 @@ export default ({
 	ga,
 	appProps,
 	breadcrumbs,
-	ageGroup,
+	ageGroups = [],
 	color,
 	hero,
 	featuredImage,
@@ -400,7 +400,7 @@ export default ({
 				backgroundColor : color
 			}}
 		/>
-		{ageGroup && ageGroup.title &&
+		{ageGroups && ageGroups[0] && ageGroups[0].title &&
 			<div className='print-age'
 				style={{
 					backgroundColor : color
@@ -409,7 +409,7 @@ export default ({
 					{appProps.strings.ageGroup}
 				</div>
 				<div className='age'>
-					{ageGroup.title}
+					{ageGroups[0].title.title}
 				</div>
 			</div>
 		}
