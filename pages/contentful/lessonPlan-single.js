@@ -71,19 +71,16 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 					url
 				}
 				relatedLessonPlans {
-					...lessonPlanThumb
+					sys { contentTypeId }
+					slug
+					title
+					description
+					featuredImage { url }
+					ageGroups {
+						title
+						cssColor
+					}
 				}
-			}
-		}
-		fragment lessonPlanThumb on LessonPlan {
-			sys { contentTypeId }
-			slug
-			title
-			description
-			featuredImage { url }
-			ageGroups {
-				title
-				cssColor
 			}
 		}
 	`)
@@ -99,9 +96,9 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 		ogImage       : lessonPlan.featuredImage && `https:${lessonPlan.featuredImage.url}`,
 
 		// color
-		color : lessonPlan.ageGroups &&
-			lessonPlan.ageGroups.length === 1 &&
-			lessonPlan.ageGroups[0].cssColor,
+		color : (lessonPlan.ageGroups &&
+				lessonPlan.ageGroups.length === 1 &&
+				lessonPlan.ageGroups[0].cssColor) || '#ababab',
 
 		// url
 		url : generateUrl({
@@ -114,9 +111,9 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 		hero : {
 			title  : `${lessonPlan.title}`,
 			author : `${lessonPlan.author.name} @ ${lessonPlan.author.organization}`,
-			color  : lessonPlan.ageGroups &&
-				lessonPlan.ageGroups.length === 1 &&
-				lessonPlan.ageGroups[0].cssColor
+			color  : (lessonPlan.ageGroups &&
+					lessonPlan.ageGroups.length === 1 &&
+					lessonPlan.ageGroups[0].cssColor) || '#ababab',
 		},
 
 		// vocabulary

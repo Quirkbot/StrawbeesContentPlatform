@@ -42,12 +42,11 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 	}`)
 	return {
 		...data,
-		//hero        : data.hero.pop(),
 		lessonPlans : (data.lessonPlans || []).map(item => ({
 			...item,
-			color : item.ageGroups &&
+			color : (item.ageGroups &&
 					item.ageGroups.length === 1 &&
-					item.ageGroups[0].cssColor,
+					item.ageGroups[0].cssColor) || '#ababab',
 			url : generateUrl({
 				appProps,
 				contentType : item.sys.contentTypeId,
