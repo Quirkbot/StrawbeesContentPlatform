@@ -267,7 +267,6 @@ export default Child => class App extends React.Component {
 						return null
 					})}
 					<meta name="viewport" content="width=device-width, initial-scale=1"/>
-					<link rel="stylesheet" href="/static/lib/carousel.min.css"/>
 					<link rel="stylesheet" href="/static/lib/nprogress.css"/>
 
 					<link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png"/>
