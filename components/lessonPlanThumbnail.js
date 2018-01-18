@@ -1,34 +1,35 @@
 import Link from 'src/components/link'
+import AgeGroupTitleList from 'src/components/ageGroupTitleList'
+import TagTitleList from 'src/components/tagTitleList'
 import generateClassnames from 'src/utils/generateClassnames'
 
 const THUMB_WIDTH = 535
 const THUMB_HEIGHT = 345
 export default ({
-	ageGroup,
-	tags,
-	title,
-	description,
-	featuredImage,
-	url
+	ageGroups = [],
+	tags = [],
+	title = '',
+	description = '',
+	featuredImage = null,
+	url = '',
+	color = '#DDD'
 }) =>
 	<div
-		className={`root lessonPlanListItem ${generateClassnames({
-			ageGroup,
+		className={`root lessonPlanThumbnail ${generateClassnames({
 			title,
+			ageGroups,
 			description,
 			featuredImage,
 			url
-		})}`}
-		style={ageGroup && ageGroup.cssColor && {
-			color           : ageGroup.cssColor,
-			backgroundColor : ageGroup.cssColor
-		}}>
+		})}`}>
 		<style jsx>{`
 			.root {
 				position: relative;
 				cursor: pointer;
 				border-radius: 0.5rem;
 				transition: transform 0.1s;
+				color: ${color};
+				background-color: ${color};
 			}
 			.root:hover {
 				transform: scale(1.025);
@@ -36,15 +37,6 @@ export default ({
 			.root :global(.link){
 				text-decoration: none;
 				color: inherit;
-			}
-			.root.not-ageGroup {
-				background-color: #DDD;
-			}
-			.root.not-ageGroup .label {
-				color: #000;
-			}
-			.root.ageGroup .label{
-				color: #FFF;
 			}
 			.root .details {
 				position: relative;
@@ -55,48 +47,32 @@ export default ({
 				position: absolute;
 				width: 100%;
 				height: 100%;
-			}
-			.root .details .label {
-				position: absolute;
-				background-color: inherit;
-			}
-
-			.root .details .label {
-				right: 1rem;
-				font-size: 1.2rem;
-				font-weight: bold;
-				padding: 0 1rem;
-				border-bottom-right-radius: 0.5rem;
-				border-bottom-left-radius: 0.5rem;
-				letter-spacing: 0.3rem;
-			}
-			.root .details .tags {
-				position: absolute;
-				bottom: 0;
-				width: 100%;
-				padding: 0.5rem;
 				display: flex;
-				flex-direction: row;
-				flex-wrap: wrap;
+				flex-direction: column;
 				justify-content: flex-end;
 			}
-			.root .details .tags .tag {
-				background-color: rgba(255,255,255,0.9);
-				color: black;
-				text-transform: uppercase;
-				font-size: 0.8rem;
-				border-radius: 1rem;
-				padding: 0 0.5rem;
-				margin: 0.1rem;
+			.root .details :global(.ageGroupTitleList) {
+				position: absolute;
+				top: 0;
+				width: 100%;
+				padding: 0.5rem;
+				justify-content: flex-end;
+			}
+			.root .details :global(.tagTitleList) {
+				padding: 0.5rem;
+				justify-content: flex-end;
+				z-index: 1;
 			}
 			.root .details .featuredImage {
 				display: block;
+				position: absolute;
+				top: 0;
+				left: 0;
 				width: 100%;
 				height: auto;
 				border-top-left-radius: 0.5rem;
 				border-top-right-radius: 0.5rem;
 			}
-
 			.root .info {
 				padding: 1rem;
 				display: flex;
@@ -115,23 +91,6 @@ export default ({
 		<Link to={url}>
 			<div className='details'>
 				<div className='wrapper'>
-					{ageGroup && ageGroup.title &&
-						<div className='label'
-							style={ageGroup && ageGroup.cssColor && {
-								backgroundColor : ageGroup.cssColor
-							}}>
-							{ageGroup.title}
-						</div>
-					}
-					{tags &&
-						<div className='tags'>
-							{tags.map((tag, i) =>
-								<div key={i} className='tag'>
-									{tag.title}
-								</div>
-							)}
-						</div>
-					}
 					{featuredImage &&
 						<img className='featuredImage'
 							width={THUMB_WIDTH}
@@ -139,6 +98,12 @@ export default ({
 							srcSet={`${featuredImage.url}?w=${THUMB_WIDTH}&h=${THUMB_HEIGHT}&fit=fill, ${featuredImage.url}?w=${THUMB_WIDTH * 2}&h=${THUMB_HEIGHT * 2}&fit=fill 2x`}
 							src={`${featuredImage.url}?w=${THUMB_WIDTH}&h=${THUMB_HEIGHT}&fit=fill`}
 						/>
+					}
+					{ageGroups &&
+						<AgeGroupTitleList items={ageGroups} />
+					}
+					{tags &&
+						<TagTitleList items={tags} />
 					}
 				</div>
 			</div>

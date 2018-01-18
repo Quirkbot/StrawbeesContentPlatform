@@ -1,7 +1,7 @@
-import LessonPlanListItem from 'src/components/lessonPlanListItem'
+import LessonPlanThumbnail from 'src/components/lessonPlanThumbnail'
 
 export default ({ items }) =>
-	<div className='root lessonPlanList'>
+	<div className='root lessonPlanThumbnailList'>
 		<style jsx>{`
 			.root {
 				display: grid;
@@ -38,14 +38,14 @@ export default ({ items }) =>
 				padding-top: 0.5rem;
 				padding-bottom: 0.5rem;
 			}*/
-			/*.root :global(.lessonPlanListItem) {
+			/*.root :global(.lessonPlanThumbnail) {
 				margin: 0.5rem;
 			}*/
 
 		`}</style>
 
 		{items.map((props, i) =>
-			<LessonPlanListItem
+			<LessonPlanThumbnail
 				key={i}
 				{...props}
 			/>

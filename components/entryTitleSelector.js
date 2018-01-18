@@ -2,6 +2,7 @@ import Button from 'src/components/button'
 
 export default ({
 	title,
+	small,
 	entries,
 	selectedEntries,
 	entrySelected,
@@ -59,7 +60,7 @@ export default ({
 						cssColor={entry.cssColor || 'white'}
 						icon={selectedEntries.indexOf(entry) !== -1 ? 'close' : null}
 						border={selectedEntries.indexOf(entry) !== -1}
-						small={true}
+						small={small}
 					/>
 				)}
 			</div>
