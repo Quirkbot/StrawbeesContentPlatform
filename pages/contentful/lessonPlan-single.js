@@ -70,17 +70,6 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 					title
 					url
 				}
-				relatedLessonPlans {
-					sys { contentTypeId }
-					slug
-					title
-					description
-					featuredImage { url }
-					ageGroups {
-						title
-						cssColor
-					}
-				}
 			}
 		}
 	`)
@@ -127,7 +116,7 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 		})),
 
 		// related lessons
-		relatedLessonPlans : (lessonPlan.relatedLessonPlans || []).map(item => ({
+		relatedContent : (lessonPlan.relatedContent || []).map(item => ({
 			...item,
 			url : generateUrl({
 				appProps,

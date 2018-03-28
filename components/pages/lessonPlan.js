@@ -46,7 +46,7 @@ export default ({
 	vocabulary,
 	vocabularyCredits,
 	attachments,
-	relatedLessonPlans
+	relatedContent
 }) =>
 	<div
 		className={`root lessonPlanSinglePage ${generateClassnames({
@@ -273,7 +273,7 @@ export default ({
 				flex-direction: column;
 				align-items: center;
 			}
-			.root .relatedLessonPlans .wrapper{
+			.root .relatedContent .wrapper{
 				max-width: 100%;
 			}
 
@@ -386,7 +386,7 @@ export default ({
 				}
 				.root .attachments,
 				.root .pdf,
-				.root .relatedLessonPlans,
+				.root .relatedContent,
 				.root .materials :global(.button) {
 					display: none;
 				}
@@ -645,11 +645,11 @@ export default ({
 					/>
 				</div>
 			</div>
-			{relatedLessonPlans && (relatedLessonPlans.length > 0) &&
-				<div className='section relatedLessonPlans not-color'>
+			{relatedContent && (relatedContent.length > 0) &&
+				<div className='section relatedContent not-color'>
 					<div className='wrapper'>
 						<h3 className='heading'>{appProps.strings.relatedLessons}</h3>
-						<LessonPlanThumbnailList items={relatedLessonPlans}/>
+						<LessonPlanThumbnailList items={relatedContent}/>
 					</div>
 				</div>
 			}
