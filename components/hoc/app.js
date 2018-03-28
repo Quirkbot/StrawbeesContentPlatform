@@ -108,17 +108,21 @@ export default Child => class App extends React.Component {
 
 		settings.socialMediaLinks = settings.socialMediaLinks.map(line => {
 			const array = line.split('_')
+			const [title, ...rest] = array
+			const url = rest.join('_')
 			return {
-				title : array[0],
-				url   : array[1]
+				title,
+				url
 			}
 		})
 
 		settings.mainMenuLinks = settings.mainMenuLinks.map(line => {
 			const array = line.split('_')
+			const [title, ...rest] = array
+			const url = rest.join('_')
 			return {
-				title : array[0],
-				url   : array[1]
+				title,
+				url
 			}
 		})
 
