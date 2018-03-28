@@ -5,9 +5,6 @@
 		},
 		"lessonPlan" : {
 			"single" : true
-		},
-		"page" : {
-			"single" : true
 		}
 	}
 }

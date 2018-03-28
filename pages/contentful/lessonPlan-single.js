@@ -74,6 +74,7 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 					title
 					url
 				}
+<<<<<<< HEAD
 				relatedContent {
 					... on Page {
 						sys { contentTypeId }
@@ -111,6 +112,8 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 						}
 					}
 				}
+=======
+>>>>>>> hotfix/0.2.3-1
 			}
 		}
 	`)
@@ -138,6 +141,19 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 		vocabularyCredits : props.vocabulary.filter(d => d.credit).map(({ credit }, i) => ({
 			index : i + 1,
 			credit
+<<<<<<< HEAD
+=======
+		})),
+
+		// related lessons
+		relatedContent : (lessonPlan.relatedContent || []).map(item => ({
+			...item,
+			url : generateUrl({
+				appProps,
+				contentType : item.sys.contentTypeId,
+				slug        : item.slug
+			})
+>>>>>>> hotfix/0.2.3-1
 		}))
 	}
 }
