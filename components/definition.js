@@ -8,12 +8,10 @@ export default ({
 		className='root definition'>
 		<style jsx>{`
 			.root {
-				width: 11rem;
 				display: flex;
 				flex-direction: column;
 				align-items: center;
 				justify-content: center;
-				margin: 0 0.5rem;
 			}
 			.root .featuredImage {
 				display: block;

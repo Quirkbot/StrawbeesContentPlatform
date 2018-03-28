@@ -2,7 +2,7 @@ import React from 'react'
 import Fuse from 'fuse.js'
 // import Router from 'next/router'
 import EntryTitleSelector from 'src/components/entryTitleSelector'
-import LessonPlanThumbnailList from 'src/components/lessonPlanThumbnailList'
+import ContentThumbnailList from 'src/components/contentThumbnailList'
 import SvgIcon from 'src/components/svgIcon'
 
 export default class extends React.Component {
@@ -308,7 +308,7 @@ export default class extends React.Component {
 						</h1>
 					}
 					{foundLessonPlans.length > 0 &&
-						<LessonPlanThumbnailList items={foundLessonPlans} />
+						<ContentThumbnailList items={foundLessonPlans} />
 					}
 				</div>
 			</div>

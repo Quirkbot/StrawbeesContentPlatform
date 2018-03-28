@@ -1,6 +1,8 @@
 import App from 'src/components/hoc/app'
-import generateUrl from 'src/utils/generateUrl'
+import computeOgProps from 'src/utils/computeOgProps'
+import computeCommonContentProps from 'src/utils/computeCommonContentProps'
 
+import Default from 'src/components/pages/default'
 import Search from 'src/components/pages/search'
 
 const resolveTemplate = template => {
@@ -8,7 +10,7 @@ const resolveTemplate = template => {
 		case 'search':
 			return Search
 		default:
-			return null
+			return Default
 	}
 }
 
@@ -22,49 +24,27 @@ const Page = props => {
 
 Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 	const { locale, contentType, id } = query
-	const data = await fetchLocalData(locale, `{
-		content:${contentType} (id:"${id}"){
+	const { pros } = await fetchLocalData(locale, `{
+		pros:${contentType} (id:"${id}"){
+			sys { contentTypeId }
 			template
-			ageGroup { cssColor }
-			featuredImage { url }
-			featuredIcon { url }
 			title
 			slug
 			description
+			featuredImage { url }
+			featuredIcon { url }
 		}
 	}`)
-	const Template = resolveTemplate(data.content.template)
+	// Get props from the template
 	let templateProps = null
+	const Template = resolveTemplate(pros.template)
 	if (Template && Template.getInitialProps) {
 		templateProps = await Template.getInitialProps({ query }, fetchLocalData, appProps)
 	}
-	const meta = {
-		ogTitle       : `${data.content.title} - ${appProps.settings.ogTitle}`,
-		ogDescription : data.content.description
-	}
-	if (data.content.featuredImage) {
-		meta.ogImage = `https:${data.content.featuredImage.url}`
-	}
 	return {
-		...meta,
-		breadcrumbs : {
-			list : [
-				{
-					title : appProps.strings.home,
-					url   : generateUrl({ appProps })
-				},
-				{
-					title : data.content.title
-				}
-			]
-		},
-		hero : {
-			icon        : data.content.featuredIcon,
-			title       : data.content.title,
-			description : data.content.description,
-			color       : data.content.ageGroup && data.content.ageGroup.cssColor
-		},
-		...data.content,
+		...pros,
+		...computeOgProps(pros, appProps),
+		...computeCommonContentProps(pros, appProps),
 		...templateProps
 	}
 }

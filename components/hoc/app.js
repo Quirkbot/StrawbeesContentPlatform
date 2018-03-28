@@ -33,10 +33,19 @@ export default Child => class App extends React.Component {
 			}
 
 			contentTypeSlugs (q : "order=-sys.createdAt", limit : 1){
-				lessonPlan
-				lessonPlanCollection
-				lessonPlanGroup
+				activity
 				definition
+				instruction
+				lessonPlan
+				material
+				page
+			}
+
+			contentTypeTitles (q : "order=-sys.createdAt", limit : 1){
+				activity
+				definition
+				instruction
+				lessonPlan
 				material
 				page
 			}
@@ -88,6 +97,7 @@ export default Child => class App extends React.Component {
 		const settings = localData.settings.shift()
 		const strings = localData.textStrings.shift()
 		const contentTypeSlugs = localData.contentTypeSlugs.shift()
+		const contentTypeTitles = localData.contentTypeTitles.shift()
 
 		settings.currentLocale = {
 			locale       : settings.locale,
@@ -126,6 +136,7 @@ export default Child => class App extends React.Component {
 			context,
 			settings,
 			contentTypeSlugs,
+			contentTypeTitles,
 			strings
 		}
 

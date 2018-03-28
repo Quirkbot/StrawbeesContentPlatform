@@ -1,5 +1,8 @@
 {
 	"contentTypesPages" : {
+		"activity" : {
+			"single" : true
+		},
 		"lessonPlan" : {
 			"single" : true
 		},

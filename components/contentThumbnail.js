@@ -1,4 +1,5 @@
 import Link from 'src/components/link'
+import AngledLabel from 'src/components/angledLabel'
 import AgeGroupTitleList from 'src/components/ageGroupTitleList'
 import TagTitleList from 'src/components/tagTitleList'
 import generateClassnames from 'src/utils/generateClassnames'
@@ -8,6 +9,7 @@ const THUMB_HEIGHT = 345
 export default ({
 	ageGroups = [],
 	tags = [],
+	contentTypeTitle = '',
 	title = '',
 	description = '',
 	featuredImage = null,
@@ -15,8 +17,9 @@ export default ({
 	color = '#DDD'
 }) =>
 	<div
-		className={`root lessonPlanThumbnail ${generateClassnames({
+		className={`root contentThumbnail ${generateClassnames({
 			title,
+			contentTypeTitle,
 			ageGroups,
 			description,
 			featuredImage,
@@ -50,6 +53,7 @@ export default ({
 				display: flex;
 				flex-direction: column;
 				justify-content: flex-end;
+				overflow: hidden;
 			}
 			.root .details :global(.ageGroupTitleList) {
 				position: absolute;
@@ -57,6 +61,11 @@ export default ({
 				width: 100%;
 				padding: 0.5rem;
 				justify-content: flex-end;
+			}
+			.root .details :global(.angledLabel) {
+				position: absolute;
+				top: 0;
+				left: 0;
 			}
 			.root .details :global(.tagTitleList) {
 				padding: 0.5rem;
@@ -104,6 +113,11 @@ export default ({
 					}
 					{tags &&
 						<TagTitleList items={tags} />
+					}
+					{contentTypeTitle &&
+						<AngledLabel>
+							{contentTypeTitle}
+						</AngledLabel>
 					}
 				</div>
 			</div>
