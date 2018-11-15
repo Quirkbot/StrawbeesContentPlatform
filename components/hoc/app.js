@@ -33,10 +33,19 @@ export default Child => class App extends React.Component {
 			}
 
 			contentTypeSlugs (q : "order=-sys.createdAt", limit : 1){
-				lessonPlan
-				lessonPlanCollection
-				lessonPlanGroup
+				activity
 				definition
+				instruction
+				lessonPlan
+				material
+				page
+			}
+
+			contentTypeTitles (q : "order=-sys.createdAt", limit : 1){
+				activity
+				definition
+				instruction
+				lessonPlan
 				material
 				page
 			}
@@ -88,6 +97,7 @@ export default Child => class App extends React.Component {
 		const settings = localData.settings.shift()
 		const strings = localData.textStrings.shift()
 		const contentTypeSlugs = localData.contentTypeSlugs.shift()
+		const contentTypeTitles = localData.contentTypeTitles.shift()
 
 		settings.currentLocale = {
 			locale       : settings.locale,
@@ -130,6 +140,7 @@ export default Child => class App extends React.Component {
 			context,
 			settings,
 			contentTypeSlugs,
+			contentTypeTitles,
 			strings
 		}
 
@@ -271,7 +282,6 @@ export default Child => class App extends React.Component {
 						return null
 					})}
 					<meta name="viewport" content="width=device-width, initial-scale=1"/>
-					<link rel="stylesheet" href="/static/lib/carousel.min.css"/>
 					<link rel="stylesheet" href="/static/lib/nprogress.css"/>
 
 					<link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png"/>

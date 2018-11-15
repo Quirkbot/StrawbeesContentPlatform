@@ -2,15 +2,14 @@ import App from 'src/components/hoc/app'
 import applyPropsComputersToList from 'src/utils/applyPropsComputersToList'
 import computeOgProps from 'src/utils/computeOgProps'
 import computeHeroProps from 'src/utils/computeHeroProps'
-import computeContentInitialInfoProps from 'src/utils/computeContentInitialInfoProps'
 import computeCommonContentProps from 'src/utils/computeCommonContentProps'
 
-import P from 'src/components/pages/lessonPlan'
+import P from 'src/components/pages/activity'
 
 const Page = props => <P {...props}/>
 
 Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
-	const { locale, contentType, id } = query
+	const {	locale, contentType, id } = query
 	const { props } = await fetchLocalData(locale, `
 		{
 			props:${contentType} (id:"${id}"){
@@ -30,7 +29,6 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 				description
 				tags { title }
 				duration { title }
-				classSize { title }
 				groupSize { title }
 				overview
 				gallery { url }
@@ -42,33 +40,24 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 					}
 					amount
 				}
-				modifications {
-					title
-					body
-				}
-				learningObjectives { body }
-				nationalStandards {
-					title
-					description
-					country {
+				content {
+					... on ContentBlock {
+						sys { contentTypeId }
 						title
+						body
 						featuredImage { url }
+						imageGallery { url }
+						video
 					}
-				}
-				teachingAssessment
-				preparation { body }
-				lessonSteps {
-					title
-					duration
-					body
-					featuredImage { url }
-					imageGallery { url }
-				}
-				vocabulary {
-					title
-					description
-					featuredImage { url }
-					credit
+					... on Instruction {
+						sys { contentTypeId }
+						title
+						duration
+						body
+						featuredImage { url }
+						imageGallery { url }
+						video
+					}
 				}
 				attachments {
 					title
@@ -114,32 +103,15 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 			}
 		}
 	`)
-
-	// Prepare vocabulary credit
-	let vocabularyCreditIndex = 0
 	return {
 		...props,
 		...computeOgProps(props, appProps),
 		...computeCommonContentProps(props, appProps),
 		...computeHeroProps(props, appProps),
-		...computeContentInitialInfoProps(props, appProps),
-
-		// related content
 		relatedContent : applyPropsComputersToList(
 			props.relatedContent, appProps,
 			[computeCommonContentProps]
-		),
-
-		// vocabulary
-		vocabulary : (props.vocabulary || []).map(itemProps => ({
-			...itemProps,
-			creditIndex : itemProps.credit ? ++vocabularyCreditIndex : null
-		})),
-		vocabularyCredits : props.vocabulary.filter(d => d.credit).map(({ credit }, i) => ({
-			index : i + 1,
-			credit
-		})),
-
+		)
 	}
 }
 

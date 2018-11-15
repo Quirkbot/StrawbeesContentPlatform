@@ -109,99 +109,82 @@ Page.getInitialProps = async ({ query }, fetchLocalData) => {
 	//structure.sort(sortByStatus)
 
 	const lessonPlanQuery = `{
-		lessonPlanGroups {
+		lessonPlans {
 			sys { id }
-			ageGroup {
+			coMaterial {
 				sys { id }
 				title
 			}
-			title
 			slug
+			title
+			author {
+				sys { id }
+				name
+				organization
+			}
 			description
-			lessonPlanCollections {
+			tags {
 				sys { id }
 				title
-				slug
-				description
-				lessonPlans {
+			}
+			duration {
+				sys { id }
+				title
+			}
+			classSize {
+				sys { id }
+				title
+			}
+			groupSize {
+				sys { id }
+				title
+			}
+			overview
+			materials {
+				sys { id }
+				material {
 					sys { id }
-					number
-					coMaterial {
-						sys { id }
-						title
-					}
-					slug
 					title
-					author {
-						sys { id }
-						name
-						organization
-					}
-					description
-					tags {
-						sys { id }
-						title
-					}
-					duration {
-						sys { id }
-						title
-					}
-					classSize {
-						sys { id }
-						title
-					}
-					groupSize {
-						sys { id }
-						title
-					}
-					overview
-					materials {
-						sys { id }
-						material {
-							sys { id }
-							title
-						}
-						amount
-					}
-					modifications {
-						sys { id }
-						title
-						body
-					}
-					learningObjectives {
-						sys { id }
-						body
-					}
-					nationalStandards {
-						sys { id }
-						title
-						description
-						country {
-							sys { id }
-							title
-						}
-					}
-					teachingAssessment
-					preparation {
-						sys { id }
-						body
-					}
-					lessonSteps {
-						sys { id }
-						title
-						duration
-						body
-					}
-					vocabulary {
-						sys { id }
-						title
-						description
-					}
-					attachments {
-						sys { id }
-						title
-					}
 				}
+				amount
+			}
+			modifications {
+				sys { id }
+				title
+				body
+			}
+			learningObjectives {
+				sys { id }
+				body
+			}
+			nationalStandards {
+				sys { id }
+				title
+				description
+				country {
+					sys { id }
+					title
+				}
+			}
+			teachingAssessment
+			preparation {
+				sys { id }
+				body
+			}
+			lessonSteps {
+				sys { id }
+				title
+				duration
+				body
+			}
+			vocabulary {
+				sys { id }
+				title
+				description
+			}
+			attachments {
+				sys { id }
+				title
 			}
 		}
 	}`
@@ -268,7 +251,7 @@ Page.getInitialProps = async ({ query }, fetchLocalData) => {
 		}
 	}
 	parseLessonObjects(englishLessonPlans, localLessonPlans)
-	const lessonPlans = localLessonPlans.lessonPlanGroups
+	const { lessonPlans } = localLessonPlans
 	return {
 		lessonPlans,
 		structure,

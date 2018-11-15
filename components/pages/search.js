@@ -45,7 +45,7 @@ const Component = ({
 Component.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 	const { locale } = query
 	const data = await fetchLocalData(locale, `{
-		lessonPlans {
+		lessonPlans (q: "order=-sys.createdAt") {
 			sys {
 				id
 				contentTypeId
@@ -54,14 +54,10 @@ Component.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 			slug
 			description
 			featuredImage { url }
-			ageGroup {
+			ageGroups {
 				sys { id }
 				title
 				cssColor
-			}
-			coMaterial {
-				sys { id }
-				title
 			}
 			tags {
 				sys { id }
@@ -71,13 +67,8 @@ Component.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 
 		ageGroups(q:"order=fields.sort") {
 			sys { id }
+			title
 			cssColor
-			title
-		}
-
-		coMaterials(q:"order=fields.sort") {
-			sys { id }
-			title
 		}
 
 		tags(q:"order=fields.sort") {

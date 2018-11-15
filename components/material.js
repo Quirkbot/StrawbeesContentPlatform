@@ -13,12 +13,10 @@ export default ({
 			<style jsx>{`
 				.root :global(>a),
 				.root :global(>div){
-					width: 11rem;
 					display: flex;
 					flex-direction: column;
 					align-items: center;
 					justify-content: center;
-					margin: 0 0.5rem;
 					text-decoration: none;
 					color: inherit;
 

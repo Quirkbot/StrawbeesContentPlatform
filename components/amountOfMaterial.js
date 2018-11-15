@@ -8,6 +8,7 @@ export default ({
 		className='root amountOfMaterial'>
 		<style jsx>{`
 			.root {
+				position: relative;
 				display: flex;
 				flex-direction: column;
 				align-items: center;
@@ -16,6 +17,9 @@ export default ({
 			.root .amount {
 				font-weight: 500;
 				font-size: 1.2rem;
+			}
+			.root :global(.material) {
+				width: 100%;
 			}
 			@media print {
 				.root .amount {

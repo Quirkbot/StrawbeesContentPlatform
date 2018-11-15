@@ -1,7 +1,7 @@
-import LessonPlanThumbnail from 'src/components/lessonPlanThumbnail'
+import ContentThumbnail from 'src/components/contentThumbnail'
 
 export default ({ items }) =>
-	<div className='root lessonPlanThumbnailList'>
+	<div className='root contentThumbnailList'>
 		<style jsx>{`
 			.root {
 				display: grid;
@@ -29,23 +29,11 @@ export default ({ items }) =>
 					grid-template-columns: repeat(1, 1fr);
 				}
 			}
-			/*.root .wrapper {
-				display: flex;
-				flex-direction: row;
-				justify-content: center;
-				flex-wrap: wrap;
-				max-width: calc(60rem + 2rem);
-				padding-top: 0.5rem;
-				padding-bottom: 0.5rem;
-			}*/
-			/*.root :global(.lessonPlanThumbnail) {
-				margin: 0.5rem;
-			}*/
 
 		`}</style>
 
 		{items.map((props, i) =>
-			<LessonPlanThumbnail
+			<ContentThumbnail
 				key={i}
 				{...props}
 			/>

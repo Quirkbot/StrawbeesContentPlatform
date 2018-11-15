@@ -1,5 +1,5 @@
 import App from 'src/components/hoc/app'
-import generateUrl from 'src/utils/generateUrl'
+import computeCommonContentProps from 'src/utils/computeCommonContentProps'
 
 import P from 'src/components/pages/home'
 
@@ -7,12 +7,9 @@ const Page = props => <P {...props}/>
 
 Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 	const { locale } = query
-	const data = await fetchLocalData(locale, `{
+	const props = await fetchLocalData(locale, `{
 		lessonPlans (q: "order=-sys.createdAt") {
-			sys {
-				id
-				contentTypeId
-			}
+			sys { contentTypeId }
 			title
 			slug
 			description
@@ -41,17 +38,10 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 
 	}`)
 	return {
-		...data,
-		lessonPlans : (data.lessonPlans || []).map(item => ({
-			...item,
-			color : (item.ageGroups &&
-					item.ageGroups.length === 1 &&
-					item.ageGroups[0].cssColor) || '#ababab',
-			url : generateUrl({
-				appProps,
-				contentType : item.sys.contentTypeId,
-				slug        : item.slug
-			})
+		...props,
+		lessonPlans : (props.lessonPlans || []).map(itemProps => ({
+			...itemProps,
+			...computeCommonContentProps(itemProps, appProps)
 		}))
 	}
 }

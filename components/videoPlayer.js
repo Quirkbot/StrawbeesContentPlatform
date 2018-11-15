@@ -29,7 +29,7 @@ export default ({
 		`}</style>
 		{url &&
 			<iframe
-				src={`https://www.youtube.com/embed/${getYouTubeId(url)}`}
+				src={`https://www.youtube.com/embed/${getYouTubeId(url)}?rel=0&showinfo=0`}
 				frameBorder="0"
 				allow="autoplay; encrypted-media"
 				allowFullScreen

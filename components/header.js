@@ -40,17 +40,7 @@ export default ({ appProps }) =>
 			}
 			@media print {
 				.root {
-					background-color: #eee !important;
-					position: relative;
-					position: fixed;
-					top: 0;
-					left: 0;
-					width: 100%;
-					z-index: 2;
-					height: 1.5cm;
-				}
-				.root :global(.logo){
-					height: 2.5rem;
+					display: none;
 				}
 			}
 		`}</style>
