@@ -19,7 +19,6 @@ const printPage = ga => {
 	window.print()
 }
 export default ({
-<<<<<<< HEAD
 	ga = null,
 	appProps = null,
 	breadcrumbs = null,
@@ -39,34 +38,6 @@ export default ({
 	vocabularyCredits = [],
 	attachments = [],
 	relatedContent = []
-=======
-	ga,
-	appProps,
-	breadcrumbs,
-	ageGroups = [],
-	color,
-	hero,
-	featuredImage,
-	description,
-	video,
-	tags,
-	duration,
-	classSize,
-	groupSize,
-	overview,
-	gallery,
-	materials,
-	modifications,
-	learningObjectives,
-	nationalStandards,
-	teachingAssessment,
-	preparation,
-	lessonSteps,
-	vocabulary,
-	vocabularyCredits,
-	attachments,
-	relatedContent
->>>>>>> hotfix/0.2.3-1
 }) =>
 	<div
 		className='root lessonPlanSinglePage'>
@@ -204,12 +175,9 @@ export default ({
 				flex-direction: column;
 				align-items: center;
 			}
-<<<<<<< HEAD
-=======
 			.root .relatedContent .wrapper{
 				max-width: 100%;
 			}
->>>>>>> hotfix/0.2.3-1
 
 			@media screen and (max-width: 600px) {
 				.root .section {
@@ -424,7 +392,6 @@ export default ({
 					}
 				</div>
 			</div>
-<<<<<<< HEAD
 		}
 		{attachments && (attachments.length > 0) &&
 			<div className='section attachments not-color'>
@@ -438,14 +405,14 @@ export default ({
 							{...props}
 						/>
 					)}
-=======
-			{relatedContent && (relatedContent.length > 0) &&
-				<div className='section relatedContent not-color'>
-					<div className='wrapper'>
-						<h3 className='heading'>{appProps.strings.relatedLessons}</h3>
-						<LessonPlanThumbnailList items={relatedContent}/>
-					</div>
->>>>>>> hotfix/0.2.3-1
+				</div>
+			</div>
+		}
+		{relatedContent && (relatedContent.length > 0) &&
+			<div className='section relatedContent not-color'>
+				<div className='wrapper'>
+					<h3 className='heading'>{appProps.strings.relatedLessons}</h3>
+					<LessonPlanThumbnailList items={relatedContent}/>
 				</div>
 			</div>
 		}
