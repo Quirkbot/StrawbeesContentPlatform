@@ -135,7 +135,7 @@ Page.getInitialProps = async ({ query }, fetchLocalData, appProps) => {
 			...itemProps,
 			creditIndex : itemProps.credit ? ++vocabularyCreditIndex : null
 		})),
-		vocabularyCredits : props.vocabulary.filter(d => d.credit).map(({ credit }, i) => ({
+		vocabularyCredits : (props.vocabulary || []).filter(d => d.credit).map(({ credit }, i) => ({
 			index : i + 1,
 			credit
 		})),
