@@ -133,7 +133,7 @@ export default class extends React.Component {
 		const foundBy = (key, lessonPlan, selection) => {
 			if (selection.length > 0) {
 				if (!selection.filter(
-					o => lessonPlan[key].filter(
+					o => lessonPlan[key] && lessonPlan[key].filter(
 						t => t.sys.id === o.sys.id
 					).length
 				).length) {
