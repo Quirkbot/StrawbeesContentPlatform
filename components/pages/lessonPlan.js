@@ -416,7 +416,7 @@ export default ({
 				</div>
 			</div>
 		}
-		<div className='section pdf color'>
+		{/* <div className='section pdf color'>
 			<div className='wrapper'>
 				<h3 className='heading'>{appProps.strings.printFriendly}</h3>
 				<Button
@@ -426,6 +426,7 @@ export default ({
 				/>
 			</div>
 		</div>
+		*/}
 		{relatedContent && (relatedContent.length > 0) &&
 			<div className='section relatedContent not-color'>
 				<div className='wrapper'>
