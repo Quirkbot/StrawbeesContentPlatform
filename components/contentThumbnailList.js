@@ -11,7 +11,7 @@ export default ({ items }) =>
 				padding-top: 1rem;
 				padding-bottom: 1rem;
 				max-width: calc(70rem);
-				justify-items: center;
+				justify-items: stretch;
 			}
 			@media screen and (max-width: 70rem) {
 				.root {
