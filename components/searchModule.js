@@ -1,6 +1,6 @@
 import React from 'react'
 import Fuse from 'fuse.js'
-// import Router from 'next/router'
+import Router from 'next/router'
 import EntryTitleSelector from 'src/components/entryTitleSelector'
 import ContentThumbnailList from 'src/components/contentThumbnailList'
 import SvgIcon from 'src/components/svgIcon'
@@ -32,13 +32,12 @@ export default class extends React.Component {
 		}
 	}
 
-	// componentDidMount = () => {
-	// 	Router.router.events.on('routeChangeComplete', this.onRouteChangeComplete)
-	// 	this.filterFoundLessonPlans(
-	// 		this.locationToState()
-	// 	)
-	// }
-
+	componentDidMount() {
+		Router.router.events.on('routeChangeComplete', this.onRouteChangeComplete)
+		this.filterFoundLessonPlans(
+			this.locationToState()
+		)
+	}
 
 	stateToLocation = state => {
 		if (typeof window === 'undefined') {
@@ -69,13 +68,15 @@ export default class extends React.Component {
 
 		// Router.push(
 		// 	{
-		// 		pathname : Router.router.pathname,
-		// 		query    : Router.router.query
+		// 		pathname : Router.pathname,
+		// 		query    : Router.query
 		// 	},
-		// 	`${Router.router.route}${search ? `?${search}` : ''}`,
+		// 	`${Router.route}${search ? `?${search}` : ''}`,
 		// 	{ shallow : true }
 		// )
+		window.history.replaceState(null, '', `${Router.route}${search ? `?${search}` : ''}`)
 	}
+
 	locationToState = () => {
 		const {
 			ageGroups,
@@ -111,6 +112,7 @@ export default class extends React.Component {
 		newState[name].push(entry)
 		this.filterFoundLessonPlans(newState)
 	}
+
 	removeFromStateProperty = (entry, name) => {
 		const newState = { ...this.state }
 		const index = this.state[name].indexOf(entry)
@@ -159,6 +161,7 @@ export default class extends React.Component {
 		})
 
 		this.setState(state)
+		this.stateToLocation(state)
 	}
 
 	ageGroupSelected = entry =>
